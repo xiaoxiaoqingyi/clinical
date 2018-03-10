@@ -1,0 +1,273 @@
+/*index*/
+.text {
+    padding: 200px 0 100px 0;
+}
+
+.text h1 {
+    font-size: 72px;
+}
+
+.text p {
+    margin: 20px 0;
+}
+
+/*end index*/
+
+/*circle*/
+.circle {
+    position: relative;
+    margin: 153px auto 0;
+    width: 650px;
+    height: 650px;
+    border-radius: 650px;
+}
+
+.circle li {
+    position: absolute;
+    display: block;
+    width: 146px;
+    height: 146px;
+    padding: 5px;
+    text-align: center;
+    background: #fff;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.circle li:hover {
+    overflow: inherit;
+}
+
+.circle li a {
+    display: block;
+    height: 100%;
+    background: #fff;
+    border-radius: 100%;
+}
+
+.circle li:hover a {
+    position: relative;
+    z-index: 2;
+}
+
+.circle li span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.circle li i {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.circle li .info {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 300px;
+    min-height: 136px;
+    padding: 10px 10px 10px 80px;
+    text-align: left;
+    color: #333;
+    background: #fff;
+    border-radius: 3px;
+    z-index: -1;
+}
+
+.circle li:hover .info {
+    opacity: 1;
+    margin-left: 5px;
+    transition: opacity .5s linear .1s, margin-left .3s linear .1s;
+    z-index: 1;
+}
+
+.circle li .info h1 {
+    margin-bottom: 5px;
+}
+
+.circle .step-1 {
+    left: 260px;
+    top: 0;
+}
+
+.circle .step-2 {
+    left: 430px;
+    top: 80px;
+}
+
+.circle .step-3 {
+    left: 494px;
+    top: 258px;
+}
+
+.circle .step-4 {
+    left: 414px;
+    top: 428px;
+}
+
+.circle .step-5 {
+    left: 236px;
+    top: 492px;
+}
+
+.circle .step-6 {
+    left: 66px;
+    top: 412px;
+}
+
+.circle .step-7 {
+    left: 2px;
+    top: 234px;
+}
+
+.circle .step-8 {
+    left: 82px;
+    top: 64px;
+}
+
+.circle .step-1:hover a {
+    color: #fff;
+    background: #04abf2;
+}
+
+.circle .step-2:hover a {
+    color: #fff;
+    background: #10de96;
+}
+
+.circle .step-3:hover a {
+    color: #fff;
+    background: #8bdc4f;
+}
+
+.circle .step-4:hover a {
+    color: #fff;
+    background: #f1be24;
+}
+
+.circle .step-5:hover a {
+    color: #fff;
+    background: #ff9841;
+}
+
+.circle .step-6:hover a {
+    color: #fff;
+    background: #ef4f37;
+}
+
+.circle .step-7:hover a {
+    color: #fff;
+    background: #df33c3;
+}
+
+.circle .step-8:hover a {
+    color: #fff;
+    background: #1679d7;
+}
+
+/*end circle*/
+
+/*step*/
+.form-group{
+    margin: 10px 0;
+}
+.step {
+
+}
+
+.s-h1, .s-h2, .s-h3, .s-h4, .s-h5, .s-h6 {
+    font-weight: bold;
+}
+
+.s-h1 {
+    font-size: 48px;
+}
+
+.s-h2 {
+    font-size: 36px;
+}
+
+.s-h3 {
+    font-size: 24px;
+}
+
+.s-h4 {
+    font-size: 20px;
+}
+
+.s-h5 {
+    font-size: 14px;
+}
+
+.s-h6 {
+    font-size: 12px;
+}
+
+.s-red {
+    color: red;
+}
+
+.s-blue {
+    color: blue;
+}
+
+.s-bold {
+    font-weight: bold;
+}
+
+.s-line {
+    text-decoration: underline;
+}
+
+.lab-r input {
+    margin-right: 5px;
+}
+
+.lab-c input {
+    margin-right: 5px;
+}
+
+.lab-t {
+    display: block;
+}
+
+.lab-t input {
+    display: block;
+    width: 400px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.lab-t textarea {
+    display: block;
+    width: 400px;
+    height: 100px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    resize: none;
+}
+
+.s-btn {
+    margin: 20px 0 40px 0;
+}
+
+.s-btn button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.s-lx{
+    display: inline-block;
+    padding: 10px;
+    background: #eee;
+}
+.s-lx span{
+    display: inline-block;
+    width: 500px;
+    padding-right: 20px;
+    vertical-align: middle;
+    word-break: break-all;
+}
+/*end step*/

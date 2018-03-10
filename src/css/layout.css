@@ -1,0 +1,143 @@
+/*layout.css布局*/
+
+/*container*/
+.container {
+    /*min-height: 960px;*/
+}
+.wrapper {
+    margin: 0 auto;
+    max-width: 1600px;
+    overflow: hidden;
+}
+/*end container*/
+
+/*head*/
+.head {
+    min-width: 1200px;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.head .login {
+    float: left;
+    padding-left: 20px;
+}
+
+.head .login .line {
+    padding: 0 10px;
+}
+
+.head .nav {
+    float: right;
+}
+
+.head .nav li {
+    float: left;
+    padding: 0 20px;
+}
+
+.head .nav li a {
+    display: block;
+    min-width: 80px;
+    text-align: center;
+}
+
+/*end head*/
+
+/*footer*/
+.footer {
+    background: #f8f8f8;
+}
+
+.footer li {
+    float: left;
+    margin-right: 10px;
+}
+
+.footer p {
+    margin-top: 5px;
+}
+
+/*end footer*/
+
+/*main-page*/
+.main-page {
+    background: url(../images/bg-main.jpg) center 100px no-repeat;
+}
+
+.main-page .head {
+    line-height: 100px;
+    color: #fff;
+    background: #09ccc4;
+}
+
+.main-page .head a {
+    color: #fff;
+}
+
+.main-page .head .nav a{
+    background: url(../images/bg-main-nav.jpg) center 100px no-repeat;
+}
+
+.main-page .head .nav a:hover,
+.main-page .head .nav li .active{
+    background-position: center bottom ;
+    transition: background 0.2s;
+}
+/*end main-page*/
+
+/*second-page*/
+.second-page {
+    background: #f4f4f4;
+}
+
+.second-page .head {
+    padding: 20px 0;
+    line-height: 60px;
+    color: #333;
+    background: #fff;
+}
+
+.second-page .head a {
+    color: #333;
+}
+
+.second-page .head .nav a:hover,
+.second-page .head .nav li .active {
+    padding-top: 2px;
+    line-height: 56px;
+    color: #ffbe22;
+    border-bottom: 2px solid #ffbe22;
+}
+/*end second-page**/
+
+/*clinical-page*/
+.clinical-page {
+    background: url(../images/bg-second.jpg) center 100px no-repeat;
+}
+/*end clinical-page**/
+
+/*media*/
+@media screen and (max-width: 1360px){
+    .head .login {
+        float: left;
+        padding-left: 15px;
+    }
+
+    .head .nav li {
+        float: left;
+        padding: 0 15px;
+    }
+}
+@media screen and (max-width: 1240px){
+    .head .login {
+        float: left;
+        padding-left: 10px;
+    }
+
+    .head .nav li {
+        float: left;
+        padding: 0 10px;
+    }
+}
+/*end media*/

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" class="second-page">
+   <head>
+    <meta charset="UTF-8">
+   <title>Clinical Scenario</title>
+    <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/common.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/layout.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/module.css'?>">
+    <script  type="text/javascript"  src="<?php echo base_url();?>src/js/jquery-1.8.3.min.js"></script>
+</head>
+    <body>
+        <div class="head h-bg-1">
+            <div class="wrap fn-clear">
+                <div class="login">
+                    <a href="javascript:;">admin</a>
+                    <span class="line">|</span>
+                    <a href="javascript:;">Sign Out</a>
+                </div>
+                <ul class="nav">
+                    <li><a href="<?=base_url().'index'?>" >Leaning Objectives</a></li>
+                    <li><a href="<?=base_url().'index/about'?>" >About Clinical Reasoning</a></li>
+                    <li><a href="<?=base_url().'index/clinical'?>" class="active">Clinical Scenario</a></li>
+                    <li><a href="<?=base_url().'indeix/recommended'?>">Recommended Readings</a></li>
+                    <li><a href="<?=base_url().'index/others'?>">Others</a></li>
+                    <li><a href="<?=base_url().'index/step'?>">Step Demo</a></li>
+                </ul>
+            </div>
+        </div>
+       <div class="fn-mtb-20">
+                <strong><?= $title; ?></strong>
+                <form id=form1 >
+                    <!--循环输出选项 -->
+                   <?php foreach ($option as $key => $value){ ?>
+                     <p> <?=$value; ?></p>
+                      <p><label class="lab-r"><input type="radio" name="single<?=$key; ?>" value="1"> true</label></p>
+                      <p><label class="lab-r"><input type="radio" name="single<?=$key; ?>" value="0"> false</label></p>
+                   
+                    
+                   <?php } ?>  
+                  
+                    <div class="s-btn">
+                     
+                           <button type="submit">下一步</button>
+                    </div>
+                </form>
+            </div>
+        
+        <script language="javascript" type="text/javascript">
+            $(function(){
+                $("#form1").submit(function(){
+      
+                            $.ajax({
+                                    url:'<?php echo base_url();?>index/judge/<?php echo $id ?>',
+                                    data:$(this).serialize(),
+                                    dataType:'json',
+                                    type:'post',
+                                    success:function(data){
+    //					console.log(data);
+                                            if(data&&data.status == 200)
+                                            {			 
+                                              location.href = data.res.url;
+                                            }
+                                            else
+                                            {			
+                                                 alert(data.statusMsg);
+                                            }
+                                    },error:function(e){
+                                            alert("error!");
+                                    }
+                            });
+
+                            return !1;
+                    });
+            });
+        
+        </script>
+
+    </body>
+</html>
