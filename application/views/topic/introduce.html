@@ -34,49 +34,9 @@ and open the template in the editor.
         </div>
        <div class="fn-mtb-20">
                 <strong><?= $title; ?></strong>
-                <form id=form1 >
-                    <!--循环输出选项 -->
-                    <label class="lab-t">
-                        <p>answer：</p>
-                        <p><textarea name="answer"></textarea></p>
-                    </label>
-                  
-                    <div class="s-btn">
-                     
-                           <button type="submit">下一步</button>
-                    </div>
-                </form>
+                <p> <?= $des; ?>  </p>
+                <p> <a href="<?php echo base_url();?>index/clinical/<?php echo $id ?>">下一步</a>   </p>
             </div>
         
-        <script language="javascript" type="text/javascript">
-            $(function(){
-                $("#form1").submit(function(){
-
-       
-                            $.ajax({
-                                    url:'<?php echo base_url();?>index/short/<?php echo $id ?>',
-                                    data:$(this).serialize(),
-                                    dataType:'json',
-                                    type:'post',
-                                    success:function(data){
-    //					console.log(data);
-                                            if(data&&data.status == 200)
-                                            {			 
-                                              location.href = data.res.url;
-                                            }
-                                            else
-                                            {			
-                                                 alert(data.statusMsg);
-                                            }
-                                    },error:function(e){
-                                            alert("error!");
-                                    }
-                            });
-
-                            return !1;
-                    });
-            });
-        
-        </script>
     </body>
 </html>

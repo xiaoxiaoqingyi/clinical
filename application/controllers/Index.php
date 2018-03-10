@@ -45,7 +45,7 @@ class Index extends CI_Controller {
         
         public function clinical($tid=0){
             if($tid == 0){
-                $tid = 1;
+                $tid = 7;
             }
             
             $data=$this->db->select('id, title, option, type, des')->from('subject')->where('id',$tid)->get()->result_array();
@@ -55,7 +55,7 @@ class Index extends CI_Controller {
 
                  if($data[0]['type'] == 0){
                      //介绍页面
-                     
+                     $this->load->view('topic/introduce.html', $data[0]); 
                  } else if($data[0]['type'] == 1){
                      //单选题
                      $this->load->view('topic/single.html', $data[0]); 
