@@ -5,41 +5,43 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html lang="en" class="second-page">
-   <head>
+<head>
     <meta charset="UTF-8">
-   <title>Clinical Scenario</title>
+    <title>Clinical Scenario</title>
     <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/common.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/layout.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/module.css'?>">
-    <script  type="text/javascript"  src="<?php echo base_url();?>src/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>src/js/jquery-1.8.3.min.js"></script>
 </head>
-    <body>
-        <div class="head h-bg-1">
-            <div class="wrap fn-clear">
-                <div class="login">
-                    <a href="javascript:;">admin</a>
-                    <span class="line">|</span>
-                    <a href="javascript:;">Sign Out</a>
-                </div>
-                <ul class="nav">
-                    <li><a href="<?=base_url().'index'?>" >Leaning Objectives</a></li>
-                    <li><a href="<?=base_url().'index/about'?>" >About Clinical Reasoning</a></li>
-                    <li><a href="<?=base_url().'index/step'?>" class="active">Clinical Scenario</a></li>
-                    <li><a href="<?=base_url().'indeix/recommended'?>">Recommended Readings</a></li>
-                    <li><a href="<?=base_url().'index/others'?>">Others</a></li>
-                    <li><a href="<?=base_url().'index/step'?>">Step Demo</a></li>
-                </ul>
+<body>
+<div class="head h-bg-1">
+    <div class="wrapper fn-clear">
+        <div class="login">
+            <a href="javascript:;">admin</a>
+            <span class="line">|</span>
+            <a href="javascript:;">Sign Out</a>
+        </div>
+        <ul class="nav">
+            <li><a href="<?=base_url().'index'?>">Leaning Objectives</a></li>
+            <li><a href="<?=base_url().'index/about'?>">About Clinical Reasoning</a></li>
+            <li><a href="<?=base_url().'index/step'?>" class="active">Clinical Scenario</a></li>
+            <li><a href="<?=base_url().'index/recommended'?>">Recommended Readings</a></li>
+            <li><a href="<?=base_url().'index/others'?>">Others</a></li>
+            <li><a href="<?=base_url().'index/step'?>">Step Demo</a></li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <div class="wrap">
+        <div class="my-20">
+            <strong><?= $title; ?></strong>
+            <div class="form-group"> <?= $des; ?>  </div>
+            <div class="form-group s-btn">
+                <a href="<?php echo base_url();?>index/clinical/<?php echo $next_topic_id; ?>">下一步</a>
             </div>
         </div>
-       <div class="fn-mtb-20">
-                <strong><?= $title; ?></strong>
-                <p> <?= $des; ?>  </p>
-                
-                <div class="s-btn">
-                <p> <a href="<?php echo base_url();?>index/clinical/<?php echo $next_topic_id; ?>">下一步</a>   </p>
-                </div>
-            </div>
-        
-    </body>
+    </div>
+</div>
+</body>
 </html>
