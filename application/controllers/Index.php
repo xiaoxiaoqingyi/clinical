@@ -38,11 +38,21 @@ class Index extends CI_Controller {
             $this->load->view('others.html');
         }
         
-        public function step(){
-            
-            $this->load->view('clinical.html');
+        public function demo(){
+            $this->load->view('step.html');
         }
         
+        public function step(){
+            $this->load->view('case/caselist.html');
+        }
+        
+        public function case1intro(){
+             $this->load->view('case/case1introduce.html');
+        }
+        
+        public function eightStep(){
+             $this->load->view('clinical.html');
+        }
         
         public function clinical($tid=0){
             if($tid == 0){
