@@ -9,9 +9,9 @@ class Index extends CI_Controller {
             
             parent::__construct();
             
-            $this->load->library('session');
+            session_start();
             //判断是否登录，否则跳转到登录
-            if(!$this->session->has_userdata('uid')){
+            if(!isset($_SESSION['uid'])){
                 $this->load->helper("url");
                 redirect(base_url().'login');
             }

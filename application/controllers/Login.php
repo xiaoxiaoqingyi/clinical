@@ -8,7 +8,7 @@ class Login extends CI_Controller {
 	public function __construct(){
             
             parent::__construct();
-           
+            session_start();
 	}
 
 	public function index(){
@@ -32,8 +32,10 @@ class Login extends CI_Controller {
                 'username'  => $account,
                 'uid'     => $d[0]->id
             );
-            $this->load->library('session');
-            $this->session->set_userdata($newdata);
+//            $this->load->library('session');
+//            $this->session->set_userdata($newdata);
+            $_SESSION['username'] = $account;
+            $_SESSION['uid'] = $d[0]->id;
 
             $this->load->helper("url");
 //             header("location:".base_url("/index"));
@@ -43,9 +45,11 @@ class Login extends CI_Controller {
 	}
         
 	public function logout(){
-             $this->load->library('session');
-            $this->session->unset_userdata('username');
-            $this->session->unset_userdata('uid');
+//             $this->load->library('session');
+//            $this->session->unset_userdata('username');
+//            $this->session->unset_userdata('uid');
+            unset($_SESSION['username']);
+            unset($_SESSION['uid']);
 
             $this->load->helper("url");
             redirect(base_url().'login');
