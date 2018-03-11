@@ -2,7 +2,7 @@
 
 /*container*/
 .container {
-    /*min-height: 960px;*/
+    min-height: 960px;
 }
 .wrapper {
     margin: 0 auto;

@@ -16,7 +16,8 @@
 /*circle*/
 .circle {
     position: relative;
-    margin: 153px auto 0;
+    top: 153px;
+    margin: 0 auto;
     width: 650px;
     height: 650px;
     border-radius: 650px;
@@ -271,3 +272,19 @@
     word-break: break-all;
 }
 /*end step*/
+
+.case-list li {
+    float: left;
+    width: 268px;
+    height: 150px;
+    margin-left: 30px;
+    text-align: center;
+    line-height: 150px;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.case-list li:hover, .case-list .active {
+    color: #fff;
+    background: #0aa770;
+}
