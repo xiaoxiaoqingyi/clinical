@@ -39,16 +39,19 @@ class Index extends CI_Controller {
         }
         
         public function step(){
-            $this->load->view('step.html');
+            
+            $this->load->view('clinical.html');
         }
         
         
         public function clinical($tid=0){
             if($tid == 0){
-                $tid = 7;
+                //8个步骤完成
+                $this->load->view('recommended.html');             
+                return;;
             }
             
-            $data=$this->db->select('id, title, option, type, des')->from('subject')->where('id',$tid)->get()->result_array();
+            $data=$this->db->select('id, title, option, type, des, next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
             if(isset($data)){
                  $options = explode(";",$data[0]['option']);
                  $data[0]['option'] = $options;
@@ -76,6 +79,9 @@ class Index extends CI_Controller {
                  }else if($data[0]['type'] == 6){
                      //多项判断题
                        $this->load->view('topic/muljudge.html', $data[0]); 
+                 }else if($data[0]['type'] == 7){
+                     //步骤选择页面
+                      $this->load->view('clinical.html');
                  }
                  
                 
@@ -83,7 +89,6 @@ class Index extends CI_Controller {
                  $this->load->view('errors/index.html');
             }
             
-           
         }
         
         /**

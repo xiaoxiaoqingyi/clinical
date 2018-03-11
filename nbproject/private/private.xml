@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/a123/deyi/phpProject/clinical/application/config/config.php</file>
+            <file>file:/Users/a123/deyi/phpProject/clinical/application/controllers/Login.php</file>
+            <file>file:/Users/a123/deyi/phpProject/clinical/application/controllers/Index.php</file>
+            <file>file:/Users/a123/deyi/phpProject/clinical/application/views/clinical.html</file>
+            <file>file:/Users/a123/deyi/phpProject/clinical/index.php</file>
+        </group>
     </open-files>
 </project-private>

@@ -25,7 +25,7 @@ and open the template in the editor.
                 <ul class="nav">
                     <li><a href="<?=base_url().'index'?>" >Leaning Objectives</a></li>
                     <li><a href="<?=base_url().'index/about'?>" >About Clinical Reasoning</a></li>
-                    <li><a href="<?=base_url().'index/clinical'?>" class="active">Clinical Scenario</a></li>
+                    <li><a href="<?=base_url().'index/step'?>" class="active">Clinical Scenario</a></li>
                     <li><a href="<?=base_url().'indeix/recommended'?>">Recommended Readings</a></li>
                     <li><a href="<?=base_url().'index/others'?>">Others</a></li>
                     <li><a href="<?=base_url().'index/step'?>">Step Demo</a></li>
@@ -35,7 +35,10 @@ and open the template in the editor.
        <div class="fn-mtb-20">
                 <strong><?= $title; ?></strong>
                 <p> <?= $des; ?>  </p>
-                <p> <a href="<?php echo base_url();?>index/clinical/<?php echo $id ?>">下一步</a>   </p>
+                
+                <div class="s-btn">
+                <p> <a href="<?php echo base_url();?>index/clinical/<?php echo $next_topic_id; ?>">下一步</a>   </p>
+                </div>
             </div>
         
     </body>
