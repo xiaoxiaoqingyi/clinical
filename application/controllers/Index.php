@@ -9,7 +9,7 @@ class Index extends CI_Controller {
             
             parent::__construct();
             
-            session_start();
+//            session_start();
             //判断是否登录，否则跳转到登录
             if(!isset($_SESSION['uid'])){
                 $this->load->helper("url");
