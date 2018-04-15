@@ -1,21 +1,41 @@
 /*layout.css布局*/
 
 /*container*/
-.container {
-    min-height: 960px;
+html{
+    height: 1080px;
+}
+.bg {
+    background: url(../images/bg.png) center 100px no-repeat;
+}
+.bg2 {
+    background: url(../images/bg2.png) center 100px no-repeat;
+}
+.bg3 {
+    background: url(../images/bg3.png) center 100px no-repeat;
+}
+.bg4 {
+    background: url(../images/bg4.png) center 100px no-repeat;
 }
 .wrapper {
     margin: 0 auto;
     max-width: 1600px;
-    overflow: hidden;
 }
 /*end container*/
 
 /*head*/
 .head {
-    min-width: 1200px;
-    font-size: 18px;
+    position: relative;
+    height: 100px;
+    line-height: 100px;
+    font-size: 20px;
     white-space: nowrap;
+    color: #fff;
+    background: #ffac53;
+    z-index: 1;
+}
+
+.head a {
+    color: #fff;
 }
 
 .head .login {
@@ -23,8 +43,13 @@
     padding-left: 20px;
 }
 
+.head .icon-user{
+    padding: 2px 0 2px 40px;
+    background: url(../images/icon-user.png) no-repeat;
+}
+
 .head .login .line {
-    padding: 0 10px;
+    padding: 0 15px;
 }
 
 .head .nav {
@@ -32,112 +57,75 @@
 }
 
 .head .nav li {
+    position: relative;
     float: left;
-    padding: 0 20px;
+    padding: 0 25px;
+    background: url(../images/icon-nav.png) center 100px no-repeat;
+    -webkit-transition: background .2s; /* Safari 和 Chrome */
+       -moz-transition: background .2s; /* Firefox 4 */
+        -ms-transition: background .2s; /* IE9 */
+         -o-transition: background .2s; /* Opera */
+            transition: background .2s;
 }
 
 .head .nav li a {
     display: block;
-    min-width: 80px;
     text-align: center;
 }
 
-/*end head*/
-
-/*footer*/
-.footer {
-    background: #f8f8f8;
+.head .nav li:hover,
+.head .nav .active{
+    background-position: center bottom;
 }
 
-.footer li {
-    float: left;
-    margin-right: 10px;
+.head .nav .active{
+    font-weight: bold;
 }
 
-.footer p {
-    margin-top: 5px;
-}
-
-/*end footer*/
-
-/*main-page*/
-.main-page {
-    background: url(../images/bg-main.jpg) center 100px no-repeat;
-}
-
-.main-page .head {
-    line-height: 100px;
-    color: #fff;
-    background: #09ccc4;
-}
-
-.main-page .head a {
-    color: #fff;
-}
-
-.main-page .head .nav a{
-    background: url(../images/bg-main-nav.jpg) center 100px no-repeat;
-}
-
-.main-page .head .nav a:hover,
-.main-page .head .nav li .active{
-    background-position: center bottom ;
-    transition: background 0.2s;
-}
-/*end main-page*/
-
-/*second-page*/
-.second-page {
-    background: #f4f4f4;
-}
-
-.second-page .head {
-    padding: 20px 0;
-    line-height: 60px;
-    color: #333;
+.head .nav li .sub{
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    line-height: 64px;
     background: #fff;
+    box-shadow: 0 10px 20px #ebebeb;
+}
+.head .nav li:hover .sub{
+    display: block;
+}
+.head .nav li .sub a{
+    color: #242424;
 }
 
-.second-page .head a {
-    color: #333;
+.head .nav li .sub a:hover{
+    color: #ed6f22;
+    background: #ebebeb;
 }
 
-.second-page .head .nav a:hover,
-.second-page .head .nav li .active {
-    padding-top: 2px;
-    line-height: 56px;
-    color: #ffbe22;
-    border-bottom: 2px solid #ffbe22;
-}
-/*end second-page**/
-
-/*clinical-page*/
-.clinical-page {
-    background: url(../images/bg-second.jpg) center 100px no-repeat;
-}
-/*end clinical-page**/
+/*head end*/
 
 /*media*/
-@media screen and (max-width: 1360px){
+@media screen and (max-width: 1600px){
     .head .login {
-        float: left;
+        padding-left: 20px;
+    }
+    .head .nav li {
+        padding: 0 20px;
+    }
+}
+@media screen and (max-width: 1480px){
+    .head .login {
         padding-left: 15px;
     }
-
     .head .nav li {
-        float: left;
         padding: 0 15px;
     }
 }
-@media screen and (max-width: 1240px){
-    .head .login {
-        float: left;
-        padding-left: 10px;
-    }
-
-    .head .nav li {
-        float: left;
-        padding: 0 10px;
+@media screen and (max-width: 1280px){
+    html, .head, .container{
+        width: 1280px;
     }
 }
-/*end media*/
+/*media end*/

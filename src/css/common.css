@@ -1,8 +1,71 @@
 /*common.css公用*/
 
-.py-20{
-    padding: 20px 0;
+/*padding、margin*/
+/*.p-0{padding: 0;}
+.p-10{padding: 10px;}
+.pt-10{padding-top: 10px;}
+.pr-10{padding-right: 10px;}
+.pb-10{padding-bottom: 10px;}
+.pl-10{padding-left: 10px;}
+.px-10{padding: 0 10px;}
+.py-10{padding: 10px;}*/
+
+/*.m-0 {margin: 0;}
+.m-10 {margin: 10px;}
+.mr-10 {margin-right: 10px;}
+.mb-10 {margin-bottom: 10px;}
+.ml-10 {margin-left: 10px;}
+.mx-10 {margin: 0 10px;}*/
+.py-30 {padding: 30px;}
+.mt-20 {margin-top: 20px;}
+.mt-30 {margin-top: 30px;}
+.my-10 {margin: 10px 0;}
+.my-30 {margin: 30px 0;}
+/*.my-20{margin: 20px 0;}*/
+/*padding、margin end*/
+
+/*color、background、border*/
+.c1-default{color: #242424;}
+.c1-primary{color: #68baff;}
+.c1-success{color: #ed6f22;}
+.c1-info{color: #5bc0de;}
+.c1-warning{color: #ffac53;}
+.c1-danger{color: #ed6f22;}
+
+.c2-default{ color: #fff; background: #b2b2b2;}
+.c2-primary{ color: #ffac53; background: #242424;}
+.c2-success{ color: #fff; background: #5cb85c;}
+.c2-info{color: #fff; background: #5bc0de;}
+.c2-warning{color: #fff; background: #f0ad4e;}
+.c2-danger{color: #fff; background: #d9534f;}
+
+.c3-default{color: #666; background: #fff; border-color: #ccc;}
+.c3-primary{color: #fff; background: #337ab7; border-color: #2e6da4;}
+.c3-success{color: #fff; background: #5cb85c; border-color: #4cae4c;}
+.c3-info{color: #fff; background: #5bc0de; border-color: #46b8da;}
+.c3-warning{color: #fff; background: #f0ad4e; border-color: #eea236;}
+.c3-danger{color: #fff; background: #d9534f; border-color: #d43f3a;}
+/*color、background、border end*/
+
+.btn-s{display:inline-block; width: 100px; line-height: 30px; font-size: 14px; text-align: center; vertical-align: middle; cursor: pointer; border: none; padding: 0;}
+.btn-m{display:inline-block; width: 100px; line-height: 40px; font-size: 18px; text-align: center; vertical-align: middle; cursor: pointer; border: none; padding: 0;}
+.btn-l{display:inline-block; width: 200px; line-height: 60px; font-size: 20px; text-align: center; vertical-align: middle; cursor: pointer; border: none; padding: 0; margin: 0 40px; font-weight: bold;}
+
+
+.l-df{line-height: 1.5;}
+.l-24{line-height: 24px;}
+.l-30{line-height: 30px;}
+.l-38{line-height: 38px;}
+
+.f-18{font-size: 18px;}
+.f-20{font-size: 20px;}
+.f-22{font-size: 22px;}
+.f-24{font-size: 24px;}
+
+
+
+.t-line{
+    height: 1px;
+    background: #ebebeb;
 }
-.my-20{
-    margin: 20px 0;
-}
+

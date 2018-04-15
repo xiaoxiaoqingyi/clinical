@@ -1,0 +1,9 @@
+/*others-page*/
+.img-wait {
+    position: relative;
+    margin: 168px auto;
+    width: 273px;
+    height: 265px;
+    background: url(../images/others/img-wait.png);
+}
+/*others-page end*/

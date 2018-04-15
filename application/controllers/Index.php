@@ -9,7 +9,7 @@ class Index extends CI_Controller {
             
             parent::__construct();
             
-//            session_start();
+            session_start();
             //判断是否登录，否则跳转到登录
             if(!isset($_SESSION['uid'])){
                 $this->load->helper("url");
@@ -23,11 +23,35 @@ class Index extends CI_Controller {
 
 	public function index(){
         
-            $this->load->view('index.html');
+            $this->load->view('learn.html');
 	}
         
         public function about(){
             $this->load->view('about.html');
+        }
+        
+        public function about2(){
+            $this->load->view('about/about2.html');
+        }
+        
+        public function about3(){
+            $this->load->view('about/about3.html');
+        }
+        
+        public function about4(){
+            $this->load->view('about/about4.html');
+        }
+        
+        public function head(){
+            $this->load->view('html/head.html');
+        }
+        
+        public function stephelp(){
+            $this->load->view('html/step-help.html');
+        }
+        
+        public function setpfloor(){
+            $this->load->view('html/step-floor.html');
         }
         
         public function recommended(){
@@ -38,23 +62,20 @@ class Index extends CI_Controller {
             $this->load->view('others.html');
         }
         
-        public function demo(){
-            $this->load->view('step.html');
-        }
         
         public function step(){
-            $this->load->view('case/caselist.html');
+            $this->load->view('case/step.html');
         }
         
         public function case1intro(){
              $this->load->view('case/case1introduce.html');
         }
         
-        public function eightStep(){
+        public function clinical(){
              $this->load->view('clinical.html');
         }
         
-        public function clinical($tid=0){
+        public function answer($tid=0){
             if($tid == 0){
                 //8个步骤完成
                 $this->load->view('recommended.html');             
@@ -91,7 +112,7 @@ class Index extends CI_Controller {
                        $this->load->view('topic/muljudge.html', $data[0]); 
                  }else if($data[0]['type'] == 7){
                      //步骤选择页面
-                      $this->load->view('clinical.html');
+                      $this->load->view('case/step.html');
                  }
                  
                 

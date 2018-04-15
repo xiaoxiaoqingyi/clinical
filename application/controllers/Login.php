@@ -8,7 +8,7 @@ class Login extends CI_Controller {
 	public function __construct(){
             
             parent::__construct();
-//            session_start();
+            session_start();
 	}
 
 	public function index(){
@@ -39,7 +39,7 @@ class Login extends CI_Controller {
 
             $this->load->helper("url");
 //             header("location:".base_url("/index"));
-            $res = array("url"=>base_url("/index"));
+            $res = array("url"=>base_url("/index/index"));
             
             $this->response(200,'ok',$res);
 	}

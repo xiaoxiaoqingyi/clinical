@@ -1,0 +1,239 @@
+/*clinical-page*/
+.case-list a {
+    float: left;
+    width: 181px;
+    height: 96px;
+    padding-top: 85px;
+    color: #fff;
+    margin: 30px 108px;
+}
+.case-list strong {
+    font-size: 28px;
+    display: block;
+    line-height: 1;
+}
+.case-list b {
+    display: block;
+    line-height: 38px;
+}
+.case-list .case-well{
+    background: url(../images/clinical/case-well.png);
+}
+.case-list .case-well b {
+    font-size: 20px;
+}
+.case-list .case-wait{
+    background: url(../images/clinical/case-wait.png);
+    cursor: default;
+}
+.case-list .case-wait b {
+    font-size: 30px;
+}
+
+.text .btn {
+    margin-top: 134px;
+}
+/*clinical-page end*/
+
+/*circle*/
+.circle {
+    position: relative;
+    margin: 108px auto 0;
+    width: 604px;
+    height: 602px;
+    border-radius: 650px;
+}
+
+.circle li {
+    position: absolute;
+    width: 141px;
+    height: 141px;
+    border-radius: 100%;
+}
+
+.circle li a {
+    display: block;
+    height: 100%;
+    border-radius: 100%;
+    cursor: not-allowed;
+}
+
+.circle .open a {
+    cursor: pointer;
+}
+
+.circle li .info {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    background: #fff;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: -1;
+    -webkit-transition: opacity .5s linear .1s, margin-top .3s linear .2s, margin-left .3s linear .2s; /* Safari 和 Chrome */
+       -moz-transition: opacity .5s linear .1s, margin-top .3s linear .2s, margin-left .3s linear .2s; /* Firefox 4 */
+        -ms-transition: opacity .5s linear .1s, margin-top .3s linear .2s, margin-left .3s linear .2s; /* IE9 */
+         -o-transition: opacity .5s linear .1s, margin-top .3s linear .2s, margin-left .3s linear .2s; /* Opera */
+            transition: opacity .5s linear .1s, margin-top .3s linear .2s, margin-left .3s linear .2s;
+}
+
+.circle li:hover .info {
+    margin-top: 0;
+    margin-left: 0;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    z-index: 1;
+}
+
+.circle-bg1{
+    background: url(../images/clinical/step-1.png);
+}
+
+.circle-bg2{
+    background: url(../images/clinical/step-2.png);
+}
+
+.circle-bg3{
+    background: url(../images/clinical/step-3.png);
+}
+
+.circle-bg4{
+    background: url(../images/clinical/step-4.png);
+}
+
+.circle-bg5{
+    background: url(../images/clinical/step-5.png);
+}
+
+.circle-bg6{
+    background: url(../images/clinical/step-6.png);
+}
+
+.circle-bg7{
+    background: url(../images/clinical/step-7.png);
+}
+
+.circle-bg8{
+    background: url(../images/clinical/step-8.png);
+}
+
+.step-1 {
+    left: 242px;
+    top: 10px;
+}
+
+.step-2 {
+    left: 395px;
+    top: 82px
+}
+
+.step-3 {
+    left: 453px;
+    top: 242px;
+}
+
+.step-4 {
+    left: 381px;
+    top: 395px;
+}
+
+.step-5 {
+    left: 221px;
+    top: 452px;
+}
+
+.step-6 {
+    left: 68px;
+    top: 379px;
+}
+
+.step-7 {
+    left: 11px;
+    top: 220px;
+}
+
+.step-8 {
+    left: 82px;
+    top: 67px;
+}
+
+.circle .step-1 .info {
+    margin-top: -10px;
+    margin-left: 10px;
+    top: -94px;
+    left: 144px;
+    width: 358px;
+    height: 101px;
+    background: url(../images/clinical/text-1.png);
+}
+
+.circle .step-2 .info {
+    margin-top: -10px;
+    margin-left: 10px;
+    top: -154px;
+    left: 172px;
+    width: 502px;
+    height: 241px;
+    background: url(../images/clinical/text-2.png);
+}
+
+.circle .step-3 .info {
+    margin-top: 10px;
+    margin-left: 10px;
+    top: -124px;
+    left: 140px;
+    width: 502px;
+    height: 313px;
+    background: url(../images/clinical/text-3.png);
+}
+
+.circle .step-4 .info {
+    margin-top: 10px;
+    margin-left: 10px;
+    top: 160px;
+    left: 80px;
+    width: 500px;
+    height: 57px;
+    background: url(../images/clinical/text-4.png);
+}
+
+.circle .step-5 .info {
+    margin-top: 10px;
+    margin-left: -10px;
+    top: 146px;
+    left: -340px;
+    width: 359px;
+    height: 53px;
+    background: url(../images/clinical/text-5.png);
+}
+
+.circle .step-6 .info {
+    margin-top: 10px;
+    margin-left: -10px;
+    top: 76px;
+    left: -384px;
+    width: 359px;
+    height: 53px;
+    background: url(../images/clinical/text-6.png);
+}
+
+.circle .step-7 .info {
+    margin-top: -10px;
+    margin-left: -10px;
+    top: -100px;
+    left: -364px;
+    width: 358px;
+    height: 123px;
+    background: url(../images/clinical/text-7.png);
+}
+
+.circle .step-8 .info {
+    margin-top: -10px;
+    margin-left: -10px;
+    top: -142px;
+    left: -300px;
+    width: 358px;
+    height: 123px;
+    background: url(../images/clinical/text-8.png);
+}
+/*circle end*/

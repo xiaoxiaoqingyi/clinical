@@ -1,27 +1,31 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script  type="text/javascript"  src="<?php echo base_url();?>src/js/jquery-1.8.3.min.js"></script>
-    </head>
-    <body>
-        <div>TODO write content</div>
-        <form id=form1 >
-            <input class="account p10 wp" id="account" name="account" placeholder="Account"><br><br>
-            <input class="password p10 wp" id="password" name="password" type="password" placeholder="password"><br><br><br>
-            <input class="bgw br brc cp p10 mr10" type="reset" value="Clear" style="width:140px">
-            <input class="submit bgc1 br bc1 cw p10 ml10" type="submit" value="Login"style="width:140px">
-        </form>
-        
-        
-        <script language="javascript" type="text/javascript">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning Objectives</title>
+    <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
+    <!--add css-->
+    <link rel="stylesheet" href="<?=base_url().'src/css/style-login.css'?>">
+    <!--add css end-->
+     <script  type="text/javascript"  src="<?php echo base_url();?>src/js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+    <div class="login-bg">
+        <div class="login">
+            <form id=form1>
+                <h1>Sign In</h1>
+                <input class="text" type="text" id="account" name="account" placeholder="Account">
+                <input class="text" type="password" id="password" name="password" placeholder="Password">
+                <span id="backerror" class="error active"></span>
+                <button class="submit" type="submit" title="login">Login</button>
+                <button class="reset" type="reset" title="login">Clear</button>
+            </form>
+        </div>
+    </div>
+    
+    
+     <script language="javascript" type="text/javascript">
+         
         $(function(){
             $("#form1").submit(function(){
                        
@@ -41,14 +45,14 @@ and open the template in the editor.
 				dataType:'json',
 				type:'post',
 				success:function(data){
-//					console.log(data);
+					console.log(data);
 					if(data&&data.status == 200)
 					{			 
 					  location.href = data.res.url;
 					}
 					else
 					{			
-					     alert(data.statusMsg);
+					      $("#backerror").text(data.statusMsg);
 					}
 				},error:function(e){
 					alert("error!");
@@ -60,5 +64,5 @@ and open the template in the editor.
         });
         
         </script>
-    </body>
+</body>
 </html>

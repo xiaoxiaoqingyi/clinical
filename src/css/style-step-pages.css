@@ -1,0 +1,44 @@
+/*circle step*/
+.step-pass{
+    margin: 76px auto;
+    width: 889px;
+    height: 389px;
+    background: url(../images/step/step-pass.png);
+}
+.step-finish{
+    margin: 76px auto;
+    width: 953px;
+    height: 295px;
+    background: url(../images/step/step-finish.png);
+}
+.step-intro{
+    text-align: center;
+}
+.step-intro .step-title{
+    display: inline-block;
+    position: relative;
+    margin: 220px 0 98px;
+}
+.step-intro .step-title i{
+    position: absolute;
+    top: -118px;
+    left: -189px;
+    width: 240px;
+    padding-left: 189px;
+    line-height: 102px;
+    text-align: center;
+    font-style: normal;
+    font-size: 40px;
+    font-weight: bold;
+    color: #fff;
+    background: url(../images/step/step-title.png);
+}
+.text ul{
+    margin: 34px 0;
+}
+
+.text li {
+    font-size: 26px;
+    line-height: 38px;
+}
+/*circle step end*/

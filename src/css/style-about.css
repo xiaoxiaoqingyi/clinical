@@ -1,0 +1,14 @@
+/*about-page*/
+.text {
+    position: relative;
+}
+
+.text ul{
+    margin: 30px 0;
+}
+
+.text li {
+    font-size: 26px;
+    line-height: 38px;
+}
+/*about-page end*/

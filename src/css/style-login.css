@@ -1,0 +1,60 @@
+/*login-page*/
+html{
+    height: 1080px;
+    background: url(../images/bg-login.png) center top no-repeat;
+}
+.login-bg{
+    margin: 140px auto 0;
+    width: 1290px;
+    height: 799px;
+    background: url(../images/login/login.png);
+}
+.login{
+    width: 300px;
+    margin-left: 854px;
+    text-align: center;
+}
+.login h1{
+    padding: 160px 0 26px;
+    font-size: 28px;
+    line-height: 1;
+}
+.login .text{
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 50px 0;
+    font-size: 20px;
+    line-height: 48px;
+    border: 0;
+    border-bottom: 2px solid #ebebeb;
+}
+.login .error{
+    display: block;
+    line-height: 1;
+    font-size: 20px;
+    color: #fff;
+}
+.login .active{
+    color: #ed6f22;
+}
+.login button{
+    display: block;
+    width: 100%;
+    padding: 0;
+    font-size: 26px;
+    border: 0;
+    cursor: pointer;
+}
+.login .submit{
+    margin: 30px 0 56px;
+    line-height: 58px;
+    color: #fff;
+    background: #ffac53;
+}
+.login .reset{
+    line-height: 1;
+    color: #ed6f22;
+    text-decoration: underline;
+}
+/*login-page end*/

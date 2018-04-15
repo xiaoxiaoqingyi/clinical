@@ -1,0 +1,14 @@
+/*learn-page*/
+.title{
+    position: relative;
+}
+.title i{
+    position: absolute;
+    top: -50px;
+    left: 330px;
+    display: block;
+    width: 84px;
+    height: 59px;
+    background: url(../images/learn/icon-title.png);
+}
+/*learn-page end*/
