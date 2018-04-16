@@ -28,37 +28,37 @@
 <div class="container">
     <div class="wrap">
         <div class="content">
-            <ul class="circle circle-bg8">
-                <li class="step-1 open">
-                    <a href="step-1-1.html"></a>
+            <ul class="<?php echo 'circle circle-bg'.$step; ?>">
+                <li class="<?php echo $step>=1?'step-1 open':'step-1'; ?>">
+                    <a href="<?php echo $step>=1?base_url().'index/fromstep/1':''; ?>"></a>
                     <div class="info"></div>
                 </li>
-                <li class="step-2 open">
-                    <a href="step-2-1.html"></a>
+                <li class="<?php echo $step>=2?'step-2 open':'step-2'; ?>">
+                    <a href="<?php echo $step>=2?base_url().'index/fromstep/2':''; ?>"></a>
                     <div class="info"></div>
                 </li>
-                <li class="step-3 open">
-                    <a href="step-3-1.html"></a>
+                <li class="<?php echo $step>=3?'step-3 open':'step-3'; ?>">
+                    <a href="<?php echo $step>=3?base_url().'index/fromstep/3':''; ?>"></a>
                     <div class="info"></div>
                 </li>
-                <li class="step-4 open">
-                    <a href="step-4-1.html"></a>
+                <li class="<?php echo $step>=4?'step-4 open':'step-4'; ?>">
+                    <a href="<?php echo $step>=4?base_url().'index/fromstep/4':''; ?>"></a>
                     <div class="info"></div>
                 </li>
-                <li class="step-5 open">
-                    <a href="step-5-1.html"></a>
+                <li class="<?php echo $step>=5?'step-5 open':'step-5'; ?>">
+                    <a href="<?php echo $step>=5?base_url().'index/fromstep/5':''; ?>"></a>
                     <div class="info"></div>
                 </li>
-                <li class="step-6 open">
-                    <a href="step-6-1.html"></a>
+                <li class="<?php echo $step>=6?'step-6 open':'step-6'; ?>">
+                    <a href="<?php echo $step>=6?base_url().'index/fromstep/6':''; ?>"></a>
                     <div class="info"></div>
                 </li>
-                <li class="step-7 open">
-                    <a href="step-7-1.html"></a>
+                <li class="<?php echo $step>=7?'step-7 open':'step-7'; ?>">
+                    <a href="<?php echo $step>=7?base_url().'index/fromstep/7':''; ?>"></a>
                     <div class="info"></div>
                 </li>
-                <li class="step-8 open">
-                    <a href="step-8-1.html"></a>
+                <li class="<?php echo $step>=8?'step-8 open':'step-8'; ?>">
+                    <a href="<?php echo $step>=8?base_url().'index/fromstep/8':''; ?>"></a>
                     <div class="info"></div>
                 </li>
             </ul>

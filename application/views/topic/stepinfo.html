@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="bg4">
+<html lang="en" class="bg3">
 <head>
     <meta charset="UTF-8">
     <title>Clinical Scenario</title>
-    <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
+     <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/common.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/layout.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/module.css'?>">
@@ -14,35 +14,24 @@
 </head>
 <body>
 <div class="head" data-val="clinical">
-    <!--common.js自动载入head.html 注意：data-val值如果与菜单栏的data-val值匹配，则匹配菜单项状态加亮-->
+    <!--自动载入-->
 </div>
 <div class="container">
-    <div class="step-box fn-clear">
-        <div class="step-floor" data-val="<?=$step; ?>">
-            <!--common.js自动载入step-floor.html 注意：data-val值代表通过的step数量，如值为3，则前3个状态加亮-->
-        </div>
-        <div class="step-wrap">
-            <form id="form1">
-                <div class="step-cont">
-                    <div class="qq-title"><?= $title; ?></div>
-                    <div class="qq-text">
-                        <strong class="f-20"><?= $des; ?></strong>
-                        
-                         <?php foreach ($option as $key => $value){ ?>
-                
-                        <label class="item-radio p-radio"><input type="radio" name="single" value="<?=$key; ?>"><?=$value; ?></label>
-                       
-                        <?php } ?>
-                    </div>
-                    <div class="tx-c mt-30">
-                        <a class="btn-l c2-primary" href="javascript:history.back(-1);" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
-                      <!--  <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$next_topic_id;?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>-->
-                    </div>
+    <div class="wrap">
+        <div class="content">
+            <div class="step-intro">
+                <div class="step-title">
+                    <i>STEP <?= $step ?></i>
+                    <h1><?= $title; ?></h1>
                 </div>
-            </form>
-        </div>
-        <div class="step-help" data-val="<?php echo $step>1?'':'1'; ?>">
-            <!--common.js自动载入step-help.html 注意：data-val值为1，则只加载一个，否则加载全部-->
+                <div class="step-text">
+                    <?= $des; ?>
+                </div>
+                <div class="step-btn" style="margin-top: 184px;">
+                    <a class="btn-prev" href="javascript:history.back(-1);" title="&lt;&nbsp;prev">prev</a>
+                    <a class="btn-next" href="<?php echo base_url().'index/answer/'.$next_topic_id;?>" title="next&nbsp;&gt;">next</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -52,32 +41,6 @@
      * Created by lzm on 2018/3/30.
      */
     $(function(){
-        
-        $("input[name=single]").each(function(){
-            $(this).click(function(){
-                $.ajax({
-                    url: '<?php echo base_url();?>index/single/<?php echo $id ?>',
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    type: 'post',
-                    success: function (data) {
-                        //console.log(data);
-                        if (data && data.status == 200) {
-                            location.href = data.res.url;
-                        }
-                        else {
-                            alert(data.statusMsg);
-                        }
-                    }, error: function (e) {
-                        alert("error!");
-                    }
-                });
-
-            });
-        });
-        
-    
-        
         // 载入头部.head
         // 给当前页面添加样式
         $('.head').load("<?=base_url().'index/head'?> .wrapper");
@@ -124,7 +87,7 @@
 
         // 载入step-help
         // .step-help切换
-        $('.step-help').load("<?=base_url().'index/stephelp'?>");
+        $('.step-help').load("<?=base_url().'index/stepfhelp'?>");
         stepHelpToggle();
         function stepHelpToggle(){
             var help = $('.step-help');

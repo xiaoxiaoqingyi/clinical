@@ -50,7 +50,7 @@ class Index extends CI_Controller {
             $this->load->view('html/step-help.html');
         }
         
-        public function setpfloor(){
+        public function stepfloor(){
             $this->load->view('html/step-floor.html');
         }
         
@@ -64,7 +64,8 @@ class Index extends CI_Controller {
         
         
         public function step(){
-            $this->load->view('case/step.html');
+            $res['step'] = 8;
+            $this->load->view('case/step.html', $res);
         }
         
         public function case1intro(){
@@ -75,6 +76,36 @@ class Index extends CI_Controller {
              $this->load->view('clinical.html');
         }
         
+        public function fromstep($step){
+            switch ($step){
+                case 1:
+                    $this->answer(1);
+                    break;
+                case 2:
+                    $this->answer(14);
+                    break;
+                case 3:
+                     $this->answer(31);
+                    break;
+                case 4:
+                     $this->answer(46);
+                    break;
+                case 5:
+                     $this->answer(52);
+                    break;
+                case 6:
+                     $this->answer(57);
+                    break;
+                case 7:
+                     $this->answer(64);
+                    break;
+                case 8:
+                     $this->answer(70);
+                    break;
+            }
+        }
+
+
         public function answer($tid=0){
             if($tid == 0){
                 //8个步骤完成
@@ -82,12 +113,15 @@ class Index extends CI_Controller {
                 return;;
             }
             
-            $data=$this->db->select('id, title, option, type, des, next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
+            $data=$this->db->select('id, title, option, type, des, step, next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
             if(isset($data)){
                  $options = explode(";",$data[0]['option']);
                  $data[0]['option'] = $options;
 
-                 if($data[0]['type'] == 0){
+                 if($data[0]['type'] == -1){
+                     //介绍页面
+                     $this->load->view('topic/stepinfo.html', $data[0]); 
+                 } else if($data[0]['type'] == 0){
                      //介绍页面
                      $this->load->view('topic/introduce.html', $data[0]); 
                  } else if($data[0]['type'] == 1){
@@ -112,7 +146,7 @@ class Index extends CI_Controller {
                        $this->load->view('topic/muljudge.html', $data[0]); 
                  }else if($data[0]['type'] == 7){
                      //步骤选择页面
-                      $this->load->view('case/step.html');
+                      $this->load->view('case/step.html', $data[0]);
                  }
                  
                 
@@ -133,7 +167,7 @@ class Index extends CI_Controller {
                 
                 $data=$this->db->select('answer,next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
-                     $res = array("url"=>base_url("/index/clinical/".$data[0]['next_topic_id']));
+                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);
                 } else {
                     $this->response(-1,'try again!');
@@ -158,7 +192,7 @@ class Index extends CI_Controller {
                 
                 $data=$this->db->select('answer,next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
-                     $res = array("url"=>base_url("/index/clinical/".$data[0]['next_topic_id']));
+                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);
                 } else {
                     $this->response(-1,'try again!');
@@ -182,7 +216,7 @@ class Index extends CI_Controller {
                 
                 $data=$this->db->select('answer,next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
-                     $res = array("url"=>base_url("/index/clinical/".$data[0]['next_topic_id']));
+                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);
                 } else {
                     $this->response(-1,'try again!');
@@ -205,7 +239,7 @@ class Index extends CI_Controller {
                 
                 $data=$this->db->select('answer,next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
-                     $res = array("url"=>base_url("/index/clinical/".$data[0]['next_topic_id']));
+                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);
                 } else {
                     $this->response(-1,'try again!');
@@ -233,7 +267,7 @@ class Index extends CI_Controller {
                             ,"answer"=>$select);
                     
                     $this->db->insert("shortquestion", $insert);
-                     $res = array("url"=>base_url("/index/clinical/".$data[0]['next_topic_id']));
+                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);
                 } else {
                     $this->response(-1,'try again!');
@@ -257,7 +291,7 @@ class Index extends CI_Controller {
                 
                 $data=$this->db->select('answer,next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
-                     $res = array("url"=>base_url("/index/clinical/".$data[0]['next_topic_id']));
+                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);
                 } else {
                     $this->response(-1,'try again!');
