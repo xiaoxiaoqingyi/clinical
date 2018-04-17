@@ -262,7 +262,7 @@ class Index extends CI_Controller {
                 
                 $data=$this->db->select('id,title,next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
                 if(!empty($data[0])){
-                    $insert= array("tid"=>$data[0]['id'], "uid"=>$this->session->userdata('uid')
+                    $insert= array("tid"=>$data[0]['id'], "uid"=>$_SESSION['uid']
                             ,"title"=>$data[0]['title'], "createtime"=>date("Y-m-d H:i:s")
                             ,"answer"=>$select);
                     
