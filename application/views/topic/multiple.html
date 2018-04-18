@@ -33,7 +33,7 @@
                             
                             <?php foreach ($option as $key => $value){ ?>
                             
-                            <label class="item-checkbox p-checkbox"><input type="checkbox" name="multiple<?=$key; ?>" value="<?=$key; ?>"><?=$value; ?></label>
+                            <label class="item-checkbox p-checkbox"><input type="checkbox" name="multiple<?=$key; ?>" value="<?=$key;?>"><?=$value; ?></label>
                             
                             <?php } ?>
                             
@@ -50,6 +50,27 @@
             <!--common.js自动载入step-help.html 注意：data-val值为1，则只加载一个，否则加载全部-->
         </div>
     </div>
+    <div class="popbox bg-error err-count">
+    <div class="popbox-bg"></div>
+    <div class="submit-result">
+        <p style="padding: 148px 0 46px 0;" class="l-38">Oops! You have only <br> selected <b class="c1-danger">3</b> correct answers. <br> Please try again!</p>
+        <a class="btn-l c2-primary" href="javascript:;" onclick="$(this).parents('.popbox').hide()">AGAIN</a>
+    </div>
+    </div>
+    <div class="popbox bg-pass">
+        <div class="popbox-bg"></div>
+        <div class="submit-result">
+            <p>Congrat! let's go next!</p>
+            <a id="congrat" class="btn-l c2-primary" href="javascript:;" onclick="$(this).parents('.popbox').hide()">NEXT</a>
+        </div>
+    </div>
+      <div class="popbox bg-error err-wrong">
+        <div class="popbox-bg"></div>
+        <div class="submit-result">
+            <p>Error, try again!</p>
+            <a class="btn-l c2-primary" href="javascript:;" onclick="$(this).parents('.popbox').hide()">AGAIN</a>
+        </div>
+    </div>
 </div>
 <script>
 
@@ -59,21 +80,38 @@
     $(function(){
         
           $("#form1").submit(function () {
+              var count = $('input:checked').length;
+              var bb = <?= $answer_count ?>;
+              if(count != bb){
+                  $('.c1-danger').html(count);
+                  $('.err-count').show();
+                  return !1;
+              }
+              
             $.ajax({
                 url: '<?php echo base_url();?>index/multiple/<?php echo $id ?>',
                 data: $(this).serialize(),
                 dataType: 'json',
                 type: 'post',
                 success: function (data) {
-                    //					console.log(data);
+                    //		
                     if (data && data.status == 200) {
-                        location.href = data.res.url;
-                    }
-                    else {
-                        alert(data.statusMsg);
+                        $('#congrat').attr('href',data.res.url);
+                        $('.bg-pass').show();
+                    } else {
+                        var answer = data.res.answer;
+                        var arr=new Array(); 
+                        arr=answer.split(',');
+                      
+                        for(j = 0; j < arr.length; j++){
+                            var option = "input[name=multiple"+arr[j] +"]";
+                             $(option). parent("label").addClass("prompt");
+                        }
+                            
+                        $('.err-wrong').show();
                     }
                 }, error: function (e) {
-                    alert("error!");
+//                    alert("error!");
                 }
             });
 
