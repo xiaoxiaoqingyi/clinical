@@ -34,8 +34,8 @@
                           <div class="select-group fn-clear">
                                 <label><?=$value; ?></label>
                                 <div class="select-top">
-                                    <span class="tx-hide">Please Select</span>
-                                    <input name="select<?=$key; ?>" type="text">
+                                    <span class="tx-hide"><?php if(isset($done)){ echo $des[explode(',',$answer)[$key]];} else{ echo 'Please Select';} ?></span>
+                                    <input name="select<?=$key; ?>"  <?php if(isset($done)){ echo 'value='.explode(',',$answer)[$key];} ?> type="text" >
                                 </div>
                             </div>
                       <?php } ?>  
@@ -102,7 +102,7 @@
         $("#form1").submit(function(){
 
             $.ajax({
-                    url:'<?php echo base_url();?>index/match/<?php echo $id ?>',
+                    url:'<?php echo base_url();?>index/match/<?php echo isset($done)?$id.'/'.$done:$id ?>',
                     data:$(this).serialize(),
                     dataType:'json',
                     type:'post',

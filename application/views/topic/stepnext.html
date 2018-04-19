@@ -1,95 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" class="bg4">
+<html lang="en" class="bg3">
 <head>
     <meta charset="UTF-8">
     <title>Clinical Scenario</title>
-     <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
+   <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/common.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/layout.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/module.css'?>">
     <!--add css-->
-    <link rel="stylesheet" href="<?=base_url().'src/css/style-step.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/style-step-pages.css'?>">
     <!--add css end-->
-    <script src="<?=base_url().'src/js/jquery-1.8.3.min.js'?>"></script>
+     <script src="<?=base_url().'src/js/jquery-1.8.3.min.js'?>"></script>
 </head>
 <body>
 <div class="head" data-val="clinical">
     <!--common.js自动载入head.html 注意：data-val值如果与菜单栏的data-val值匹配，则匹配菜单项状态加亮-->
 </div>
 <div class="container">
-    <div class="step-box fn-clear">
-        <div class="step-floor" data-val="<?=$step; ?>">
-            <!--common.js自动载入step-floor.html 注意：data-val值代表通过的step数量，如值为3，则前3个状态加亮-->
-        </div>
-        <div class="step-wrap">
-            <form id="form1">
-                <div class="step-cont">
-                    <div class="qq-title"><?= $title; ?></div>
-                    <div class="qq-text">
-                        <div class="l-30">
-                            <strong><?= $des; ?></strong>
-                        </div>
-                        <div class="table-no-border">
-                            <table>
-                                <tr>
-                                    <th width="700"></th>
-                                    <th width="90">true</th>
-                                    <th>false</th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="table-no-border">
-                            <table>
-                                <tr class="tr-no">
-                                    <td width="700"></td>
-                                    <td width="90"></td>
-                                    <td></td>
-                                </tr>
-                                
-                                <?php foreach ($option as $key => $value){ ?>
-                                
-                                 <tr>
-                                    <td class="tx-l"><?=$value; ?></td>
-                                    <td><label class="item-radio i-radio"><input type="radio" name="single<?=$key; ?>" 
-                                                              <?php if(isset($done)) echo 1==explode(',',$answer)[$key]?'checked="true"':'' ?>
-                                                              value="1"></label></td>
-                                    <td><label class="item-radio i-radio"><input type="radio" name="single<?=$key; ?>"
-                                                                                   <?php if(isset($done)) echo 0==explode(',',$answer)[$key]?'checked="true"':'' ?>
-                                                                                 value="0"></label></td>
-                                </tr>
-                                
-                                <?php } ?>
-                                
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tx-c mt-30">
-                        <a class="btn-l c2-primary" href="javascript:history.back(-1);" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
-                        <button type="submit" class="btn-l c2-primary">SUBMIT</button>
-                    </div>
+    <div class="wrap">
+        <div class="content">
+            <div class="tx-c">
+                <div class="step-pass"></div>
+                <div class="btn" style="margin-top: 110px;">
+                    <a class="btn-prev" href="javascript:history.back(-1);" title="&lt;&nbsp;prev">prev</a>
+                    <a class="btn-next" href="<?php echo base_url().'index/answer/'.$next_topic_id;?>" title="next&nbsp;&gt;">next</a>
                 </div>
-            </form>
-        </div>
-        <div class="step-help" data-val="<?php echo $step>1?'':'1'; ?>">
-            <!--common.js自动载入step-help.html 注意：data-val值为1，则只加载一个，否则加载全部-->
+            </div>
         </div>
     </div>
-    
-     <div class="popbox bg-error err-wrong">
-        <div class="popbox-bg"></div>
-        <div class="submit-result">
-            <p>Error, try again!</p>
-            <a class="btn-l c2-primary" href="javascript:;" onclick="$(this).parents('.popbox').hide()">AGAIN</a>
-        </div>
-    </div>
-    <div class="popbox bg-pass">
-    <div class="popbox-bg"></div>
-    <div class="submit-result">
-        <p>Congrat! let's go next!</p>
-        <a id="congrat" class="btn-l c2-primary" href="javascript:;" onclick="$(this).parents('.popbox').hide()">NEXT</a>
-    </div>
-    </div>
-    
 </div>
 <script>
 
@@ -97,39 +35,6 @@
      * Created by lzm on 2018/3/30.
      */
     $(function(){
-        
-         $("#form1").submit(function () {
-            $.ajax({
-                url: '<?php echo base_url();?>index/judge/<?php echo isset($done)?$id.'/'.$done:$id ?>',
-                data: $(this).serialize(),
-                dataType: 'json',
-                type: 'post',
-                success: function (data) {
-                    //					console.log(data);
-                    if (data && data.status == 200) {
-                        $('#congrat').attr('href',data.res.url);
-                        $('.bg-pass').show();
-                    }
-                    else {
-                        var answer = data.res.answer;
-                        var arr=new Array(); 
-                        arr=answer.split(',');
-                      
-                        for(j = 0; j < arr.length; j++){
-                         
-                            var option = "input[name=single"+j +"][value="+arr[j]+"]";
-                            $(option). parent("label").addClass("prompt");
-                        }
-                         $('.err-wrong').show();
-                    }
-                }, error: function (e) {
-                    alert("error!");
-                }
-            });
-
-            return !1;
-        });
-        
         // 载入头部.head
         // 给当前页面添加样式
         $('.head').load("<?=base_url().'index/head'?> .wrapper");

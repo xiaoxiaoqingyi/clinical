@@ -30,7 +30,9 @@
                         
                          <?php foreach ($option as $key => $value){ ?>
                 
-                        <label class="item-radio p-radio"><input type="radio" name="single" value="<?=$key; ?>"><?=$value; ?></label>
+                         <label class="item-radio p-radio"><input type="radio" name="single" 
+                                                                <?php if(isset($done)) echo $key==$answer?'checked="true"':'' ?>  
+                                                                value="<?=$key; ?>"><?=$value; ?></label>
                        
                         <?php } ?>
                     </div>
@@ -72,7 +74,7 @@
         $("input[name=single]").each(function(){
             $(this).click(function(){
                 $.ajax({
-                    url: '<?php echo base_url();?>index/single/<?php echo $id ?>',
+                    url: '<?php echo base_url();?>index/single/<?php echo isset($done)?$id.'/'.$done:$id ?>',
                     data: $(this).serialize(),
                     dataType: 'json',
                     type: 'post',

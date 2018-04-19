@@ -33,9 +33,11 @@
                             
                             <?php foreach ($option as $key => $value){ ?>
                             
-                            <label class="item-checkbox p-checkbox"><input type="checkbox" name="multiple<?=$key; ?>" value="<?=$key;?>"><?=$value; ?></label>
+                            <label class="item-checkbox p-checkbox"><input type="checkbox" name="multiple<?=$key; ?>" 
+                                                                           <?php if(isset($done)) echo in_array($key, explode(',',$answer))?'checked="true"':'' ?>
+                                                                           value="<?=$key;?>"><?=$value; ?></label>
                             
-                            <?php } ?>
+                            <?php } ?>        
                             
                         </div>
                         <div class="tx-c mt-30">
@@ -89,7 +91,7 @@
               }
               
             $.ajax({
-                url: '<?php echo base_url();?>index/multiple/<?php echo $id ?>',
+                url: '<?php echo base_url();?>index/multiple/<?php echo isset($done)?$id.'/'.$done:$id ?>',
                 data: $(this).serialize(),
                 dataType: 'json',
                 type: 'post',
