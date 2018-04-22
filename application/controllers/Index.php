@@ -9,7 +9,7 @@ class Index extends CI_Controller {
             
             parent::__construct();
             
-//            session_start();
+            session_start();
             //判断是否登录，否则跳转到登录
             if(!isset($_SESSION['uid'])){
                 $this->load->helper("url");
@@ -159,7 +159,7 @@ class Index extends CI_Controller {
                        'step' => $data[0]['step']
                        );
                   $this->db->insert('answer_state', $insert);
-               } else if($data[0]['id'] >  $state[0]['sid']){
+               } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
                     $update = array(
                        'sid' => $data[0]['next_topic_id'],
                        'step' => $data[0]['step']
@@ -197,7 +197,7 @@ class Index extends CI_Controller {
                        'step' => $data[0]['step']
                        );
                   $this->db->insert('answer_state', $insert);
-               } else if($data[0]['id'] >=  $state[0]['sid']){
+               } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
                     $update = array(
                        'sid' => $data[0]['next_topic_id'],
                        'step' => $data[0]['step']
@@ -215,7 +215,7 @@ class Index extends CI_Controller {
                        'step' => $data[0]['step']
                        );
                   $this->db->insert('answer_state', $insert);
-               } else if($data[0]['id'] >=  $state[0]['sid']){
+               } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
                     $update = array(
                        'sid' => $data[0]['next_topic_id'],
                        'step' => $data[0]['step']
@@ -234,7 +234,7 @@ class Index extends CI_Controller {
          * 单选题提交答案
          * @param type $tid
          */
-        public function single($tid, $done = 0){
+        public function single($tid){
            
             $select = $this->I('single');
             if($select !== ''){
@@ -243,24 +243,22 @@ class Index extends CI_Controller {
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
                     
-                     if($done == 0){
-                        $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
-                        if(empty($state)){
-                           $insert = array(
-                                'uid' => $_SESSION['uid'],
-                                'sid' => $data[0]['next_topic_id'],
-                                'step' => $data[0]['step']
-                                );
-                           $this->db->insert('answer_state', $insert);
-                        } else{
-                             $update = array(
-                                'sid' => $data[0]['next_topic_id'],
-                                'step' => $data[0]['step']
-                                );
-                            $where = "uid=".$_SESSION['uid'];
-                            $this->db->update('answer_state', $update, $where);
-                        }
-                     }
+                    $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
+                    if(empty($state)){
+                       $insert = array(
+                            'uid' => $_SESSION['uid'],
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step']
+                            );
+                       $this->db->insert('answer_state', $insert);
+                    } else{
+                         $update = array(
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step']
+                            );
+                        $where = "uid=".$_SESSION['uid'];
+                        $this->db->update('answer_state', $update, $where);
+                    }
                     
                     
                      $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
@@ -280,7 +278,7 @@ class Index extends CI_Controller {
          * 多选题
          * @param type $tid
          */
-        public function multiple($tid, $done = 0){
+        public function multiple($tid){
            
             $select = implode(",",$_POST);
             
@@ -292,24 +290,22 @@ class Index extends CI_Controller {
                      $this->response(200,'ok',$res);
                 } else {
                     
-                   if($done == 0){
-                        $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
-                        if(empty($state)){
-                           $insert = array(
-                                'uid' => $_SESSION['uid'],
-                                'sid' => $data[0]['next_topic_id'],
-                                'step' => $data[0]['step']
-                                );
-                           $this->db->insert('answer_state', $insert);
-                        } else{
-                             $update = array(
-                                'sid' => $data[0]['next_topic_id'],
-                                'step' => $data[0]['step']
-                                );
-                            $where = "uid=".$_SESSION['uid'];
-                            $this->db->update('answer_state', $update, $where);
-                        }
-                     }
+                    $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
+                    if(empty($state)){
+                       $insert = array(
+                            'uid' => $_SESSION['uid'],
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step']
+                            );
+                       $this->db->insert('answer_state', $insert);
+                    } else{
+                         $update = array(
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step']
+                            );
+                        $where = "uid=".$_SESSION['uid'];
+                        $this->db->update('answer_state', $update, $where);
+                    }
                     
                     $res['answer'] = $data[0]['answer'];
                     $this->response(-1,'try again!',$res);
@@ -326,7 +322,7 @@ class Index extends CI_Controller {
          * 判断题
          * @param type $tid
          */
-        public function judge($tid, $done = 0){
+        public function judge($tid){
             $select = implode(",",$_POST);
             
             if($select !== ''){
@@ -337,24 +333,22 @@ class Index extends CI_Controller {
                      $this->response(200,'ok',$res);
                 } else {
                     
-                    if($done == 0){
-                        $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
-                        if(empty($state)){
-                           $insert = array(
-                                'uid' => $_SESSION['uid'],
-                                'sid' => $data[0]['next_topic_id'],
-                                'step' => $data[0]['step']
-                                );
-                           $this->db->insert('answer_state', $insert);
-                        } else{
-                             $update = array(
-                                'sid' => $data[0]['next_topic_id'],
-                                'step' => $data[0]['step']
-                                );
-                            $where = "uid=".$_SESSION['uid'];
-                            $this->db->update('answer_state', $update, $where);
-                        }
-                     }
+                    $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
+                    if(empty($state)){
+                       $insert = array(
+                            'uid' => $_SESSION['uid'],
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step']
+                            );
+                       $this->db->insert('answer_state', $insert);
+                    } else{
+                         $update = array(
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step']
+                            );
+                        $where = "uid=".$_SESSION['uid'];
+                        $this->db->update('answer_state', $update, $where);
+                    }
                     
                    $res['answer'] = $data[0]['answer'];
                     $this->response(-1,'try again!',$res);
@@ -370,7 +364,7 @@ class Index extends CI_Controller {
          * 多项判断题
          * @param type $tid
          */
-        public function muljudge($tid, $done = 0){
+        public function muljudge($tid){
             $select = implode(",",$_POST);
             
             if($select !== ''){
@@ -381,24 +375,22 @@ class Index extends CI_Controller {
                      $this->response(200,'ok',$res);
                 } else {
                     
-                    if($done == 0){
-                        $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
-                        if(empty($state)){
-                           $insert = array(
-                                'uid' => $_SESSION['uid'],
-                                'sid' => $data[0]['next_topic_id'],
-                                'step' => $data[0]['step']
-                                );
-                           $this->db->insert('answer_state', $insert);
-                        } else{
-                             $update = array(
-                                'sid' => $data[0]['next_topic_id'],
-                                'step' => $data[0]['step']
-                                );
-                            $where = "uid=".$_SESSION['uid'];
-                            $this->db->update('answer_state', $update, $where);
-                        }
-                     }
+                    $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
+                    if(empty($state)){
+                       $insert = array(
+                            'uid' => $_SESSION['uid'],
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step']
+                            );
+                       $this->db->insert('answer_state', $insert);
+                    } else{
+                         $update = array(
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step']
+                            );
+                        $where = "uid=".$_SESSION['uid'];
+                        $this->db->update('answer_state', $update, $where);
+                    }
                     
                     $res['answer'] = $data[0]['answer'];
                     $this->response(-1,'try again!',$res);
@@ -414,7 +406,7 @@ class Index extends CI_Controller {
          * 简答题提交答案
          * @param type $tid
          */
-        public function short($tid, $done = 0){
+        public function short($tid){
            
             $select = $this->I('answer');
             if($select !== ''){
@@ -446,7 +438,7 @@ class Index extends CI_Controller {
          * 连线题
          * @param type $tid
          */
-        public function match($tid, $done = 0){
+        public function match($tid){
             $select = implode(",",$_POST);
             
             if($select !== ''){
@@ -457,24 +449,22 @@ class Index extends CI_Controller {
                      $this->response(200,'ok',$res);
                 } else {
                     
-                    if($done == 0){
-                        $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
-                        if(empty($state)){
-                           $insert = array(
-                                'uid' => $_SESSION['uid'],
-                                'sid' => $data[0]['next_topic_id'],
-                                'step' => $data[0]['step']
-                                );
-                           $this->db->insert('answer_state', $insert);
-                        } else{
-                             $update = array(
-                                'sid' => $data[0]['next_topic_id'],
-                                'step' => $data[0]['step']
-                                );
-                            $where = "uid=".$_SESSION['uid'];
-                            $this->db->update('answer_state', $update, $where);
-                        }
-                     }
+                    $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
+                    if(empty($state)){
+                       $insert = array(
+                            'uid' => $_SESSION['uid'],
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step']
+                            );
+                       $this->db->insert('answer_state', $insert);
+                    } else{
+                         $update = array(
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step']
+                            );
+                        $where = "uid=".$_SESSION['uid'];
+                        $this->db->update('answer_state', $update, $where);
+                    }
                     
                     $this->response(-1,'try again!');
                 }

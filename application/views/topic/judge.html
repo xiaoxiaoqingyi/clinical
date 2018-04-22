@@ -65,7 +65,11 @@
                     </div>
                     <div class="tx-c mt-30">
                         <a class="btn-l c2-primary" href="javascript:history.back(-1);" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
+                        <?php if(!isset($done)){ ?>
                         <button type="submit" class="btn-l c2-primary">SUBMIT</button>
+                         <?php }else{ ?>
+                        <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$next_topic_id;?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>
+                         <?php } ?>
                     </div>
                 </div>
             </form>
@@ -100,7 +104,7 @@
         
          $("#form1").submit(function () {
             $.ajax({
-                url: '<?php echo base_url();?>index/judge/<?php echo isset($done)?$id.'/'.$done:$id ?>',
+                url: '<?php echo base_url();?>index/judge/<?=$id?>',
                 data: $(this).serialize(),
                 dataType: 'json',
                 type: 'post',

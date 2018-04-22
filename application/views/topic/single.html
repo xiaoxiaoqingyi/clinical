@@ -38,6 +38,9 @@
                     </div>
                     <div class="tx-c mt-30">
                         <a class="btn-l c2-primary" href="javascript:history.back(-1);" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
+                        <?php if(isset($done)){ ?>
+                          <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$next_topic_id;?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>
+                         <?php } ?>
                       <!--  <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$next_topic_id;?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>-->
                     </div>
                 </div>
@@ -74,7 +77,7 @@
         $("input[name=single]").each(function(){
             $(this).click(function(){
                 $.ajax({
-                    url: '<?php echo base_url();?>index/single/<?php echo isset($done)?$id.'/'.$done:$id ?>',
+                    url: '<?php echo base_url();?>index/single/<?=$id?>',
                     data: $(this).serialize(),
                     dataType: 'json',
                     type: 'post',

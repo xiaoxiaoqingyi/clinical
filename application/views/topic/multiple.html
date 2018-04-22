@@ -42,7 +42,11 @@
                         </div>
                         <div class="tx-c mt-30">
                             <a class="btn-l c2-primary" href="javascript:history.back(-1);" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
-                            <button type="submit" class="btn-l c2-primary">SUBMIT</button>
+                            <?php if(!isset($done)){ ?>
+                        <button type="submit" class="btn-l c2-primary">SUBMIT</button>
+                         <?php }else{ ?>
+                        <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$next_topic_id;?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>
+                         <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -55,7 +59,7 @@
     <div class="popbox bg-error err-count">
     <div class="popbox-bg"></div>
     <div class="submit-result">
-        <p style="padding: 148px 0 46px 0;" class="l-38">Oops! You have only <br> selected <b class="c1-danger">3</b> correct answers. <br> Please try again!</p>
+        <p style="padding: 148px 0 46px 0;" class="l-38">Oops! You have only <br> selected <b class="c1-danger">3</b> answers. <br> Please try again!</p>
         <a class="btn-l c2-primary" href="javascript:;" onclick="$(this).parents('.popbox').hide()">AGAIN</a>
     </div>
     </div>
@@ -80,6 +84,20 @@
      * Created by lzm on 2018/3/30.
      */
     $(function(){
+
+//            var ac = <?= $answer_count ?>;
+            var itemCheckbox = $('.item-checkbox input');
+            itemCheckbox.bind('click', function(){
+                        if($('.item-checkbox input:checked').length > 2){
+                            $(this).removeAttr("checked");
+                            $(this).parent().removeClass('active');
+                          
+                        }else{
+                             $(this).parent().toggleClass('active');
+                            
+                        }
+
+                    });
         
           $("#form1").submit(function () {
               var count = $('input:checked').length;
@@ -91,7 +109,7 @@
               }
               
             $.ajax({
-                url: '<?php echo base_url();?>index/multiple/<?php echo isset($done)?$id.'/'.$done:$id ?>',
+                url: '<?php echo base_url();?>index/multiple/<?=$id?>',
                 data: $(this).serialize(),
                 dataType: 'json',
                 type: 'post',
@@ -221,20 +239,6 @@
             });
         }
 
-        // 复选框切换
-        checkboxToggle();
-        function checkboxToggle(){
-            var itemCheckbox = $('.item-checkbox input');
-            var itemChecked = $('.item-checkbox input:checked');
-            // 默认选中，添加样式
-            for(var i = 0, len = itemChecked.length; i < len; i++){
-                itemChecked.eq(i).parent().addClass('active');
-            }
-            // 给当前选中添加样式
-            itemCheckbox.bind('click', function(){
-                $(this).parent().toggleClass('active');
-            });
-        }
 
         // 仿下拉菜单
         var sTopInp = $('.select-top input');
