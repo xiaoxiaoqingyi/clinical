@@ -32,12 +32,13 @@
                 
                          <label class="item-radio p-radio"><input type="radio" name="single" 
                                                                 <?php if(isset($done)) echo $key==$answer?'checked="true"':'' ?>  
+                                                                <?php if(isset($done)) echo 'disabled="disabled"';?>
                                                                 value="<?=$key; ?>"><?=$value; ?></label>
                        
                         <?php } ?>
                     </div>
                     <div class="tx-c mt-30">
-                        <a class="btn-l c2-primary" href="javascript:history.back(-1);" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
+                        <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$last_topic_id;?>" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
                         <?php if(isset($done)){ ?>
                           <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$next_topic_id;?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>
                          <?php } ?>

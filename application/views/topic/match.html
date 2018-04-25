@@ -35,7 +35,9 @@
                                 <label><?=$value; ?></label>
                                 <div class="select-top">
                                     <span class="tx-hide"><?php if(isset($done)){ echo $des[explode(',',$answer)[$key]];} else{ echo 'Please Select';} ?></span>
-                                    <input name="select<?=$key; ?>"  <?php if(isset($done)){ echo 'value='.explode(',',$answer)[$key];} ?> type="text" >
+                                    <input name="select<?=$key; ?>"  <?php if(isset($done)){ echo 'value='.explode(',',$answer)[$key];} ?> 
+                                           <?php if(isset($done)) echo 'disabled="disabled"';?>
+                                           type="text" >
                                 </div>
                             </div>
                       <?php } ?>  
@@ -43,7 +45,7 @@
                     </div>
                 </div>
                 <div class="tx-c mt-30">
-                    <a class="btn-l c2-primary" href="javascript:history.back(-1);" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
+                    <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$last_topic_id;?>" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
                     <?php if(!isset($done)){ ?>
                         <button type="submit" class="btn-l c2-primary">SUBMIT</button>
                          <?php }else{ ?>

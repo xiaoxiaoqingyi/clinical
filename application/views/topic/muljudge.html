@@ -53,12 +53,15 @@
                                    <td class="tx-l"><?=$value; ?></td>
                                    <td><label class="item-radio i-radio"><input type="radio" name="single<?=$key; ?>"
                                                                                 <?php if(isset($done)) echo 0==explode(',',$answer)[$key]?'checked="true"':'' ?>
+                                                                                <?php if(isset($done)) echo 'disabled="disabled"';?>
                                                                                 value="0"></label></td>
                                    <td><label class="item-radio i-radio"><input type="radio" name="single<?=$key; ?>"
                                                                                 <?php if(isset($done)) echo 1==explode(',',$answer)[$key]?'checked="true"':'' ?>
+                                                                                <?php if(isset($done)) echo 'disabled="disabled"';?>
                                                                                 value="1"></label></td>
                                    <td><label class="item-radio i-radio"><input type="radio" name="single<?=$key; ?>"
                                                                                 <?php if(isset($done)) echo 2==explode(',',$answer)[$key]?'checked="true"':'' ?>
+                                                                                <?php if(isset($done)) echo 'disabled="disabled"';?>
                                                                                 value="2"></label></td>
                                </tr>
                             <?php } ?>
@@ -66,7 +69,7 @@
                     </div>
                 </div>
                 <div class="tx-c mt-30">
-                    <a class="btn-l c2-primary" href="javascript:history.back(-1);" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
+                    <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$last_topic_id;?>" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
                     <?php if(!isset($done)){ ?>
                         <button type="submit" class="btn-l c2-primary">SUBMIT</button>
                          <?php }else{ ?>

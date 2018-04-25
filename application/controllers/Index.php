@@ -9,7 +9,7 @@ class Index extends CI_Controller {
             
             parent::__construct();
             
-            session_start();
+//            session_start();
             //判断是否登录，否则跳转到登录
             if(!isset($_SESSION['uid'])){
                 $this->load->helper("url");
@@ -62,6 +62,32 @@ class Index extends CI_Controller {
             $this->load->view('others.html');
         }
         
+         public function stepconclusion(){
+             $this->load->view('stepconclusion.html');
+        }
+        
+        public function stepsurvey(){
+            $data=$this->db->select('*')->from('survey')->where('uid',$_SESSION['uid'])->get()->result_array();
+            $res['done'] = 0;
+            if(!empty($data)){
+                $res['done'] = 1;
+            }
+            $this->load->view('stepsurvey.html',$res);
+        }
+        
+        public function submitsurvey(){
+            $select = implode(",",$_POST);
+            if(!empty($select)){
+                 $insert = array(
+                       'uid' => $_SESSION['uid'],
+                       'answer' => $select,
+                       'createtime' => date('Y-m-d H:i:s')
+                       );
+                $this->db->insert('survey', $insert);
+            }
+            
+            $this->stepconclusion();
+        }
         
         public function step(){
             
@@ -127,13 +153,18 @@ class Index extends CI_Controller {
         public function answer($tid=0){
             if($tid == 0){
                 //8个步骤完成
-                $this->load->view('recommended.html');             
+                $this->stepsurvey();             
                 return;;
             }
             
             $data=$this->db->select('id, title, option, type, des, step, next_topic_id,answer, answer_count')->from('subject')->where('id',$tid)->get()->result_array();
             $options = explode(";",$data[0]['option']);
             $data[0]['option'] = $options;
+            
+            $lastdata=$this->db->select('*')->from('subject')->where('next_topic_id',$tid)->get()->result_array();
+            if(!empty($lastdata)){
+                 $data[0]['last_topic_id'] = $lastdata[0]['id'];
+            }
              
             //判断该题是否已经答过
             $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
@@ -284,13 +315,12 @@ class Index extends CI_Controller {
             
             if($select !== ''){
                 
-                $data=$this->db->select('answer,next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
+                $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
                      $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);
-                } else {
-                    
-                    $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
+                     
+                      $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
                     if(empty($state)){
                        $insert = array(
                             'uid' => $_SESSION['uid'],
@@ -306,6 +336,7 @@ class Index extends CI_Controller {
                         $where = "uid=".$_SESSION['uid'];
                         $this->db->update('answer_state', $update, $where);
                     }
+                } else {
                     
                     $res['answer'] = $data[0]['answer'];
                     $this->response(-1,'try again!',$res);
@@ -327,7 +358,7 @@ class Index extends CI_Controller {
             
             if($select !== ''){
                 
-                $data=$this->db->select('answer,next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
+                $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
                      $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);
@@ -369,7 +400,7 @@ class Index extends CI_Controller {
             
             if($select !== ''){
                 
-                $data=$this->db->select('answer,next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
+                $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
                      $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);
@@ -411,15 +442,13 @@ class Index extends CI_Controller {
             $select = $this->I('answer');
             if($select !== ''){
                 
-                $data=$this->db->select('id,title,next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
+                $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if(!empty($data[0])){
-                    if($done == 0){
-                        $insert= array("tid"=>$data[0]['id'], "uid"=>$_SESSION['uid']
-                            ,"title"=>$data[0]['title'], "createtime"=>date("Y-m-d H:i:s")
-                            ,"answer"=>$select);
-                    
-                         $this->db->insert("shortquestion", $insert);
-                    }
+                    $insert= array("tid"=>$data[0]['id'], "uid"=>$_SESSION['uid']
+                        ,"title"=>$data[0]['title'], "createtime"=>date("Y-m-d H:i:s")
+                        ,"answer"=>$select);
+
+                     $this->db->insert("shortquestion", $insert);
                    
                      $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);
@@ -443,7 +472,7 @@ class Index extends CI_Controller {
             
             if($select !== ''){
                 
-                $data=$this->db->select('answer,next_topic_id')->from('subject')->where('id',$tid)->get()->result_array();
+                $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
                      $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);

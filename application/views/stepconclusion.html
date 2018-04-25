@@ -1,51 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" class="bg4">
+<html lang="en" class="bg">
 <head>
     <meta charset="UTF-8">
-    <title>Clinical Scenario</title>
-   <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
+    <title>clinical</title>
+     <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/common.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/layout.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/module.css'?>">
     <!--add css-->
-    <link rel="stylesheet" href="<?=base_url().'src/css/style-step.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/style-step-pages.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/popbox-img.css'?>">
     <!--add css end-->
     <script src="<?=base_url().'src/js/jquery-1.8.3.min.js'?>"></script>
 </head>
 <body>
 <div class="head" data-val="clinical">
-    <!--common.js自动载入head.html 注意：data-val值如果与菜单栏的data-val值匹配，则匹配菜单项状态加亮-->
+    <!--自动载入-->
 </div>
 <div class="container">
-    <div class="step-box fn-clear">
-        <div class="step-floor" data-val="<?=$step; ?>">
-            <!--common.js自动载入step-floor.html 注意：data-val值代表通过的step数量，如值为3，则前3个状态加亮-->
-        </div>
-        <div class="step-wrap">
-            <form id="form1">
-                <div class="step-cont">
-                    <div class="qq-title"><?= $title; ?></div>
-                    <div class="qq-text">
-                        <p class="f-20 l-38 c1-danger"><?= $des; ?></p>
-                        <p>
-                            <textarea class="textarea" name="answer" <?php if(isset($done)) echo 'disabled="disabled"';?>  placeholder="Please fill in the answers here..."></textarea>
-                        </p>
-                    </div>
-                    <div class="tx-c mt-30">
-                        <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$last_topic_id;?>" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
-                        <?php if(!isset($done)){ ?>
-                        <button type="submit" class="btn-l c2-primary">SUBMIT</button>
-                         <?php }else{ ?>
-                        <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$next_topic_id;?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>
-                         <?php } ?>
-                    </div>
+    <div class="wrap">
+        <div class="content">
+            <div class="text tx-c" style="position: relative;">
+                <div class="title-h1" style="margin: 88px auto;">Certificate of Completion</div>
+                <div class="tx-l">
+                    <div class="title-h2">Congratulations! You have successfully applied the Clinical Reasoning Cycle on a case study!</div>
+                    <ul>
+                        <li>1. Consider the patient condition,</li>
+                        <li>2. Collect cues/information</li>
+                        <li>3. Process information</li>
+                        <li>4. Identify problems/issues</li>
+                        <li>5. Establish goals</li>
+                        <li>6. Take action</li>
+                        <li>7. Evaluate outcomes</li>
+                        <li>8. Reflect on process and new learning</li>
+                    </ul>
+                    <a class="img-s" href="javascript:;" title="open">
+                        <img src="<?=base_url().'src/imgs/img-s.png'?>">
+                    </a>
                 </div>
-            </form>
-        </div>
-        <div class="step-help" data-val="<?php echo $step>1?'':'1'; ?>">
-            <!--common.js自动载入step-help.html 注意：data-val值为1，则只加载一个，否则加载全部-->
+                <div class="btn" style="margin-top: 112px;">
+                    <a class="btn-prev" href="<?=base_url().'index/answer/78'?>" title="&lt;&nbsp;prev">prev</a>
+                    <a class="btn-next" href="<?=base_url().'index/recommended'?>" title="next&nbsp;&gt;">next</a>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+<div class="img-popbox fn-hide">
+    <div class="img-popbox-bg"></div>
+    <div class="img-popbox-pic">
+        <img src="<?=base_url().'src/imgs/img-l.png'?>">
+    </div>
+    <div class="img-popbox-close" title="close"></div>
 </div>
 <script>
 
@@ -53,29 +59,6 @@
      * Created by lzm on 2018/3/30.
      */
     $(function(){
-        
-         $("#form1").submit(function () {
-            $.ajax({
-                url: '<?php echo base_url();?>index/short/<?=$id?>',
-                data: $(this).serialize(),
-                dataType: 'json',
-                type: 'post',
-                success: function (data) {
-                    //				console.log(data);
-                    if (data && data.status == 200) {
-                        location.href = data.res.url;
-                    }
-                    else {
-                        alert(data.statusMsg);
-                    }
-                }, error: function (e) {
-                    alert("error!");
-                }
-            });
-
-            return !1;
-        });
-        
         // 载入头部.head
         // 给当前页面添加样式
         $('.head').load("<?=base_url().'index/head'?> .wrapper");
@@ -122,7 +105,7 @@
 
         // 载入step-help
         // .step-help切换
-        $('.step-help').load("<?=base_url().'index/stephelp'?>");
+        $('.step-help').load("<?=base_url().'index/stepfhelp'?>");
         stepHelpToggle();
         function stepHelpToggle(){
             var help = $('.step-help');

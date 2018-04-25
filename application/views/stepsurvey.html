@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" class="bg4">
+<head>
+    <meta charset="UTF-8">
+    <title>Clinical Scenario</title>
+   <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/common.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/layout.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/module.css'?>">
+    <!--add css-->
+    <link rel="stylesheet" href="<?=base_url().'src/css/style-step.css'?>">
+    <!--add css end-->
+    <script src="<?=base_url().'src/js/jquery-1.8.3.min.js'?>"></script>
+</head>
+<body>
+<div class="head" data-val="clinical">
+    <!--自动载入-->
+</div>
+<div class="container">
+    <div class="wrap">
+        <div class="content">
+            <div class="text tx-c">
+                <div class="title-h2 tx-l" style="font-size: 28px; margin: 30px 0 24px 0;">Evaluation survey</div>
+                <form action="<?php echo base_url();?>index/submitsurvey" class="form" method="post">
+                    <div class="table-have-border" >
+                        <table>
+                            <tr>
+                                <th width="676" class="tx-l">
+                                    Your opinions about the effectiveness of the virtual patient based, interactive computerised platform for students practising clinical reasoning and decision making skills in helping you to develop plans for nursing interventions (VPICP-CR)
+                                </th>
+                                <th width="80">Very agree</th>
+                                <th width="80">Agree</th>
+                                <th width="80">Disagree</th>
+                                <th>Very disagree</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <div class="table-have-border radio-s">
+                            <table>
+                                <tr class="tr-no">
+                                    <td width="676"></td>
+                                    <td width="80"></td>
+                                    <td width="80"></td>
+                                    <td width="80"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">The interactive platform maintained by interest in learning clinical reasoning skills</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-0" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-0" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-0" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-0" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">The interactive platform helped me to develop plans for nursing therapeutic interventions</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-1" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-1" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-1" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-1" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">The interactive platform helped me to recognize the gaps of my knowledge</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-2" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-2" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-2" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-2" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">The interactive platform helped me to develop ability to solve problems</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-3" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-3" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-3" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-3" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">The interactive platform helped me to develop clinical reasoning ability</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-4" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-4" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-4" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-4" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">The interactive platform helped me to develop decision making ability</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-5" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-5" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-5" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-5" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">I will be able to related the VP scenario to apply to my future practice.</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-6" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-6" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-6" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-6" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">Your opinions about the feasibility of the (VPICP-CR) platform</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-7" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-7" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-7" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-7" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">The instructions of the clinical scenarios were clear</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-8" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-8" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-8" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-8" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">My background knowledge was sufficient for understanding the clinical scenarios</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-9" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-9" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-9" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-9" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">The interactive platform is relevant to prepare my clinical practicum</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-10" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-10" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-10" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-10" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">As a result of practicing clinical reasoning skills via the platform, I can see clearly how clinical reasoning relates to becoming a registered nurse</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-11" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-11" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-11" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-11" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">I was able to access technical help when needed</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-12" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-12" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-12" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-12" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">Your opinions about the acceptability of the (VPICP-CR) platform</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-13" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-13" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-13" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-13" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">The process of using the platform, has motivated me to learn</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-14" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-14" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-14" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-14" value="3"></label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-l">This was a valuable learning experience</td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-15" value="0"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-15" value="1"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-15" value="2"></label></td>
+                                    <td><label class="item-radio i-radio"><input type="radio" name="radio-15" value="3"></label></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tx-c py-30">
+
+                        <a class="btn-l c2-primary" href="<?=base_url().'index/answer/78'?>" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
+                            <?php if(!isset($done)){ ?>
+                        <button type="submit" class="btn-l c2-primary">SUBMIT</button>
+                         <?php }else{ ?>
+                        <a class="btn-l c2-primary" href="<?=base_url().'index/stepconclusion'?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>
+                         <?php } ?>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+        /**
+     * Created by lzm on 2018/3/30.
+     */
+    $(function(){
+        
+        
+        // 载入头部.head
+        // 给当前页面添加样式
+        $('.head').load("<?=base_url().'index/head'?> .wrapper");
+        navActive();
+        function navActive(){
+            var head = $('.head');
+            var aLink = $('.nav li > a');
+            if(!head.length) return false;// 没有.head则不执行下面
+            if(aLink.length){
+                var hVal = $('.head').attr('data-val');
+                for(var i = 0, len = aLink.length; i < len; i++){
+                    var aVal = aLink.eq(i).attr('data-val');
+                    if(aVal == hVal){
+                        aLink.eq(i).parent().addClass('active');
+                    }
+                }
+            }else{
+                setTimeout(function(){
+                    navActive();
+                }, 100);
+            }
+        }
+
+        // 载入step-floor
+        // .step-floor添加样式
+        $('.step-floor').load("<?=base_url().'index/stepfloor'?>");
+        stepFloorActive();
+        function stepFloorActive(){
+            var floor = $('.step-floor');
+            var dataVal = floor.attr('data-val');
+            var li = $('.step-floor li');
+            if(!floor.length) return false;// 没有.step-floor则不执行
+            if(dataVal && li.length){
+                for(var i = 0; i < dataVal; i++){
+                    li.eq(i).addClass('active');
+                }
+            }
+            else{
+                setTimeout(function(){
+                    stepFloorActive();
+                }, 100)
+            }
+        }
+
+        // 载入step-help
+        // .step-help切换
+        $('.step-help').load("<?=base_url().'index/stepfhelp'?>");
+        stepHelpToggle();
+        function stepHelpToggle(){
+            var help = $('.step-help');
+            var link = $('.step-help-link');
+            var intro = $('.step-help-intro');
+            var close = $('.step-help-intro .intro-close');
+            if(!help.length) return false;// 没有.step-help则不执行
+            if(link.length){
+                link.bind('click', function(){
+                    intro.not($(this).next()).fadeOut();
+                    $(this).next().fadeToggle();
+                });
+                close.bind('click', function(){
+                    $(this).parent().fadeOut();
+                });
+                var dataVal = help.attr('data-val');
+                if(dataVal && dataVal == '1'){
+                    for(var i = link.length; i > 0; i--){
+                        link.eq(i).parent().remove();
+                    }
+                }
+            }else{
+                setTimeout(function(){
+                    stepHelpToggle();
+                }, 100);
+            }
+        }
+
+        // 图片放大展示
+        $('.img-s').bind('click', function(){
+            $('.img-popbox').fadeIn();
+        });
+        $('.img-popbox-close').bind('click', function(){
+            $('.img-popbox').fadeOut();
+        });
+
+        // 单选框切换
+        radioToggle();
+        function radioToggle(){
+            var itemRadio = $('.item-radio input');
+            var itemChecked = $('.item-radio input:checked');
+            // 默认选中，添加样式
+            for(var i = 0, len = itemChecked.length; i < len; i++){
+                itemChecked.eq(i).parent().addClass('active');
+            }
+            // 点击清空name值相同样式，再给当前选中添加样式
+            itemRadio.bind('click', function(){
+                var itemName = $(this).prop('name');
+                var itemRadioArr = $('.item-radio input[name=' + itemName + ']');
+                itemRadioArr.parent().removeClass('active');
+                $(this).parent().addClass('active');
+            });
+        }
+
+        // 复选框切换
+        checkboxToggle();
+        function checkboxToggle(){
+            var itemCheckbox = $('.item-checkbox input');
+            var itemChecked = $('.item-checkbox input:checked');
+            // 默认选中，添加样式
+            for(var i = 0, len = itemChecked.length; i < len; i++){
+                itemChecked.eq(i).parent().addClass('active');
+            }
+            // 给当前选中添加样式
+            itemCheckbox.bind('click', function(){
+                $(this).parent().toggleClass('active');
+            });
+        }
+
+        // 仿下拉菜单
+        var sTopInp = $('.select-top input');
+        var sTopSpan = $('.select-top span');
+        for(var i = 0, len = sTopInp.length; i < len; i++){
+            if(sTopInp.eq(i).val()){
+                sTopSpan.eq(i).addClass('active');
+            }
+        }
+        // 点击选项.select-top
+        $('.select-top').bind('click', function(){
+            var sTopQ = $(this).prev('label');
+            var sTopA = $(this).find('span');
+            var sTopV = $(this).find('input');
+            var sBottomP = $('.select-bottom').parents('.popbox');
+            var sBottomQ = sBottomP.find('.select-title');
+            var sBottomA = sBottomP.find('.select-bottom li');
+
+            sBottomQ.html(sTopQ.html());
+
+            // 给默认选中的选项添加样式
+            if(sTopV.val()){
+                for(var i = 0, len = sBottomA.length; i < len; i++){
+                    sBottomA.eq(i).removeClass('active');
+                    if(sBottomA.eq(i).attr('data-val') == sTopV.val()){
+                        sBottomA.eq(i).addClass('active');
+                    }
+                }
+            }
+            sBottomP.fadeIn();
+
+            // 选择某个选项.select-bottom li
+            sBottomA.bind('click', function(){
+                sTopA.html($(this).html()).addClass('active');
+                sTopV.val($(this).attr('data-val'));
+                sBottomP.fadeOut();
+                sBottomA.unbind('click');//解绑
+            });
+        });
+
+
+    });
+    </script>
+</body>
+</html>

@@ -33,15 +33,18 @@
                             
                             <?php foreach ($option as $key => $value){ ?>
                             
-                            <label class="item-checkbox p-checkbox"><input type="checkbox" name="multiple<?=$key; ?>" 
+                            <label class="item-checkbox p-checkbox <?php if(isset($done)) echo in_array($key, explode(',',$answer))?'active':'' ?>  ">
+                                <input type="checkbox" name="multiple<?=$key; ?>" 
                                                                            <?php if(isset($done)) echo in_array($key, explode(',',$answer))?'checked="true"':'' ?>
+                                                                           
+                                                                           <?php if(isset($done)) echo 'disabled="disabled"';?>
                                                                            value="<?=$key;?>"><?=$value; ?></label>
                             
                             <?php } ?>        
                             
                         </div>
                         <div class="tx-c mt-30">
-                            <a class="btn-l c2-primary" href="javascript:history.back(-1);" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
+                            <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$last_topic_id;?>" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
                             <?php if(!isset($done)){ ?>
                         <button type="submit" class="btn-l c2-primary">SUBMIT</button>
                          <?php }else{ ?>
@@ -59,7 +62,7 @@
     <div class="popbox bg-error err-count">
     <div class="popbox-bg"></div>
     <div class="submit-result">
-        <p style="padding: 148px 0 46px 0;" class="l-38">Oops! You have only <br> selected <b class="c1-danger">3</b> answers. <br> Please try again!</p>
+        <p style="padding: 148px 0 46px 0;" class="l-38">Oops! You have only <br> selected <b id="ecount" class="c1-danger">3</b> answers. <br> Please try again!</p>
         <a class="btn-l c2-primary" href="javascript:;" onclick="$(this).parents('.popbox').hide()">AGAIN</a>
     </div>
     </div>
@@ -85,17 +88,19 @@
      */
     $(function(){
 
-//            var ac = <?= $answer_count ?>;
+            var ac = <?= $answer_count ?>;
             var itemCheckbox = $('.item-checkbox input');
             itemCheckbox.bind('click', function(){
-                        if($('.item-checkbox input:checked').length > 2){
+                        if($('.item-checkbox input:checked').length > ac){
                             $(this).removeAttr("checked");
                             $(this).parent().removeClass('active');
                           
                         }else{
                              $(this).parent().toggleClass('active');
-                            
                         }
+                        
+                        $(this).parent().removeClass('prompt');
+                         
 
                     });
         
@@ -103,7 +108,7 @@
               var count = $('input:checked').length;
               var bb = <?= $answer_count ?>;
               if(count != bb){
-                  $('.c1-danger').html(count);
+                  $('#ecount').html(count);
                   $('.err-count').show();
                   return !1;
               }
