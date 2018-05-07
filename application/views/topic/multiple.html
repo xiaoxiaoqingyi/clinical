@@ -124,6 +124,14 @@
                         $('#congrat').attr('href',data.res.url);
                         $('.bg-pass').show();
                     } else {
+                    
+                       /* var itemChecked = $('.item-checkbox input:checked');
+                        // 清除所有选中
+                        for(var i = 0, len = itemChecked.length; i < len; i++){
+                            itemChecked.eq(i).removeAttr("checked");
+                            itemChecked.eq(i).parent().removeClass('active');
+                        }
+                        
                         var answer = data.res.answer;
                         var arr=new Array(); 
                         arr=answer.split(',');
@@ -132,6 +140,8 @@
                             var option = "input[name=multiple"+arr[j] +"]";
                              $(option). parent("label").addClass("prompt");
                         }
+                       */
+                        
                             
                         $('.err-wrong').show();
                     }

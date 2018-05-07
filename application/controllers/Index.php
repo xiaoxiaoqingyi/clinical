@@ -15,14 +15,12 @@ class Index extends CI_Controller {
                 $this->load->helper("url");
                 redirect(base_url().'login');
             }
-            
             date_default_timezone_set('Asia/Shanghai');
             $this->load->database();
            
 	}
 
 	public function index(){
-        
             $this->load->view('learn.html');
 	}
         
@@ -43,7 +41,8 @@ class Index extends CI_Controller {
         }
         
         public function head(){
-            $this->load->view('html/head.html');
+             $res['name'] = $_SESSION['username'];  
+            $this->load->view('html/head.html',$res);
         }
         
         public function stephelp(){
@@ -174,6 +173,7 @@ class Index extends CI_Controller {
                }else{
                    $data[0]['done'] = 1;
                }
+               $data[0]['step'] = $state[0]['step'];
            } else {
                unset($data[0]['answer']);
            }
@@ -187,13 +187,15 @@ class Index extends CI_Controller {
                   $insert = array(
                        'uid' => $_SESSION['uid'],
                        'sid' => $data[0]['next_topic_id'],
-                       'step' => $data[0]['step']
+                       'step' => $data[0]['step'],
+                       'createtime' => date("Y-m-d H:i:s")
                        );
                   $this->db->insert('answer_state', $insert);
-               } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
+               } else if($data[0]['next_topic_id'] >  $state[0]['sid'] && $state[0]['sid'] != 0){
                     $update = array(
                        'sid' => $data[0]['next_topic_id'],
-                       'step' => $data[0]['step']
+                       'step' => $data[0]['step'],
+                       'createtime' => date("Y-m-d H:i:s")
                        );
                    $where = "uid=".$_SESSION['uid'];
                    $this->db->update('answer_state', $update, $where);
@@ -225,13 +227,15 @@ class Index extends CI_Controller {
                   $insert = array(
                        'uid' => $_SESSION['uid'],
                        'sid' => $data[0]['next_topic_id'],
-                       'step' => $data[0]['step']
+                       'step' => $data[0]['step'],
+                       'createtime' => date("Y-m-d H:i:s")
                        );
                   $this->db->insert('answer_state', $insert);
-               } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
+               } else if($data[0]['next_topic_id'] >  $state[0]['sid'] && $state[0]['sid'] != 0){
                     $update = array(
                        'sid' => $data[0]['next_topic_id'],
-                       'step' => $data[0]['step']
+                       'step' => $data[0]['step'],
+                       'createtime' => date("Y-m-d H:i:s")
                        );
                    $where = "uid=".$_SESSION['uid'];
                    $this->db->update('answer_state', $update, $where);
@@ -243,13 +247,15 @@ class Index extends CI_Controller {
                   $insert = array(
                        'uid' => $_SESSION['uid'],
                        'sid' => $data[0]['next_topic_id'],
-                       'step' => $data[0]['step']
+                       'step' => $data[0]['step'],
+                       'createtime' => date("Y-m-d H:i:s")
                        );
                   $this->db->insert('answer_state', $insert);
-               } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
+               } else if($data[0]['next_topic_id'] >  $state[0]['sid'] && $state[0]['sid'] != 0){
                     $update = array(
                        'sid' => $data[0]['next_topic_id'],
-                       'step' => $data[0]['step']
+                       'step' => $data[0]['step'],
+                       'createtime' => date("Y-m-d H:i:s")
                        );
                    $where = "uid=".$_SESSION['uid'];
                    $this->db->update('answer_state', $update, $where);
@@ -279,7 +285,8 @@ class Index extends CI_Controller {
                        $insert = array(
                             'uid' => $_SESSION['uid'],
                             'sid' => $data[0]['next_topic_id'],
-                            'step' => $data[0]['step']
+                            'step' => $data[0]['step'],
+                            'createtime' => date("Y-m-d H:i:s")
                             );
                        $this->db->insert('answer_state', $insert);
                     } else{
@@ -317,25 +324,28 @@ class Index extends CI_Controller {
                 
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
-                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
-                     $this->response(200,'ok',$res);
                      
                       $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
                     if(empty($state)){
                        $insert = array(
                             'uid' => $_SESSION['uid'],
                             'sid' => $data[0]['next_topic_id'],
-                            'step' => $data[0]['step']
+                            'step' => $data[0]['step'],
+                            'createtime' => date("Y-m-d H:i:s")
                             );
                        $this->db->insert('answer_state', $insert);
                     } else{
                          $update = array(
                             'sid' => $data[0]['next_topic_id'],
-                            'step' => $data[0]['step']
+                            'step' => $data[0]['step'],
+                            'createtime' => date("Y-m-d H:i:s")
                             );
                         $where = "uid=".$_SESSION['uid'];
                         $this->db->update('answer_state', $update, $where);
                     }
+                    
+                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
+                     $this->response(200,'ok',$res);
                 } else {
                     
                     $res['answer'] = $data[0]['answer'];
@@ -360,26 +370,29 @@ class Index extends CI_Controller {
                 
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
-                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
-                     $this->response(200,'ok',$res);
-                } else {
-                    
-                    $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
+                     $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
                     if(empty($state)){
                        $insert = array(
                             'uid' => $_SESSION['uid'],
                             'sid' => $data[0]['next_topic_id'],
-                            'step' => $data[0]['step']
+                            'step' => $data[0]['step'],
+                            'createtime' => date("Y-m-d H:i:s")
                             );
                        $this->db->insert('answer_state', $insert);
                     } else{
                          $update = array(
                             'sid' => $data[0]['next_topic_id'],
-                            'step' => $data[0]['step']
+                            'step' => $data[0]['step'],
+                            'createtime' => date("Y-m-d H:i:s")
                             );
                         $where = "uid=".$_SESSION['uid'];
                         $this->db->update('answer_state', $update, $where);
                     }
+                    
+                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
+                     $this->response(200,'ok',$res);
+                } else {
+                   
                     
                    $res['answer'] = $data[0]['answer'];
                     $this->response(-1,'try again!',$res);
@@ -402,27 +415,32 @@ class Index extends CI_Controller {
                 
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
-                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
-                     $this->response(200,'ok',$res);
-                } else {
                     
-                    $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
+                      $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
                     if(empty($state)){
                        $insert = array(
                             'uid' => $_SESSION['uid'],
                             'sid' => $data[0]['next_topic_id'],
-                            'step' => $data[0]['step']
+                            'step' => $data[0]['step'],
+                            'createtime' => date("Y-m-d H:i:s")
                             );
                        $this->db->insert('answer_state', $insert);
                     } else{
                          $update = array(
                             'sid' => $data[0]['next_topic_id'],
-                            'step' => $data[0]['step']
+                            'step' => $data[0]['step'],
+                            'createtime' => date("Y-m-d H:i:s")
                             );
                         $where = "uid=".$_SESSION['uid'];
                         $this->db->update('answer_state', $update, $where);
                     }
                     
+                    
+                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
+                     $this->response(200,'ok',$res);
+                } else {
+                    
+                  
                     $res['answer'] = $data[0]['answer'];
                     $this->response(-1,'try again!',$res);
                 }
@@ -449,6 +467,28 @@ class Index extends CI_Controller {
                         ,"answer"=>$select);
 
                      $this->db->insert("shortquestion", $insert);
+                     
+                     
+                       $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
+                    if(empty($state)){
+                       $insert = array(
+                            'uid' => $_SESSION['uid'],
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step'],
+                            'createtime' => date("Y-m-d H:i:s")
+                            );
+                       $this->db->insert('answer_state', $insert);
+                    } else{
+                         $update = array(
+                            'sid' => $data[0]['next_topic_id'],
+                            'step' => $data[0]['step'],
+                            'createtime' => date("Y-m-d H:i:s")
+                            );
+                        $where = "uid=".$_SESSION['uid'];
+                        $this->db->update('answer_state', $update, $where);
+                    }
+                    
+                     
                    
                      $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
                      $this->response(200,'ok',$res);
@@ -474,26 +514,29 @@ class Index extends CI_Controller {
                 
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if($data[0]['answer'] === $select){
-                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
-                     $this->response(200,'ok',$res);
-                } else {
                     
-                    $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
+                     $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
                     if(empty($state)){
                        $insert = array(
                             'uid' => $_SESSION['uid'],
                             'sid' => $data[0]['next_topic_id'],
-                            'step' => $data[0]['step']
+                            'step' => $data[0]['step'],
+                            'createtime' => date("Y-m-d H:i:s")
                             );
                        $this->db->insert('answer_state', $insert);
                     } else{
                          $update = array(
                             'sid' => $data[0]['next_topic_id'],
-                            'step' => $data[0]['step']
+                            'step' => $data[0]['step'],
+                            'createtime' => date("Y-m-d H:i:s")
                             );
                         $where = "uid=".$_SESSION['uid'];
                         $this->db->update('answer_state', $update, $where);
                     }
+                    
+                     $res = array("url"=>base_url("/index/answer/".$data[0]['next_topic_id']));
+                     $this->response(200,'ok',$res);
+                } else {
                     
                     $this->response(-1,'try again!');
                 }
