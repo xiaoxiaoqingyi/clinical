@@ -28,7 +28,9 @@
                     <div class="qq-text">
                         <p class="f-20 l-38 c1-danger"><?= $des; ?></p>
                         <p>
-                            <textarea class="textarea" name="answer" <?php if(isset($done)) echo 'disabled="disabled"';?>  placeholder="Please fill in the answers here..."></textarea>
+                            <textarea class="textarea" name="answer" <?php if(isset($done)) echo 'disabled="disabled"';?>  placeholder="Please fill in the answers here...">
+                             <?php if(isset($done)) echo $answer;?>
+                        </textarea>
                         </p>
                     </div>
                     <div class="tx-c mt-30">

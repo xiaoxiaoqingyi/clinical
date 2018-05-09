@@ -9,7 +9,7 @@ class Index extends CI_Controller {
             
             parent::__construct();
             
-            session_start();
+//            session_start();
             //判断是否登录，否则跳转到登录
             if(!isset($_SESSION['uid'])){
                 $this->load->helper("url");
@@ -156,7 +156,7 @@ class Index extends CI_Controller {
                 return;;
             }
             
-            $data=$this->db->select('id, title, option, type, des, step, next_topic_id,answer, answer_count')->from('subject')->where('id',$tid)->get()->result_array();
+            $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
             $options = explode(";",$data[0]['option']);
             $data[0]['option'] = $options;
             
@@ -168,12 +168,12 @@ class Index extends CI_Controller {
             //判断该题是否已经答过
             $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
            if(!empty($state)){
-               if($data[0]['id'] >=  $state[0]['sid']){
+               if($data[0]['id'] >=  $state[0]['sid'] && $state[0]['sid'] != 0){
                    unset($data[0]['answer']);
                }else{
                    $data[0]['done'] = 1;
                }
-               $data[0]['step'] = $state[0]['step'];
+               
            } else {
                unset($data[0]['answer']);
            }
@@ -217,6 +217,15 @@ class Index extends CI_Controller {
                  $this->load->view('topic/match.html', $data[0]); 
             }else if($data[0]['type'] == 5){
                 //简答题
+                if(isset($data[0]['done'])){
+                    $shortAnswer=$this->db->select('*')->from('shortquestion')->where('tid',$data[0]['id'])
+                            ->where('uid',$_SESSION['uid'])->order_by('createtime', 'DESC')->get()->result_array();
+           
+                    if(!empty($shortAnswer)){
+                        $data[0]['answer'] = $shortAnswer[0]['answer'];
+                    }
+                }
+                
                 $this->load->view('topic/short.html', $data[0]); 
             }else if($data[0]['type'] == 6){
                 //多项判断题
@@ -240,8 +249,11 @@ class Index extends CI_Controller {
                    $where = "uid=".$_SESSION['uid'];
                    $this->db->update('answer_state', $update, $where);
                }
+               if(!empty($state)){
+                    $data[0]['step'] = $state[0]['step'];
+               }
 
-                 $this->load->view('case/step.html', $data[0]);
+                $this->load->view('case/step.html', $data[0]);
             }else if($data[0]['type'] == 8){
                 if(empty($state)){
                   $insert = array(

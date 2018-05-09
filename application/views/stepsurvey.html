@@ -163,7 +163,7 @@
                     <div class="tx-c py-30">
 
                         <a class="btn-l c2-primary" href="<?=base_url().'index/answer/78'?>" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
-                            <?php if(!isset($done)){ ?>
+                            <?php if($done == 0){ ?>
                         <button type="submit" class="btn-l c2-primary">SUBMIT</button>
                          <?php }else{ ?>
                         <a class="btn-l c2-primary" href="<?=base_url().'index/stepconclusion'?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>
