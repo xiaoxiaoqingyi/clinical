@@ -1,31 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" class="bg">
+<html lang="en" class="bg4">
 <head>
     <meta charset="UTF-8">
-    <title>Others</title>
-    <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
+    <title>Clinical Scenario</title>
+   <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/common.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/layout.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/module.css'?>">
     <!--add css-->
-    <link rel="stylesheet" href="<?=base_url().'src/css/style-others.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/style-step.css'?>">
     <!--add css end-->
     <script src="<?=base_url().'src/js/jquery-1.8.3.min.js'?>"></script>
 </head>
 <body>
 <div class="head" data-val="others">
-    <!--自动载入-->
+    <!--common.js自动载入head.html 注意：data-val值如果与菜单栏的data-val值匹配，则匹配菜单项状态加亮-->
 </div>
 <div class="container">
-    <div class="wrap">
-        <div class="content">
-            <div class="text tx-c">
-                <div class="img-wait"></div>
-                <div class="btn" style="margin-top: 112px;">
-                    <a class="btn-prev" href="<?=base_url().'index/recommended'?>" title="&lt;&nbsp;prev">prev</a>
-                </div>
+    <div class="step-box fn-clear">
+       
+        <div class="step-wrap">
+            <div class="step-cont">
+                <div class="title">Care for patients with fluid and electrolyte imbalance</div>
+                <p class="f-18 l-30"><span style="display: inline-block; width: 230px;">What is colon resection?</span><a class="c1-primary" href="https://www.youtube.com/watch?v=b0msKgqTjDU">https://www.youtube.com/watch?v=b0msKgqTjDU</a></p>
+                <p class="f-18 l-30"><span style="display: inline-block; width: 230px;">What is a colostomy?</span><a class="c1-primary" href="https://www.youtube.com/watch?v=XscbQTemf_g">https://www.youtube.com/watch?v=XscbQTemf_g</a></p>
+                <p class="f-18 l-30">Pathophysiology of fluid and electrolyte balance in the older adult surgical patient El-Sharkawy, A. M., Sahota, O., Maughan, R. J., & Lobo, D. N. (2014). The pathophysiology of fluid and electrolyte balance in the older adult surgical patient. Clinical Nutrition, 33(1), 6-13.</p>
+                <p class="f-18 l-30"><a class="c1-primary" href="https://scholar.google.com.hk/scholar?hl=zh-TW&as_sdt=0%2C5&q=The+pathophysiology+of+fluid+and+electrolyte+balance+in+the+older+adult+surgical+patient&btnG=">https://scholar.google.com.hk/scholar?hl=zh-TW&as_sdt=0%2C5&q=The+pathophysiology+of+fluid+and+<br>electrolyte+balance+in+the+older+adult+surgical+patient&btnG=</a></p>
+                <p class="f-18 l-30">Boore, J., Cook, N., & Shepherd, A. (2016). Essentials of Anatomy and Physiology for Nursing Practice. SAGE.<br>仓静, & 金琳. (2015). 外科病人麻醉期液体治疗. 中国实用外科杂志, 35(2), 136-139.</p>
+                <div class="title" style="margin-top: 30px;">Colostomy Care Teaching Videos</div>
+                <p class="f-18 l-30">Colostomy Care Teaching Video</p>
+                <p class="f-18 l-30"><a class="c1-primary" href="https://www.youtube.com/watch?v=gWZygImpGng">https://www.youtube.com/watch?v=gWZygImpGng</a></p>
+                <p class="f-18 l-30" style="margin-top: 30px;">Colon Cancer: how to change the ostomy bag after a colostomy</p>
+                <p class="f-18 l-30"><a class="c1-primary" href="https://www.youtube.com/watch?v=0uahhUxNez0">https://www.youtube.com/watch?v=0uahhUxNez0</a></p>
             </div>
         </div>
+        <div class="step-help" data-val="">
+            <!--common.js自动载入step-help.html 注意：data-val值为1，则只加载一个，否则加载全部-->
+        </div>
+    </div>
+    <div class="tx-c">
+        <a class="btn-prev" href="<?=base_url().'index/recommended'; ?>" title="&lt;&nbsp;prev">prev</a>
     </div>
 </div>
 <script>
