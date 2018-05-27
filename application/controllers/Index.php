@@ -24,6 +24,10 @@ class Index extends CI_Controller {
             $this->load->view('learn.html');
 	}
         
+        public function welcome(){
+            $this->load->view('welcome.html');
+        }
+        
         public function about(){
             $this->load->view('about.html');
         }
@@ -36,21 +40,27 @@ class Index extends CI_Controller {
             $this->load->view('about/about3.html');
         }
         
-        public function about4(){
-            $this->load->view('about/about4.html');
-        }
-        
         public function head(){
              $res['name'] = $_SESSION['username'];  
             $this->load->view('html/head.html',$res);
         }
         
         public function stephelp(){
-            $this->load->view('html/step-help.html');
+             //获取个人日志
+            $notes=$this->db->select('*')->from('notes')->where('user_id',$_SESSION['uid'])->get()->result_array();
+            if(!empty($notes)){
+                 $data[0]['notes'] = $notes[0];
+            }else{
+                $data[0]['notes'] = '';
+            }
+             
+            $res['notes'] = '';
+            $this->load->view('html/step-help.html',$res);
         }
         
-        public function stepfloor(){
-            $this->load->view('html/step-floor.html');
+        public function stepfloor($step=0){
+            $res['step'] = $step;
+            $this->load->view('html/step-floor.html',$res);
         }
         
         public function recommended(){
@@ -67,11 +77,11 @@ class Index extends CI_Controller {
         
         public function stepsurvey(){
             $data=$this->db->select('*')->from('survey')->where('uid',$_SESSION['uid'])->get()->result_array();
-            $res['done'] = 0;
             if(!empty($data)){
-                $res['done'] = 1;
+                $this->stepconclusion();
+                return;
             }
-            $this->load->view('stepsurvey.html',$res);
+            $this->load->view('stepsurvey.html');
         }
         
         public function submitsurvey(){
@@ -147,6 +157,51 @@ class Index extends CI_Controller {
             }
             
         } 
+        
+         public function saveNotes(){
+            $step1 = $this->I('textarea-1');
+            $step2 = $this->I('textarea-2');
+            $step3 = $this->I('textarea-3');
+            $step4 = $this->I('textarea-4');
+            $step5 = $this->I('textarea-5');
+            $step6 = $this->I('textarea-6');
+            $step7 = $this->I('textarea-7');
+            $step8 = $this->I('textarea-8');
+            
+            $notes=$this->db->select('*')->from('notes')->where('user_id',$_SESSION['uid'])->get()->result_array();
+            if(empty($notes)){
+                $insert = array(
+                    'user_id' => $_SESSION['uid'],
+                    'step1' => $step1,
+                    'step2' => $step2,
+                    'step3' => $step3,
+                    'step4' => $step4,
+                    'step5' => $step5,
+                    'step6' => $step6,
+                    'step7' => $step7,
+                    'step8' => $step8,
+                    'update_time' => date("Y-m-d H:i:s")
+                    );
+               $this->db->insert('notes', $insert);
+            }else{
+               $update = array(
+                    'step1' => $step1,
+                    'step2' => $step2,
+                    'step3' => $step3,
+                    'step4' => $step4,
+                    'step5' => $step5,
+                    'step6' => $step6,
+                    'step7' => $step7,
+                    'step8' => $step8,
+                    'update_time' => date("Y-m-d H:i:s")
+                    );
+                $where = "user_id=".$_SESSION['uid'];
+                $this->db->update('notes', $update, $where);
+            }
+            
+           $this->response(200,'ok');
+            
+         }
 
 
         public function answer($tid=0){
@@ -164,7 +219,8 @@ class Index extends CI_Controller {
             if(!empty($lastdata)){
                  $data[0]['last_topic_id'] = $lastdata[0]['id'];
             }
-             
+            
+           
             //判断该题是否已经答过
             $state=$this->db->select('*')->from('answer_state')->where('uid',$_SESSION['uid'])->get()->result_array();
            if(!empty($state)){
@@ -173,7 +229,7 @@ class Index extends CI_Controller {
                }else{
                    $data[0]['done'] = 1;
                }
-               
+                $data[0]['leftstep'] = $state[0]['step'];
            } else {
                unset($data[0]['answer']);
            }
@@ -215,18 +271,22 @@ class Index extends CI_Controller {
                 $des = explode(";",$data[0]['des']);
                 $data[0]['des'] = $des;
                  $this->load->view('topic/match.html', $data[0]); 
-            }else if($data[0]['type'] == 5){
+            }else if($data[0]['type'] == 5 || $data[0]['type'] == 9){
                 //简答题
                 if(isset($data[0]['done'])){
                     $shortAnswer=$this->db->select('*')->from('shortquestion')->where('tid',$data[0]['id'])
                             ->where('uid',$_SESSION['uid'])->order_by('createtime', 'DESC')->get()->result_array();
            
                     if(!empty($shortAnswer)){
-                        $data[0]['answer'] = $shortAnswer[0]['answer'];
+                        $data[0]['answer'] = $shortAnswer;
                     }
                 }
-                
-                $this->load->view('topic/short.html', $data[0]); 
+                if($data[0]['type'] == 5){
+                     $this->load->view('topic/short.html', $data[0]); 
+                } else {
+                     $this->load->view('topic/short_3answer.html', $data[0]); 
+                }
+               
             }else if($data[0]['type'] == 6){
                 //多项判断题
                   $this->load->view('topic/muljudge.html', $data[0]); 
@@ -469,14 +529,19 @@ class Index extends CI_Controller {
          */
         public function short($tid){
            
-            $select = $this->I('answer');
-            if($select !== ''){
+            $answer = $this->I('answer');
+            $answer2 = $this->I('answer2');
+            $answer3 = $this->I('answer3');
+            if($answer !== ''){
                 
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if(!empty($data[0])){
                     $insert= array("tid"=>$data[0]['id'], "uid"=>$_SESSION['uid']
                         ,"title"=>$data[0]['title'], "createtime"=>date("Y-m-d H:i:s")
-                        ,"answer"=>$select);
+                        ,"answer"=>$answer
+                        ,"answer2"=>$answer2
+                        ,"answer3"=>$answer3
+                            );
 
                      $this->db->insert("shortquestion", $insert);
                      

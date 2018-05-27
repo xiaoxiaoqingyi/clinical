@@ -1,6 +1,6 @@
 .step-box{
     position: relative;
-    padding: 50px 0;
+    padding: 0 0 50px 0;
     margin: 0 auto;
     width: 1032px;
 }
@@ -37,7 +37,7 @@
 .step-floor{
     position: absolute;
     right: 100%;
-    top: 20px;
+    top: 21px;
     width: 100px;
     padding-top: 59px;
     margin-right: 60px;
@@ -48,20 +48,24 @@
     line-height: 40px;
     text-align: center;
     font-size: 22px;
+}
+.step-floor li a{
+    display: block;
     color: #fff;
     background: #b3b3b3;
-    cursor: default;
+    cursor: not-allowed;
 }
-.step-floor li.active{
+.step-floor li.active a{
     color: #ffac53;
     background: #242424;
+    cursor: pointer;
 }
 /*step-floor end*/
 
 /*step-help*/
 .step-help{
     position: absolute;
-    top: 50px;
+    top: 100px;
     left: 100%;
     padding-left: 60px;
     width: 160px;
@@ -98,6 +102,15 @@
     height: 34px;
     background: url(../images/step/step-close.png);
 }
+.step-help .intro-save{
+    display: block;
+    position: absolute;
+    top: 26px;
+    left: 956px;
+    width: 48px;
+    height: 48px;
+    background: url(../images/step/icon-save.png);
+}
 .step-help .intro-title{
     font-size: 28px;
     padding-bottom: 32px;
@@ -129,6 +142,9 @@
 .step-help .i-nursing i{
     background: url(../images/step/step-help-nursing.png) center no-repeat;
 }
+.step-help .i-note i{
+    background: url(../images/step/step-help-note.png) center no-repeat;
+}
 .step-help .i-medical .step-help-intro{
     background: url(../images/step/step-help-medical-bg.png) left top no-repeat;
 }
@@ -146,6 +162,56 @@
 }
 .step-help .i-nursing .step-help-intro{
     background: url(../images/step/step-help-nursing-bg.png) left top no-repeat;
+}
+.step-help .i-note .step-help-intro{
+    margin-right: 0;
+    width: 958px;
+    padding: 36px;
+    height: auto;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    border-bottom: 5px solid #e7e7e7;
+}
+
+.step-help .intro-note{
+    height: 496px;
+    margin: 20px;
+    line-height: 38px;
+    font-size: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.intro-note-item{
+
+}
+.intro-note-item .note-item-title{
+    display: inline-block;
+    padding-right: 28px;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 16px 0 6px 0;
+    background: url(../images/step/icon-up-b.png) right center no-repeat;
+    cursor: pointer;
+}
+.intro-note-item .note-item-title.active{
+    background: url(../images/step/icon-down-b.png) right center no-repeat;
+}
+.step1-color{color: #099af4}
+.step2-color{color: #13d6a5}
+.step3-color{color: #9ddf46}
+.step4-color{color: #f4c225}
+.step5-color{color: #ff993e}
+.step6-color{color: #f35338}
+.step7-color{color: #e036ba}
+.step8-color{color: #276ed9}
+.intro-note-item .textarea{
+    display: none;
+    width: 840px;
+    height: 82px;
+    line-height: 30px;
+    padding: 14px 20px;
+    margin-top: 0;
+    font-size: 20px;
 }
 /*step-help end*/
 
@@ -193,7 +259,7 @@
     border-bottom: 1px solid #fff;
 }
 .table-have-border td{
-    padding: 5px 20px;
+    padding: 12px 20px;
     font-size: 18px;
     line-height: 24px;
     border: none;
@@ -247,6 +313,22 @@
     font-size: 18px;
     border: 1px solid #ebebeb;
     resize: none;
+}
+.answer-record{
+    display: block;
+    width: 848px;
+    padding: 24px 28px;
+    margin-top: 30px;
+    line-height: 24px;
+    font-size: 20px;
+    background: #fafafa;
+    resize: none;
+}
+.answer-created{
+    margin-bottom: 15px;
+}
+.answer-item{
+    margin-top: 10px;
 }
 .select-group:hover{
     background: #f8f8f8;
@@ -315,12 +397,20 @@
 
 /*step-page*/
 .step-wrap{
+    position: relative;
+    padding-top: 100px;
+}
+.step-h1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 100px;
+    color: #ed6f22;
+}
+.step-cont{
     min-height: 610px;
     padding: 30px 60px;
     background: #fff;
-}
-.step-cont{
-
 }
 .step-cont .title{
     font-weight: bold;

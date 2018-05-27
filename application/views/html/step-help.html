@@ -1,11 +1,12 @@
+
 <div class="step-help-item i-medical">
     <div class="step-help-link">
         <i></i>
         <p>Medical Notes</p>
     </div>
     <div class="step-help-intro">
-        <a href="javascript:;" class="intro-close"></a>
-        <div class="intro-title">Medical Notes</div>
+        <a href="javascript:;" class="intro-close" title="close"></a>
+        <div class="intro-title">Medical Note</div>
         <div class="intro-text">
             <p>- Bed 2, we have Mr Chan, he is 72 years old. He is under the care by Dr. Ng.</p>
             <p>- He has colon cancer and had a <strong class="text-pormpt">partial colectomy<span><b>Partial colectomy</b> refers to the surgical removal of the diseased part of the colon.</span></strong> and formation of a <strong class="text-pormpt">colostomy<span><b>colostomy</b> is a surgical procedure that creates a new opening between the colon and the abdominal wall. The type of colostomy depends on which part of the intestine is removed, which could be ascending colostomy, transverse colostomy, descending colostomy and sigmoid colostomy.</span></strong>.</p>
@@ -27,10 +28,14 @@
         <p>Operation Record</p>
     </div>
     <div class="step-help-intro">
-        <a href="javascript:;" class="intro-close"></a>
+        <a href="javascript:;" class="intro-close" title="close"></a>
         <div class="intro-title">Operation Record</div>
         <div class="intro-text">
-            <p>to be constructed</p>
+            <p>- T˚=37, Pulse rate = 112/min, RR = 22/min,</p>
+            <p>- BP = 90/50mmHg</p>
+            <p>- SaO2 = 97%</p>
+            <p>- u/o = 24 mL/hr</p>
+            <p>- H’stix = 4 mmol/L</p>
         </div>
     </div>
 </div>
@@ -40,23 +45,39 @@
         <p>Lab Results</p>
     </div>
     <div class="step-help-intro">
-        <a href="javascript:;" class="intro-close"></a>
+        <a href="javascript:;" class="intro-close" title="close"></a>
         <div class="intro-title">Lab Result</div>
         <div class="intro-text">
-            <p>to be constructed</p>
+            <p>- Tactile fremitus is absent at right side.</p>
+            <p>- Percussion note is hyper-resonant.</p>
+            <p>- Breath sound is reduced at right side.</p>
         </div>
     </div>
 </div>
 <div class="step-help-item i-mar">
     <div class="step-help-link">
         <i></i>
-        <p>Medication Administration Record(MAR)</p>
+        <p>(Medication Administration Record)MAR</p>
     </div>
     <div class="step-help-intro">
-        <a href="javascript:;" class="intro-close"></a>
+        <a href="javascript:;" class="intro-close" title="close"></a>
         <div class="intro-title">M AR</div>
         <div class="intro-text">
             <img style="margin-top: -30px;" src="<?=base_url().'src/imgs/step-help-mar.png'?>">
+        </div>
+    </div>
+</div>
+
+<div class="step-help-item i-nursing">
+    <div class="step-help-link">
+        <i></i>
+        <p>Nursing Notes</p>
+    </div>
+    <div class="step-help-intro">
+        <a href="javascript:;" class="intro-close" title="close"></a>
+        <div class="intro-title">Nursing Chart</div>
+        <div class="intro-text tx-c">
+            <img src="<?=base_url().'src/imgs/step-help-nursing.png'?>">
         </div>
     </div>
 </div>
@@ -66,23 +87,61 @@
         <p>Imaging Results</p>
     </div>
     <div class="step-help-intro">
-        <a href="javascript:;" class="intro-close"></a>
+        <a href="javascript:;" class="intro-close" title="close"></a>
         <div class="intro-title">Imaging Result</div>
         <div class="intro-text tx-c">
             <img src="<?=base_url().'src/imgs/step-help-imaging.png'?>">
         </div>
     </div>
 </div>
-<div class="step-help-item i-nursing">
+
+<div class="step-help-item i-note">
     <div class="step-help-link">
         <i></i>
-        <p>Nursing Notes</p>
+        <p>Note</p>
     </div>
     <div class="step-help-intro">
-        <a href="javascript:;" class="intro-close"></a>
-        <div class="intro-title">Nursing Chart</div>
-        <div class="intro-text tx-c">
-            <img src="<?=base_url().'src/imgs/step-help-nursing.png'?>">
-        </div>
+         <form id="savenote">
+            <div class="intro-save" title="save note" style="border: none;"></div>
+            <div class="intro-title">Note</div>
+            <div class="intro-note">
+                <div class="intro-note-item">
+                    <div class="note-item-title step1-color">Step1</div>
+                    <textarea class="textarea" name="textarea-1" placeholder="Please fill note here about step1..."><?php if(isset($notes['step1'])) echo $notes['step1'];?></textarea>
+                </div>
+                <div class="intro-note-item">
+                    <div class="note-item-title step2-color">Step2</div>
+                    <textarea class="textarea" name="textarea-2" placeholder="Please fill note here about step2..."><?php if(isset($notes['step2'])) echo $notes['step2'];?></textarea>
+                </div>
+                <div class="intro-note-item">
+                    <div class="note-item-title step3-color">Step3</div>
+                    <textarea class="textarea" name="textarea-3" placeholder="Please fill note here about step3..."><?php if(isset($notes['step3'])) echo $notes['step3'];?></textarea>
+                </div>
+                <div class="intro-note-item">
+                    <div class="note-item-title step4-color">Step4</div>
+                    <textarea class="textarea" name="textarea-4" placeholder="Please fill note here about step4..."><?php if(isset($notes['step4'])) echo $notes['step4'];?></textarea>
+                </div>
+                <div class="intro-note-item">
+                    <div class="note-item-title step5-color">Step5</div>
+                    <textarea class="textarea" name="textarea-5" placeholder="Please fill note here about step5..."><?php if(isset($notes['step5'])) echo $notes['step5'];?></textarea>
+                </div>
+                <div class="intro-note-item">
+                    <div class="note-item-title step6-color">Step6</div>
+                    <textarea class="textarea" name="textarea-6" placeholder="Please fill note here about step6..."><?php if(isset($notes['step6'])) echo $notes['step6'];?></textarea>
+                </div>
+                <div class="intro-note-item">
+                    <div class="note-item-title step7-color">Step7</div>
+                    <textarea class="textarea" name="textarea-7" placeholder="Please fill note here about step7..."><?php if(isset($notes['step7'])) echo $notes['step7'];?></textarea>
+                </div>
+                <div class="intro-note-item">
+                    <div class="note-item-title step8-color">Step8</div>
+                    <textarea class="textarea" name="textarea-8" placeholder="Please fill note here about step8..."><?php if(isset($notes['step8'])) echo $notes['step8'];?></textarea>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
+
+
+    
+

@@ -1,9 +1,11 @@
 /*circle step*/
 .step-pass{
-    margin: 76px auto;
-    width: 889px;
-    height: 389px;
-    background: url(../images/step/step-pass.png);
+    margin: 80px auto;
+    width: 1100px;
+    padding-top: 152px;
+    line-height: 48px;
+    font-size: 38px;
+    background: url(../images/step/step-pass.png) center top no-repeat;
 }
 .step-finish{
     margin: 76px auto;

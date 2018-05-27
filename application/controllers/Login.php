@@ -39,7 +39,7 @@ class Login extends CI_Controller {
 
             $this->load->helper("url");
 //             header("location:".base_url("/index"));
-            $res = array("url"=>base_url("/index/index"));
+            $res = array("url"=>base_url("/index/welcome"));
             
             $this->response(200,'ok',$res);
 	}

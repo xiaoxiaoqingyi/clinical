@@ -119,6 +119,7 @@
                         $('.bg-pass').show();
                     }
                     else {
+						/**
                         var answer = data.res.answer;
                         var arr=new Array(); 
                         arr=answer.split(',');
@@ -127,7 +128,7 @@
                          
                             var option = "input[name=single"+j +"][value="+arr[j]+"]";
                             $(option). parent("label").addClass("prompt");
-                        }
+                        } **/
                          $('.err-wrong').show();
                     }
                 }, error: function (e) {

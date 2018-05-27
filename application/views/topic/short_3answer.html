@@ -1,42 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" class="bg">
+<html lang="en" class="bg4">
 <head>
     <meta charset="UTF-8">
-    <title>About Clinical Reasoning</title>
-    <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
+    <title>Clinical Scenario</title>
+   <link rel="stylesheet" href="<?=base_url().'src/css/base.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/common.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/layout.css'?>">
     <link rel="stylesheet" href="<?=base_url().'src/css/module.css'?>">
     <!--add css-->
-    <link rel="stylesheet" href="<?=base_url().'src/css/style-about.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/style-step.css'?>">
     <!--add css end-->
     <script src="<?=base_url().'src/js/jquery-1.8.3.min.js'?>"></script>
 </head>
 <body>
-<div class="head" data-val="about">
-    <!--自动载入-->
+<div class="head" data-val="clinical">
+    <!--common.js自动载入head.html 注意：data-val值如果与菜单栏的data-val值匹配，则匹配菜单项状态加亮-->
 </div>
 <div class="container">
-    <div class="wrap">
-        <div class="content">
-            <div class="text tx-c">
-                <div class="title-h1" style="margin: 100px 0 60px 0;">About Virtual Patient Clinical<br> Reasoning Platform(VP-CRP)</div>
-                <p class="tx-l l-df" style="margin: 0 100px">
-                    There are some key features of this virtual patient clinical reasoning platform (to be constructed)
-                    For each case, the following information will be provided:<br>
-                    1. A case scenario<br>
-                    2. Medical history and records<br>
-                    3. Nursing records<br>
-                    4. Laboratory and other clinical findings…<br>
-                    5. Optional extra materials in different formats eg videos, text, sound … etc.<br>
-                    6. Readings and assignments: Materials will be provided or referred<br>
-                    7. Quiz questions
-                </p>
-                <div class="btn" style="margin-top: 80px;">
-                    <a class="btn-prev" href="<?=base_url().'index/about3'?>" title="&lt;&nbsp;prev">prev</a>
-                    <a class="btn-next" href="<?=base_url().'index/clinical'?>" title="next&nbsp;&gt;">next</a>
+    <div class="step-box fn-clear">
+        <div class="step-floor" data-val="<?=$step; ?>">
+            <!--common.js自动载入step-floor.html 注意：data-val值代表通过的step数量，如值为3，则前3个状态加亮-->
+        </div>
+        <div class="step-wrap">
+            <form id="form1">
+                <div class="step-cont">
+                    <div class="qq-title"><?= $title; ?></div>
+                    <div class="qq-text">
+                        <p class="f-20 l-38 c1-danger"><?= $des; ?></p>
+                        <p>
+                            <textarea class="textarea" name="answer" style="height: 74px;" 
+                                     placeholder="Please fill in the answers here..."><?php if(isset($done)) echo $answer[0]['answer']; ?></textarea>
+                        
+                            <textarea class="textarea" name="answer2" style="height: 74px;" 
+                                     placeholder="Please fill in the answers here..."><?php if(isset($done)) echo $answer[0]['answer2']; ?></textarea>
+                            
+                            <textarea class="textarea" name="answer3" style="height: 74px;" 
+                                     placeholder="Please fill in the answers here..."><?php if(isset($done)) echo $answer[0]['answer3']; ?></textarea>
+                        
+                        </p>
+                    </div>
+                    
+                     <?php if(isset($answer[1])){ ?>
+                            <div class="answer-record">
+                              <p class="answer-created"><?= $answer[1]['createtime']; ?></p>
+                              <p class="answer-item"><?= $answer[1]['answer']; ?></p>
+                              <p class="answer-item"><?= $answer[1]['answer2']; ?></p>
+                              <p class="answer-item"><?= $answer[1]['answer3']; ?></p>
+                           </div>
+                      <?php } ?>
+                    
+                    <div class="tx-c mt-30">
+                        <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$last_topic_id;?>" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
+                        <?php if(!isset($done)){ ?>
+                        <button type="submit" class="btn-l c2-primary">SUBMIT</button>
+                         <?php }else{ ?>
+                          <button type="submit" class="btn-l c2-primary">SUBMIT</button>
+                        <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$next_topic_id;?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>
+                         <?php } ?>
+                    </div>
                 </div>
-            </div>
+            </form>
+        </div>
+        <div class="step-help" data-val="<?php echo $step>1?'':'1'; ?>">
+            <!--common.js自动载入step-help.html 注意：data-val值为1，则只加载一个，否则加载全部-->
         </div>
     </div>
 </div>
@@ -46,6 +72,29 @@
      * Created by lzm on 2018/3/30.
      */
     $(function(){
+        
+         $("#form1").submit(function () {
+            $.ajax({
+                url: '<?php echo base_url();?>index/short/<?=$id?>',
+                data: $(this).serialize(),
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    //				console.log(data);
+                    if (data && data.status == 200) {
+                        location.href = data.res.url;
+                    }
+                    else {
+                        alert(data.statusMsg);
+                    }
+                }, error: function (e) {
+                    alert("error!");
+                }
+            });
+
+            return !1;
+        });
+        
         // 载入头部.head
         // 给当前页面添加样式
         $('.head').load("<?=base_url().'index/head'?> .wrapper");
@@ -92,7 +141,7 @@
 
         // 载入step-help
         // .step-help切换
-        $('.step-help').load("<?=base_url().'index/stepfhelp'?>");
+        $('.step-help').load("<?=base_url().'index/stephelp'?>");
         stepHelpToggle();
         function stepHelpToggle(){
             var help = $('.step-help');

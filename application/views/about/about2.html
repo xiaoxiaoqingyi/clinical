@@ -13,6 +13,7 @@
      <link rel="stylesheet" href="<?=base_url().'src/css/popbox-img.css'?>">
     <!--add css end-->
     <script src="<?=base_url().'src/js/jquery-1.8.3.min.js'?>"></script>
+    <script src="<?=base_url().'src/js/html5media.min.js'?>"></script>
    
     <!--add css end-->
 </head>
@@ -28,7 +29,7 @@
                 <div class="tx-l">
                     <div class="title-h2">There are 8 steps in the Clinical Reasoning Cycle including:</div>
                     <ul>
-                        <li>1. Consider the patient situation</li>
+                        <li>1. Consider the patient condition,</li>
                         <li>2. Collect cues/information</li>
                         <li>3. Process information</li>
                         <li>4. Identify problems/issues</li>
@@ -37,9 +38,11 @@
                         <li>7. Evaluate outcomes</li>
                         <li>8. Reflect on process and new learning</li>
                     </ul>
-                    <a class="img-s" href="javascript:;" title="open">
-                        <img src="<?=base_url().'src/imgs/img-s.png'?>">
-                    </a>
+                    <div class="video">
+                        <video src="<?=base_url().'src/media/about-movie.mp4'?>" controls autoplay loop muted>
+                            您的浏览器不支持显示该视频
+                        </video>
+                    </div>
                 </div>
                 <div class="btn" style="margin-top: 100px;">
                     <a class="btn-prev" href="<?=base_url().'index/about'?>" title="&lt;&nbsp;prev">prev</a>
