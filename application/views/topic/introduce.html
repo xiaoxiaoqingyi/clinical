@@ -137,6 +137,24 @@ $(function(){
              // 保存笔记
            var noteSaveBtn = $('.intro-save');
            noteSaveBtn.bind('click', function(){
+                 //ajax提交笔记
+                $.ajax({
+                    url: "<?= base_url().'index/saveNotes';?>",
+                    data: $("#saveNote").serialize(),
+                    dataType: 'json',
+                    type: 'post',
+                    success: function (data) {
+                        if (data && data.status == 200) {
+                            //alert("success");
+                        }
+                        else {
+                            //alert(data.statusMsg);
+                        }
+                    }, error: function (e) {
+                        alert("error!");
+                    }
+                });
+               
                var self = $(this);
                setTimeout(function(){
                    self.parent().fadeOut();
@@ -152,26 +170,7 @@ $(function(){
     }
     
 
-    //提交笔记
-    $("#savenote").submit(function () {
-      $.ajax({
-          url: "<?= base_url().'index/saveNotes';?>",
-          data: $(this).serialize(),
-          dataType: 'json',
-          type: 'post',
-          success: function (data) {
-              if (data && data.status == 200) {
-                  alert("success");
-              }
-              else {
-                  alert(data.statusMsg);
-              }
-          }, error: function (e) {
-              alert("error!");
-          }
-      });
-
-    });
+  
 
     // 图片放大展示
     $('.img-s').bind('click', function(){

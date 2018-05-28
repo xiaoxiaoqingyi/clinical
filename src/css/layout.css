@@ -16,6 +16,9 @@ html{
 .bg4 {
     background: url(../images/bg4.png) center 100px no-repeat;
 }
+.bg5 {
+    background: #ebebeb url(../images/bg5.png) center bottom no-repeat;
+}
 .wrapper {
     margin: 0 auto;
     max-width: 1600px;

@@ -35,5 +35,6 @@ iframe{display: block;}
 .tx-l{text-align: left;}
 .tx-r{text-align: right;}
 .tx-c{text-align: center;}
+.tx-line{text-decoration: underline;}
 .tx-hide{white-space: nowrap; overflow: hidden; text-overflow: ellipsis; -o-text-overflow: ellipsis;}
 /*font end*/

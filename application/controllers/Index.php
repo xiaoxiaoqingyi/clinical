@@ -9,7 +9,7 @@ class Index extends CI_Controller {
             
             parent::__construct();
             
-            session_start();
+//            session_start();
             //判断是否登录，否则跳转到登录
             if(!isset($_SESSION['uid'])){
                 $this->load->helper("url");
@@ -49,12 +49,12 @@ class Index extends CI_Controller {
              //获取个人日志
             $notes=$this->db->select('*')->from('notes')->where('user_id',$_SESSION['uid'])->get()->result_array();
             if(!empty($notes)){
-                 $data[0]['notes'] = $notes[0];
+                 $res['notes'] = $notes[0];
             }else{
-                $data[0]['notes'] = '';
+                 $res['notes'] = '';
             }
              
-            $res['notes'] = '';
+          
             $this->load->view('html/step-help.html',$res);
         }
         

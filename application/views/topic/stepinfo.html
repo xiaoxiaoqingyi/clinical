@@ -42,159 +42,212 @@
      */
     $(function(){
         // 载入头部.head
-        // 给当前页面添加样式
-        $('.head').load("<?=base_url().'index/head'?> .wrapper");
-        navActive();
-        function navActive(){
-            var head = $('.head');
-            var aLink = $('.nav li > a');
-            if(!head.length) return false;// 没有.head则不执行下面
-            if(aLink.length){
-                var hVal = $('.head').attr('data-val');
-                for(var i = 0, len = aLink.length; i < len; i++){
-                    var aVal = aLink.eq(i).attr('data-val');
-                    if(aVal == hVal){
-                        aLink.eq(i).parent().addClass('active');
+    // 给当前页面添加样式
+    $('.head').load("<?=base_url().'index/head'?> .wrapper");
+    navActive();
+    function navActive(){
+        var head = $('.head');
+        var aLink = $('.nav li > a');
+        if(!head.length) return false;// 没有.head则不执行下面
+        if(aLink.length){
+            var hVal = $('.head').attr('data-val');
+            for(var i = 0, len = aLink.length; i < len; i++){
+                var aVal = aLink.eq(i).attr('data-val');
+                if(aVal == hVal){
+                    aLink.eq(i).parent().addClass('active');
+                }
+            }
+        }else{
+            setTimeout(function(){
+                navActive();
+            }, 100);
+        }
+    }
+
+    var floorUrlArr = [
+        "<?php echo $leftstep>=1?base_url().'index/fromstep/1':'javascript:;'; ?>",
+        "<?php echo $leftstep>=2?base_url().'index/fromstep/2':'javascript:;'; ?>",
+        "<?php echo $leftstep>=3?base_url().'index/fromstep/3':'javascript:;'; ?>",
+        "<?php echo $leftstep>=4?base_url().'index/fromstep/4':'javascript:;'; ?>",
+        "<?php echo $leftstep>=5?base_url().'index/fromstep/5':'javascript:;'; ?>",
+        "<?php echo $leftstep>=6?base_url().'index/fromstep/6':'javascript:;'; ?>",
+        "<?php echo $leftstep>=7?base_url().'index/fromstep/7':'javascript:;'; ?>",
+        "<?php echo $leftstep>=8?base_url().'index/fromstep/8':'javascript:;'; ?>"
+    ];
+
+    // 载入step-floor
+    // .step-floor添加样式
+    $('.step-floor').load("<?php echo base_url().'index/stepfloor';?>");
+    stepFloorActive();
+    function stepFloorActive(){
+        var floor = $('.step-floor');
+        var dataVal = floor.attr('data-val');
+        var li = $('.step-floor li');
+        if(!floor.length) return false;// 没有.step-floor则不执行
+        if(dataVal && li.length){
+            for(var i = 0; i < dataVal; i++){
+                li.eq(i).addClass('active');
+                li.eq(i).find('a').prop('href', floorUrlArr[i]);
+            }
+        }
+        else{
+            setTimeout(function(){
+                stepFloorActive();
+            }, 100)
+        }
+    }
+
+    // 载入step-help
+    // .step-help切换
+    $('.step-help').load("<?php echo base_url().'index/stephelp';?>");
+    stepHelpToggle();
+    function stepHelpToggle(){
+        var help = $('.step-help');
+        var link = $('.step-help-link');
+        var intro = $('.step-help-intro');
+        var close = $('.step-help-intro .intro-close');
+        if(!help.length) return false;// 没有.step-help则不执行
+        if(link.length){
+            // 显示菜单个数
+            var dataVal = help.attr('data-val');
+            if(dataVal && dataVal == '1'){ // 如果为step1，后面的菜单内容则清空
+                for(var i = link.length-2; i > 0; i--){
+                    link.eq(i).parent().remove();
+                }
+            }
+            // 菜单展开
+            link.bind('click', function(){
+                intro.not($(this).next()).fadeOut();
+                $(this).next().fadeToggle();
+            });
+            // 关闭按钮
+            close.bind('click', function(){
+                $(this).parent().fadeOut();
+            });
+            // 笔记展开收缩
+            var noteItemBtn = $('.note-item-title');
+            noteItemBtn.bind('click', function(){
+                $(this).next('.textarea').toggle();
+                $(this).toggleClass('active');
+            });
+            
+             // 保存笔记
+           var noteSaveBtn = $('.intro-save');
+           noteSaveBtn.bind('click', function(){
+                 //ajax提交笔记
+                $.ajax({
+                    url: "<?= base_url().'index/saveNotes';?>",
+                    data: $("#saveNote").serialize(),
+                    dataType: 'json',
+                    type: 'post',
+                    success: function (data) {
+                        if (data && data.status == 200) {
+                            //alert("success");
+                        }
+                        else {
+                            //alert(data.statusMsg);
+                        }
+                    }, error: function (e) {
+                        alert("error!");
                     }
-                }
-            }else{
-                setTimeout(function(){
-                    navActive();
-                }, 100);
-            }
-        }
-
-        // 载入step-floor
-        // .step-floor添加样式
-        $('.step-floor').load("<?=base_url().'index/stepfloor'?>");
-        stepFloorActive();
-        function stepFloorActive(){
-            var floor = $('.step-floor');
-            var dataVal = floor.attr('data-val');
-            var li = $('.step-floor li');
-            if(!floor.length) return false;// 没有.step-floor则不执行
-            if(dataVal && li.length){
-                for(var i = 0; i < dataVal; i++){
-                    li.eq(i).addClass('active');
-                }
-            }
-            else{
-                setTimeout(function(){
-                    stepFloorActive();
-                }, 100)
-            }
-        }
-
-        // 载入step-help
-        // .step-help切换
-        $('.step-help').load("<?=base_url().'index/stepfhelp'?>");
-        stepHelpToggle();
-        function stepHelpToggle(){
-            var help = $('.step-help');
-            var link = $('.step-help-link');
-            var intro = $('.step-help-intro');
-            var close = $('.step-help-intro .intro-close');
-            if(!help.length) return false;// 没有.step-help则不执行
-            if(link.length){
-                link.bind('click', function(){
-                    intro.not($(this).next()).fadeOut();
-                    $(this).next().fadeToggle();
                 });
-                close.bind('click', function(){
-                    $(this).parent().fadeOut();
-                });
-                var dataVal = help.attr('data-val');
-                if(dataVal && dataVal == '1'){
-                    for(var i = link.length; i > 0; i--){
-                        link.eq(i).parent().remove();
-                    }
+               
+               var self = $(this);
+               setTimeout(function(){
+                   self.parent().fadeOut();
+               }, 100);
+           });
+         
+            
+        }else{
+            setTimeout(function(){
+                stepHelpToggle();
+            }, 100);
+        }
+    }
+    
+
+  
+
+    // 图片放大展示
+    $('.img-s').bind('click', function(){
+        $('.img-popbox').fadeIn();
+    });
+    $('.img-popbox-close').bind('click', function(){
+        $('.img-popbox').fadeOut();
+    });
+
+    // 单选框切换
+    radioToggle();
+    function radioToggle(){
+        var itemRadio = $('.item-radio input');
+        var itemChecked = $('.item-radio input:checked');
+        // 默认选中，添加样式
+        for(var i = 0, len = itemChecked.length; i < len; i++){
+            itemChecked.eq(i).parent().addClass('active');
+        }
+        // 点击清空name值相同样式，再给当前选中添加样式
+        itemRadio.bind('click', function(){
+            var itemName = $(this).prop('name');
+            var itemRadioArr = $('.item-radio input[name=' + itemName + ']');
+            itemRadioArr.parent().removeClass('active');
+            $(this).parent().addClass('active');
+        });
+    }
+
+    // 复选框切换
+    checkboxToggle();
+    function checkboxToggle(){
+        var itemCheckbox = $('.item-checkbox input');
+        var itemChecked = $('.item-checkbox input:checked');
+        // 默认选中，添加样式
+        for(var i = 0, len = itemChecked.length; i < len; i++){
+            itemChecked.eq(i).parent().addClass('active');
+        }
+        // 给当前选中添加样式
+        itemCheckbox.bind('click', function(){
+            $(this).parent().toggleClass('active');
+        });
+    }
+
+    // 仿下拉菜单
+    var sTopInp = $('.select-top input');
+    var sTopSpan = $('.select-top span');
+    for(var i = 0, len = sTopInp.length; i < len; i++){
+        if(sTopInp.eq(i).val()){
+            sTopSpan.eq(i).addClass('active');
+        }
+    }
+    // 点击选项.select-top
+    $('.select-top').bind('click', function(){
+        var sTopQ = $(this).prev('label');
+        var sTopA = $(this).find('span');
+        var sTopV = $(this).find('input');
+        var sBottomP = $('.select-bottom').parents('.popbox');
+        var sBottomQ = sBottomP.find('.select-title');
+        var sBottomA = sBottomP.find('.select-bottom li');
+
+        sBottomQ.html(sTopQ.html());
+
+        // 给默认选中的选项添加样式
+        if(sTopV.val()){
+            for(var i = 0, len = sBottomA.length; i < len; i++){
+                sBottomA.eq(i).removeClass('active');
+                if(sBottomA.eq(i).attr('data-val') == sTopV.val()){
+                    sBottomA.eq(i).addClass('active');
                 }
-            }else{
-                setTimeout(function(){
-                    stepHelpToggle();
-                }, 100);
             }
         }
+        sBottomP.fadeIn();
 
-        // 图片放大展示
-        $('.img-s').bind('click', function(){
-            $('.img-popbox').fadeIn();
+        // 选择某个选项.select-bottom li
+        sBottomA.bind('click', function(){
+            sTopA.html($(this).html()).addClass('active');
+            sTopV.val($(this).attr('data-val'));
+            sBottomP.fadeOut();
+            sBottomA.unbind('click');//解绑
         });
-        $('.img-popbox-close').bind('click', function(){
-            $('.img-popbox').fadeOut();
-        });
-
-        // 单选框切换
-        radioToggle();
-        function radioToggle(){
-            var itemRadio = $('.item-radio input');
-            var itemChecked = $('.item-radio input:checked');
-            // 默认选中，添加样式
-            for(var i = 0, len = itemChecked.length; i < len; i++){
-                itemChecked.eq(i).parent().addClass('active');
-            }
-            // 点击清空name值相同样式，再给当前选中添加样式
-            itemRadio.bind('click', function(){
-                var itemName = $(this).prop('name');
-                var itemRadioArr = $('.item-radio input[name=' + itemName + ']');
-                itemRadioArr.parent().removeClass('active');
-                $(this).parent().addClass('active');
-            });
-        }
-
-        // 复选框切换
-        checkboxToggle();
-        function checkboxToggle(){
-            var itemCheckbox = $('.item-checkbox input');
-            var itemChecked = $('.item-checkbox input:checked');
-            // 默认选中，添加样式
-            for(var i = 0, len = itemChecked.length; i < len; i++){
-                itemChecked.eq(i).parent().addClass('active');
-            }
-            // 给当前选中添加样式
-            itemCheckbox.bind('click', function(){
-                $(this).parent().toggleClass('active');
-            });
-        }
-
-        // 仿下拉菜单
-        var sTopInp = $('.select-top input');
-        var sTopSpan = $('.select-top span');
-        for(var i = 0, len = sTopInp.length; i < len; i++){
-            if(sTopInp.eq(i).val()){
-                sTopSpan.eq(i).addClass('active');
-            }
-        }
-        // 点击选项.select-top
-        $('.select-top').bind('click', function(){
-            var sTopQ = $(this).prev('label');
-            var sTopA = $(this).find('span');
-            var sTopV = $(this).find('input');
-            var sBottomP = $('.select-bottom').parents('.popbox');
-            var sBottomQ = sBottomP.find('.select-title');
-            var sBottomA = sBottomP.find('.select-bottom li');
-
-            sBottomQ.html(sTopQ.html());
-
-            // 给默认选中的选项添加样式
-            if(sTopV.val()){
-                for(var i = 0, len = sBottomA.length; i < len; i++){
-                    sBottomA.eq(i).removeClass('active');
-                    if(sBottomA.eq(i).attr('data-val') == sTopV.val()){
-                        sBottomA.eq(i).addClass('active');
-                    }
-                }
-            }
-            sBottomP.fadeIn();
-
-            // 选择某个选项.select-bottom li
-            sBottomA.bind('click', function(){
-                sTopA.html($(this).html()).addClass('active');
-                sTopV.val($(this).attr('data-val'));
-                sBottomP.fadeOut();
-                sBottomA.unbind('click');//解绑
-            });
-        });
+    });
 
 
     });

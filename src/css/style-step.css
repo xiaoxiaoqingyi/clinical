@@ -80,18 +80,19 @@
 }
 .step-help .step-help-link i{
     display: block;
-    height: 68px;
-    margin-bottom:10px;
+    height: 64px;
 }
 .step-help .step-help-intro{
     display: none;
     position: absolute;
     top: -1px;
     right: 100%;
-    margin-right: -60px;
-    width: 966px;
-    height: 604px;
-    padding: 36px 90px 36px 36px;
+    width: 958px;
+    height: 602px;
+    padding: 36px;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    border-bottom: 5px solid #e7e7e7;
 }
 .step-help .intro-close{
     display: block;
@@ -110,6 +111,7 @@
     width: 48px;
     height: 48px;
     background: url(../images/step/icon-save.png);
+    cursor: pointer;
 }
 .step-help .intro-title{
     font-size: 28px;
@@ -145,32 +147,8 @@
 .step-help .i-note i{
     background: url(../images/step/step-help-note.png) center no-repeat;
 }
-.step-help .i-medical .step-help-intro{
-    background: url(../images/step/step-help-medical-bg.png) left top no-repeat;
-}
-.step-help .i-operation .step-help-intro{
-    background: url(../images/step/step-help-operation-bg.png) left top no-repeat;
-}
-.step-help .i-lab .step-help-intro{
-    background: url(../images/step/step-help-lab-bg.png) left top no-repeat;
-}
-.step-help .i-mar .step-help-intro{
-    background: url(../images/step/step-help-mar-bg.png) left top no-repeat;
-}
-.step-help .i-imaging .step-help-intro{
-    background: url(../images/step/step-help-imaging-bg.png) left top no-repeat;
-}
-.step-help .i-nursing .step-help-intro{
-    background: url(../images/step/step-help-nursing-bg.png) left top no-repeat;
-}
 .step-help .i-note .step-help-intro{
-    margin-right: 0;
-    width: 958px;
-    padding: 36px;
     height: auto;
-    background: #fff;
-    border: 1px solid #e7e7e7;
-    border-bottom: 5px solid #e7e7e7;
 }
 
 .step-help .intro-note{
