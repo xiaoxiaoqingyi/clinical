@@ -308,20 +308,6 @@
         });
     }
 
-    // 复选框切换
-    checkboxToggle();
-    function checkboxToggle(){
-        var itemCheckbox = $('.item-checkbox input');
-        var itemChecked = $('.item-checkbox input:checked');
-        // 默认选中，添加样式
-        for(var i = 0, len = itemChecked.length; i < len; i++){
-            itemChecked.eq(i).parent().addClass('active');
-        }
-        // 给当前选中添加样式
-        itemCheckbox.bind('click', function(){
-            $(this).parent().toggleClass('active');
-        });
-    }
 
     // 仿下拉菜单
     var sTopInp = $('.select-top input');
