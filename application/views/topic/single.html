@@ -173,7 +173,7 @@
             // 显示菜单个数
             var dataVal = help.attr('data-val');
             if(dataVal && dataVal == '1'){ // 如果为step1，后面的菜单内容则清空
-                for(var i = link.length-2; i > 0; i--){
+                for(var i = link.length; i > 1; i--){
                     link.eq(i).parent().remove();
                 }
             }
