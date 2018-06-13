@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/clinical/';
+//$config['base_url'] = 'https://snprojdev.polyu.edu.hk/b/snproj1';
 
 /*
 |--------------------------------------------------------------------------
