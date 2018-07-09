@@ -206,6 +206,7 @@
                     link.eq(i).parent().remove();
                 }
             }
+             help.show();
             // 菜单展开
             link.bind('click', function(){
                 intro.not($(this).next()).fadeOut();
@@ -341,6 +342,7 @@
         // 选择某个选项.select-bottom li
         sBottomA.bind('click', function(){
             sTopA.html($(this).html()).addClass('active');
+            sTopA.prop('title', $(this).html());
             sTopV.val($(this).attr('data-val'));
             sBottomP.fadeOut();
             sBottomA.unbind('click');//解绑
