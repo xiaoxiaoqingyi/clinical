@@ -10,13 +10,15 @@
 .px-10{padding: 0 10px;}
 .py-10{padding: 10px;}*/
 
-/*.m-0 {margin: 0;}
+.m-0 {margin: 0;}
 .m-10 {margin: 10px;}
 .mr-10 {margin-right: 10px;}
 .mb-10 {margin-bottom: 10px;}
 .ml-10 {margin-left: 10px;}
-.mx-10 {margin: 0 10px;}*/
+.ml-20 {margin-left: 20px;}
+.mx-10 {margin: 0 10px;}
 .py-30 {padding: 30px;}
+.mt-10 {margin-top: 10px;}
 .mt-20 {margin-top: 20px;}
 .mt-30 {margin-top: 30px;}
 .my-10 {margin: 10px 0;}

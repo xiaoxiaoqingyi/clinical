@@ -270,7 +270,14 @@
                    self.parent().fadeOut();
                }, 100);
            });
-         
+          // 图片放大展示
+            $('.step-img-s').bind('click', function(){
+                $('.step-img-popbox-pic img').attr('src', $(this).attr('src'));
+                $('.step-img-popbox').fadeIn();
+            });
+            $('.step-img-popbox-close').bind('click', function(){
+                $('.step-img-popbox').fadeOut();
+            });
             
         }else{
             setTimeout(function(){
