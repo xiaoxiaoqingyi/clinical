@@ -22,6 +22,7 @@
             <!--common.js自动载入step-floor.html 注意：data-val值代表通过的step数量，如值为3，则前3个状态加亮-->
         </div>
         <div class="step-wrap">
+             <div class="step-h1"><?= $step_title; ?></div>
             <form id="form1">
                 <div class="step-cont">
                     <div class="qq-title"><?= $title; ?></div>
@@ -66,17 +67,17 @@
                         </div>
                     </div>
                     <div class="tx-c mt-30">
-                        <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$last_topic_id;?>" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
+                        <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$case.'/'.$last_topic_id;?>" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
                         <?php if(!isset($done)){ ?>
                         <button type="submit" class="btn-l c2-primary">SUBMIT</button>
                          <?php }else{ ?>
-                        <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$next_topic_id;?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>
+                        <a class="btn-l c2-primary" href="<?php echo base_url().'index/answer/'.$case.'/'.$next_topic_id;?>" title="next&nbsp;&gt;">NEXT&nbsp;&gt;</a>
                          <?php } ?>
                     </div>
                 </div>
             </form>
         </div>
-        <div class="step-help" data-val="<?php echo $step>1?'':'1'; ?>">
+        <div class="<?php echo 'step-help step-help-case'.$case; ?>" data-val="<?php echo $step>1?'':'1'; ?>">
             <!--common.js自动载入step-help.html 注意：data-val值为1，则只加载一个，否则加载全部-->
         </div>
     </div>
@@ -160,14 +161,14 @@
     }
 
     var floorUrlArr = [
-        "<?php echo $leftstep>=1?base_url().'index/fromstep/1':'javascript:;'; ?>",
-        "<?php echo $leftstep>=2?base_url().'index/fromstep/2':'javascript:;'; ?>",
-        "<?php echo $leftstep>=3?base_url().'index/fromstep/3':'javascript:;'; ?>",
-        "<?php echo $leftstep>=4?base_url().'index/fromstep/4':'javascript:;'; ?>",
-        "<?php echo $leftstep>=5?base_url().'index/fromstep/5':'javascript:;'; ?>",
-        "<?php echo $leftstep>=6?base_url().'index/fromstep/6':'javascript:;'; ?>",
-        "<?php echo $leftstep>=7?base_url().'index/fromstep/7':'javascript:;'; ?>",
-        "<?php echo $leftstep>=8?base_url().'index/fromstep/8':'javascript:;'; ?>"
+        "<?php echo $leftstep>=1?base_url().'index/fromstep/'.$case.'/1':'javascript:;'; ?>",
+        "<?php echo $leftstep>=2?base_url().'index/fromstep/'.$case.'/2':'javascript:;'; ?>",
+        "<?php echo $leftstep>=3?base_url().'index/fromstep/'.$case.'/3':'javascript:;'; ?>",
+        "<?php echo $leftstep>=4?base_url().'index/fromstep/'.$case.'/4':'javascript:;'; ?>",
+        "<?php echo $leftstep>=5?base_url().'index/fromstep/'.$case.'/5':'javascript:;'; ?>",
+        "<?php echo $leftstep>=6?base_url().'index/fromstep/'.$case.'/6':'javascript:;'; ?>",
+        "<?php echo $leftstep>=7?base_url().'index/fromstep/'.$case.'/7':'javascript:;'; ?>",
+        "<?php echo $leftstep>=8?base_url().'index/fromstep/'.$case.'/8':'javascript:;'; ?>"
     ];
 
     // 载入step-floor
@@ -194,7 +195,9 @@
 
     // 载入step-help
     // .step-help切换
-    $('.step-help').load("<?php echo base_url().'index/stephelp';?>");
+    $('.step-help-case1').load("<?php echo base_url().'index/stephelp1';?>");
+    $('.step-help-case2').load("<?php echo base_url().'index/stephelp2';?>");
+    $('.step-help-case3').load("<?php echo base_url().'index/stephelp3';?>");
     stepHelpToggle();
     function stepHelpToggle(){
         var help = $('.step-help');

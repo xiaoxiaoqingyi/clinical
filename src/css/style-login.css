@@ -56,4 +56,17 @@ html{
     line-height: 1;
     text-decoration: underline;
 }
+.polyu-login{
+    width: 370px;
+    margin-left: 820px;
+}
+.polyu-login h1{
+    padding-top: 300px;
+}
+.polyu-login .btn-polyu-login{
+    margin: 30px 0 56px;
+    line-height: 94px;
+    text-indent: -999em;
+    background: url(../images/login/btn-polyu-login.png) center no-repeat;
+}
 /*login-page end*/
