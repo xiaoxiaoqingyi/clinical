@@ -29,13 +29,13 @@
                         <p class="f-20 l-38 c1-danger"><?= $des; ?></p>
                         <p>
                             <textarea class="textarea" name="answer" style="height: 74px;" 
-                                     placeholder="Please fill in the answers here..."><?php if(isset($done)) echo $answer[0]['answer']; ?></textarea>
+                                     placeholder="Please fill in the answers here..."><?php if(isset($done)) echo $answer[0]['user_answer']; ?></textarea>
                         
                             <textarea class="textarea" name="answer2" style="height: 74px;" 
-                                     placeholder="Please fill in the answers here..."><?php if(isset($done)) echo $answer[0]['answer2']; ?></textarea>
+                                     placeholder="Please fill in the answers here..."><?php if(isset($done)) echo $answer[0]['short_answer2']; ?></textarea>
                             
                             <textarea class="textarea" name="answer3" style="height: 74px;" 
-                                     placeholder="Please fill in the answers here..."><?php if(isset($done)) echo $answer[0]['answer3']; ?></textarea>
+                                     placeholder="Please fill in the answers here..."><?php if(isset($done)) echo $answer[0]['short_answer3']; ?></textarea>
                         
                         </p>
                     </div>
@@ -43,9 +43,9 @@
                      <?php if(isset($answer[1])){ ?>
                             <div class="answer-record">
                               <p class="answer-created"><?= $answer[1]['createtime']; ?></p>
-                              <p class="answer-item"><?= $answer[1]['answer']; ?></p>
-                              <p class="answer-item"><?= $answer[1]['answer2']; ?></p>
-                              <p class="answer-item"><?= $answer[1]['answer3']; ?></p>
+                              <p class="answer-item"><?= $answer[1]['user_answer']; ?></p>
+                              <p class="answer-item"><?= $answer[1]['short_answer2']; ?></p>
+                              <p class="answer-item"><?= $answer[1]['short_answer3']; ?></p>
                            </div>
                       <?php } ?>
                     

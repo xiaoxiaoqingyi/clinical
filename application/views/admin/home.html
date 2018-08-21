@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>index</title>
+  <link rel="stylesheet" href="<?=base_url().'res/css/base.css'?>">
+  <link rel="stylesheet" href="<?=base_url().'res/css/common.css'?>">
+  <link rel="stylesheet" href="<?=base_url().'res/css/layout.css'?>">
+  <script src="<?=base_url().'res/js/jquery-1.8.3.min.js'?>"></script>
+</head>
+<body>
+<div class="head fn-clear">
+  <div class="head-l">
+    <a href="javascript:;" title="Admin" class="icon-admin">ADMIN</a>
+    <span class="line"></span>
+    <a href="javascript:;" title="Logout">LOGOUT</a>
+  </div>
+  <div class="head-r">
+    <div class="head-search">
+        <form action="<?php echo base_url().'admin/index/'.$case.'/'.$page;?>" method="post" class="fn-clear">
+          <input id='search' name='key' type="text" value='<?=$search ?>' placeholder="ID/USER NAME">
+        <button type="submit" title="Search"></button>
+      </form>
+    </div>
+    <div class="head-do">
+      <a href="<?=base_url().'admin/downloadAll/'.$case?>" title="Download All" class="c2-info">Download All</a>
+      <a href="<?=base_url().'admin/deleteAll/'.$case ?>" title="Clean All" class="c2-warning">Clean All</a>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="cont-top">
+    <select id="caseList" >
+      <option value="1" <?php echo $case==1?" selected ='selected' ":""; ?>  >case1</option>
+      <option value="2" <?php echo $case==2?" selected ='selected' ":""; ?> >case2</option>
+      <option value="3" <?php echo $case==3?" selected = 'selected' ":""; ?> >case3</option>
+    </select>
+  </div>
+  <div class="cont-center">
+    <table class="table">
+        
+        <tr>
+        <th>&nbsp;</th>
+        <th>NETID</th>
+        <th>ANSWER COMPLETION RATE</th>
+        <th>EVALUATION SURVEY</th>
+        <th>LAST LOGIN TIME</th>
+        <th>OPERATION</th>
+      </tr>
+       <?php foreach ($data as $key => $value){ ?>
+            
+            <?php if($value['finsih'] == 1){ ?>
+            
+                <tr>
+                    <td>
+                      <label class="check-box icon-checked">
+                          <input name="checkbox" type="checkbox" value="<?=$value['uid'] ?>">
+                      </label>
+                    </td>
+                    <td><?=$value['account'] ?></td>
+                    <td><span class="c1-success"><?=$value['com_rate'] ?></span></td>
+                    <td><?=$value['survey'] ?></td>
+                    <td><?=$value['last_login_time'] ?></td>
+                    <td>
+                      <div class="table-do">
+                        <a href="<?=base_url().'admin/downloadOne/'.$case.'/'.$value['uid'] ?>"  class="icon-download" title="Download">Download</a>
+                        <a href="<?=base_url().'admin/deleteOne/'.$case.'/'.$page.'/'.$value['uid'].'/'.$search ?>" 
+                           class="icon-delete" title="Delete">Delete</a>
+                      </div>
+                    </td>
+                 </tr>
+            
+             <?php }else{ ?>
+                 <tr>
+                    <td>&nbsp;</td>
+                    <td><?=$value['account'] ?></td>
+                    <td><?=$value['com_rate'] ?></td>
+                    <td><?=$value['survey'] ?></td>
+                    <td><?=$value['last_login_time'] ?></td>
+                    <td><span class="c1-default">NOT COMPLETED</span></td>
+                  </tr>
+             
+              <?php } ?> 
+       
+        <?php } ?>
+     
+    </table>
+  </div>
+  <div class="cont-bottom fn-clear">
+    <div class="table-do-batch">
+      <button id="downloadbtn" type="button" class="icon-download" title="Batch Download">Batch Download</button>
+      <button id="deletebtn" type="button" class="icon-delete" title="Batch Delete">Batch Delete</button>
+    </div>
+    <div class="page fn-r">
+      
+       <a href="<?php $url = base_url().'admin/index/'.$case.'/'.($page-1); echo $page <=1?'javascript:;':$url; ?>" 
+          title="Prev" class="prev">Prev</a>
+        
+       <?php for($i=1; $i<=$totalPage; $i++){ ?>
+       
+       <a href="<?= base_url().'admin/index/'.$case.'/'.$i;?>" title="<?php echo $i; ?>" 
+        class="<?php echo $page==$i?'active':''; ?>"    > <?php echo $i; ?></a>
+                
+
+       <?php } ?>
+       
+       <a href=" <?php $url2 = base_url().'admin/index/'.$case.'/'.($page+1); echo $page>=$totalPage?'javascript:;':$url2; ?>" 
+          
+          title="Next" class="next">Next</a>
+      
+    </div>
+  </div>
+</div>
+<script src="<?=base_url().'res/js/common.js'?>"></script>
+
+<script>
+    
+    $(function () {
+        
+        //change case
+        $("select#caseList").change(function(){
+            var option = $(this).val();
+            var url = "<?= base_url().'admin/index/' ?>"+option+ "<?='/'.$page ?>"
+             window.location.href = url;
+
+         });
+         
+        $("#downloadbtn").click(function(){
+            //$('input:checkbox:checked') 等同于 $('input[type=checkbox]:checked')
+            //意思是选择被选中的checkbox
+            var temp='';
+            $.each($('input:checkbox:checked'),function(){
+                temp = temp + $(this).val() +',';
+            });
+            var uids=temp.substring(0,temp.length-1);
+            
+             var url = "<?= base_url().'admin/downloadMul/'.$case.'/' ?>" + encodeURIComponent(uids);
+             window.location.href = url;
+
+        });
+        
+         $("#deletebtn").click(function(){
+            //$('input:checkbox:checked') 等同于 $('input[type=checkbox]:checked')
+            //意思是选择被选中的checkbox
+            var temp='';
+            $.each($('input:checkbox:checked'),function(){
+                temp = temp + $(this).val() +',';
+            });
+            var uids=temp.substring(0,temp.length-1);
+            
+             var url = "<?= base_url().'admin/deleteMul/'.$case.'/'.$page.'/' ?>" + encodeURIComponent(uids);
+             window.location.href = url;
+
+        });
+        
+    });
+    
+</script>
+</body>
+</html>

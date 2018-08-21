@@ -1,0 +1,54 @@
+
+body .c1-default {
+    color: #999;
+}
+
+body .c1-info {
+    color: #1fbdf1;
+}
+
+body .c1-success {
+    color: #1f9c37;
+}
+
+body .c1-warning {
+    color: #ff6c2b;
+}
+
+body .c1-danger {
+    color: #ff3636;
+}
+
+body .c1-inverse {
+    color: #363636;
+}
+
+body .c2-default {
+    color: #666;
+    background: #fff;
+}
+
+body .c2-info {
+    color: #fff;
+    background: #1fbdf1;
+}
+
+body .c2-success {
+    color: #fff;
+    background: #1f9c37;
+}
+
+body .c2-warning {
+    color: #fff;
+    background: #ff6c2b;
+}
+
+body .c2-danger {
+    color: #fff;
+    background: #ff3636;
+}
+
+body .c2-inverse {
+    color: #fff;
+    background: #363636;
+}

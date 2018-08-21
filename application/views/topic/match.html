@@ -168,9 +168,7 @@
 
     // 载入step-floor
     // .step-floor添加样式
-    $('.step-help-case1').load("<?php echo base_url().'index/stephelp1';?>");
-    $('.step-help-case2').load("<?php echo base_url().'index/stephelp2';?>");
-    $('.step-help-case3').load("<?php echo base_url().'index/stephelp3';?>");
+   $('.step-floor').load("<?php echo base_url().'index/stepfloor';?>");
     stepFloorActive();
     function stepFloorActive(){
         var floor = $('.step-floor');
@@ -192,7 +190,9 @@
 
     // 载入step-help
     // .step-help切换
-    $('.step-help').load("<?php echo base_url().'index/stephelp';?>");
+   $('.step-help-case1').load("<?php echo base_url().'index/stephelp1';?>");
+    $('.step-help-case2').load("<?php echo base_url().'index/stephelp2';?>");
+    $('.step-help-case3').load("<?php echo base_url().'index/stephelp3';?>");
     stepHelpToggle();
     function stepHelpToggle(){
         var help = $('.step-help');

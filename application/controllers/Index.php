@@ -17,8 +17,19 @@ class Index extends CI_Controller {
             }
             date_default_timezone_set('Asia/Shanghai');
             $this->load->database();
+            $this->updateLoginTime();
            
 	}
+        
+        
+       public function updateLoginTime(){
+            $update = array(
+                'last_login_time' => date("Y-m-d H:i:s")
+                );
+            $where = array();
+            $where['id'] = $_SESSION['uid'];
+            $this->db->update('user', $update, $where);
+}
 
 	public function index(){
             $this->load->view('learn.html');
@@ -355,7 +366,7 @@ class Index extends CI_Controller {
          }
 
 
-        public function answer($case=1, $tid=0){
+        public function answer($case, $tid=0){
             if($tid == 0){
                 //8个步骤完成
                 $this->stepsurvey($case);             
@@ -408,7 +419,9 @@ class Index extends CI_Controller {
                        'case' => $data[0]['case'],
                        'createtime' => date("Y-m-d H:i:s")
                        );
-                   $where = "uid=".$_SESSION['uid'];
+                    $where = array();
+                    $where['uid'] = $_SESSION['uid'];
+                    $where['case'] = $data[0]['case'];
                    $this->db->update('answer_state', $update, $where);
                }
                 $this->load->view('topic/introduce.html', $data[0]); 
@@ -429,8 +442,8 @@ class Index extends CI_Controller {
             }else if($data[0]['type'] == 5 || $data[0]['type'] == 9){
                 //简答题
                 if(isset($data[0]['done'])){
-                    $shortAnswer=$this->db->select('*')->from('shortquestion')->where('tid',$data[0]['id'])
-                            ->where('uid',$_SESSION['uid'])->order_by('createtime', 'DESC')->get()->result_array();
+                    $shortAnswer=$this->db->select('*')->from('answer_log')->where('topic_id',$data[0]['id'])
+                            ->where('user_id',$_SESSION['uid'])->order_by('createtime', 'DESC')->get()->result_array();
            
                     if(!empty($shortAnswer)){
                         $data[0]['answer'] = $shortAnswer;
@@ -463,7 +476,9 @@ class Index extends CI_Controller {
                         'case' => $data[0]['case'],
                        'createtime' => date("Y-m-d H:i:s")
                        );
-                   $where = "uid=".$_SESSION['uid'];
+                    $where = array();
+                    $where['uid'] = $_SESSION['uid'];
+                    $where['case'] = $data[0]['case'];
                    $this->db->update('answer_state', $update, $where);
                }
                if(!empty($state)){
@@ -488,7 +503,10 @@ class Index extends CI_Controller {
                         'case' => $data[0]['case'],
                        'createtime' => date("Y-m-d H:i:s")
                        );
-                   $where = "uid=".$_SESSION['uid'];
+                    
+                   $where = array();
+                   $where['uid'] = $_SESSION['uid'];
+                   $where['case'] = $data[0]['case'];
                    $this->db->update('answer_state', $update, $where);
                }
                  $this->load->view('topic/stepnext.html', $data[0]);
@@ -509,6 +527,24 @@ class Index extends CI_Controller {
                 
                
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
+                
+                // insert log
+                if(!empty($data)){
+                      $insert= array(
+                        "user_id"=>$_SESSION['uid'],
+                        "username"=>$_SESSION['username'],
+                        "case"=>$data[0]['case'],
+                        "topic_id"=>$data[0]['id'],
+                        "topic_type"=>$data[0]['type'], 
+                        "topic_title"=>$data[0]['title'].$data[0]['des'].$data[0]['option'],
+                        "topic_answer"=>$data[0]['answer'],
+                        "user_answer"=>$select,
+                        "createtime"=>date("Y-m-d H:i:s")
+                            );
+
+                     $this->db->insert("answer_log", $insert);
+                }
+                
                 if($data[0]['answer'] === $select){
                     
                     $state=$this->db->select('*')->from('answer_state')->where('case', $data[0]['case'])
@@ -527,7 +563,9 @@ class Index extends CI_Controller {
                             'sid' => $data[0]['next_topic_id'],
                             'step' => $data[0]['step']
                             );
-                        $where = "uid=".$_SESSION['uid'];
+                        $where = array();
+                        $where['uid'] = $_SESSION['uid'];
+                        $where['case'] = $data[0]['case'];
                         $this->db->update('answer_state', $update, $where);
                     }
                     
@@ -556,6 +594,24 @@ class Index extends CI_Controller {
             if($select !== ''){
                 
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
+                
+                // insert log
+                if(!empty($data)){
+                      $insert= array(
+                        "user_id"=>$_SESSION['uid'],
+                        "username"=>$_SESSION['username'],
+                        "case"=>$data[0]['case'],
+                        "topic_id"=>$data[0]['id'],
+                        "topic_type"=>$data[0]['type'], 
+                        "topic_title"=>$data[0]['title'].$data[0]['des'].$data[0]['option'],
+                        "topic_answer"=>$data[0]['answer'],
+                        "user_answer"=>$select,
+                        "createtime"=>date("Y-m-d H:i:s")
+                            );
+
+                     $this->db->insert("answer_log", $insert);
+                }
+                
                 if($data[0]['answer'] === $select){
                      
                       $state=$this->db->select('*')->from('answer_state')->where('case', $data[0]['case'])
@@ -575,7 +631,9 @@ class Index extends CI_Controller {
                             'step' => $data[0]['step'],
                             'createtime' => date("Y-m-d H:i:s")
                             );
-                        $where = "uid=".$_SESSION['uid'];
+                        $where = array();
+                        $where['uid'] = $_SESSION['uid'];
+                        $where['case'] = $data[0]['case'];
                         $this->db->update('answer_state', $update, $where);
                     }
                     
@@ -604,6 +662,24 @@ class Index extends CI_Controller {
             if($select !== ''){
                 
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
+                
+                // insert log
+                if(!empty($data)){
+                      $insert= array(
+                        "user_id"=>$_SESSION['uid'],
+                        "username"=>$_SESSION['username'],
+                        "case"=>$data[0]['case'],
+                        "topic_id"=>$data[0]['id'],
+                        "topic_type"=>$data[0]['type'], 
+                        "topic_title"=>$data[0]['title'].$data[0]['des'].$data[0]['option'],
+                        "topic_answer"=>$data[0]['answer'],
+                        "user_answer"=>$select,
+                        "createtime"=>date("Y-m-d H:i:s")
+                            );
+
+                     $this->db->insert("answer_log", $insert);
+                }
+                
                 if($data[0]['answer'] === $select){
                      $state=$this->db->select('*')->from('answer_state')->where('case', $data[0]['case'])
                              ->where('uid',$_SESSION['uid'])->get()->result_array();
@@ -622,7 +698,9 @@ class Index extends CI_Controller {
                             'step' => $data[0]['step'],
                             'createtime' => date("Y-m-d H:i:s")
                             );
-                        $where = "uid=".$_SESSION['uid'];
+                         $where = array();
+                        $where['uid'] = $_SESSION['uid'];
+                        $where['case'] = $data[0]['case'];
                         $this->db->update('answer_state', $update, $where);
                     }
                     
@@ -651,6 +729,24 @@ class Index extends CI_Controller {
             if($select !== ''){
                 
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
+                
+                // insert log
+                if(!empty($data)){
+                      $insert= array(
+                        "user_id"=>$_SESSION['uid'],
+                        "username"=>$_SESSION['username'],
+                        "case"=>$data[0]['case'],
+                        "topic_id"=>$data[0]['id'],
+                        "topic_type"=>$data[0]['type'], 
+                        "topic_title"=>$data[0]['title'].$data[0]['des'].$data[0]['option'],
+                        "topic_answer"=>$data[0]['answer'],
+                        "user_answer"=>$select,
+                        "createtime"=>date("Y-m-d H:i:s")
+                            );
+
+                     $this->db->insert("answer_log", $insert);
+                }
+                
                 if($data[0]['answer'] === $select){
                     
                       $state=$this->db->select('*')->from('answer_state')->where('case', $data[0]['case'])
@@ -670,7 +766,9 @@ class Index extends CI_Controller {
                             'step' => $data[0]['step'],
                             'createtime' => date("Y-m-d H:i:s")
                             );
-                        $where = "uid=".$_SESSION['uid'];
+                         $where = array();
+                        $where['uid'] = $_SESSION['uid'];
+                        $where['case'] = $data[0]['case'];
                         $this->db->update('answer_state', $update, $where);
                     }
                     
@@ -703,14 +801,21 @@ class Index extends CI_Controller {
                 
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
                 if(!empty($data[0])){
-                    $insert= array("tid"=>$data[0]['id'], "uid"=>$_SESSION['uid']
-                        ,"title"=>$data[0]['title'], "createtime"=>date("Y-m-d H:i:s")
-                        ,"answer"=>$answer
-                        ,"answer2"=>$answer2
-                        ,"answer3"=>$answer3
+                    $insert= array(
+                        "user_id"=>$_SESSION['uid'],
+                        "username"=>$_SESSION['username'],
+                        "case"=>$data[0]['case'],
+                        "topic_id"=>$data[0]['id'],
+                        "topic_type"=>$data[0]['type'], 
+                        "topic_title"=>$data[0]['title'].$data[0]['des'].$data[0]['option'],
+                        "topic_answer"=>$data[0]['answer'],
+                        "user_answer"=>$answer,
+                        "short_answer2"=>$answer2,
+                        "short_answer3"=>$answer3,
+                        "createtime"=>date("Y-m-d H:i:s")
                             );
 
-                     $this->db->insert("shortquestion", $insert);
+                     $this->db->insert("answer_log", $insert);
                      
                      
                        $state=$this->db->select('*')->from('answer_state')->where('case', $data[0]['case'])
@@ -730,7 +835,9 @@ class Index extends CI_Controller {
                             'step' => $data[0]['step'],
                             'createtime' => date("Y-m-d H:i:s")
                             );
-                        $where = "uid=".$_SESSION['uid'];
+                         $where = array();
+                        $where['uid'] = $_SESSION['uid'];
+                        $where['case'] = $data[0]['case'];
                         $this->db->update('answer_state', $update, $where);
                     }
                     
@@ -759,6 +866,24 @@ class Index extends CI_Controller {
             if($select !== ''){
                 
                 $data=$this->db->select('*')->from('subject')->where('id',$tid)->get()->result_array();
+                
+                // insert log
+                if(!empty($data)){
+                      $insert= array(
+                        "user_id"=>$_SESSION['uid'],
+                        "username"=>$_SESSION['username'],
+                        "case"=>$data[0]['case'],
+                        "topic_id"=>$data[0]['id'],
+                        "topic_type"=>$data[0]['type'], 
+                        "topic_title"=>$data[0]['title'].$data[0]['des'].$data[0]['option'],
+                        "topic_answer"=>$data[0]['answer'],
+                        "user_answer"=>$select,
+                        "createtime"=>date("Y-m-d H:i:s")
+                            );
+
+                     $this->db->insert("answer_log", $insert);
+                }
+                
                 if($data[0]['answer'] === $select){
                     
                      $state=$this->db->select('*')->from('answer_state')->where('case', $data[0]['case'])
@@ -778,7 +903,9 @@ class Index extends CI_Controller {
                             'step' => $data[0]['step'],
                             'createtime' => date("Y-m-d H:i:s")
                             );
-                        $where = "uid=".$_SESSION['uid'];
+                         $where = array();
+                        $where['uid'] = $_SESSION['uid'];
+                        $where['case'] = $data[0]['case'];
                         $this->db->update('answer_state', $update, $where);
                     }
                     

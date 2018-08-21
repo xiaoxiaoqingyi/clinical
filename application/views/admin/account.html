@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>list</title>
+ <link rel="stylesheet" href="<?=base_url().'res/css/base.css'?>">
+  <link rel="stylesheet" href="<?=base_url().'res/css/common.css'?>">
+  <link rel="stylesheet" href="<?=base_url().'res/css/layout.css'?>">
+  <script src="<?=base_url().'res/js/jquery-1.8.3.min.js'?>"></script>
+</head>
+<body>
+<div class="head">
+  <div class="head-l">
+    <a href="javascript:;" class="icon-back " title="Back"></a>
+  </div>
+  <div class="head-search">
+    <form action="" class="fn-clear">
+      <input type="text" placeholder="ID/USER NAME">
+      <button type="submit" title="Search"></button>
+    </form>
+  </div>
+</div>
+<div class="container">
+  <div class="cont-top">
+    <a href="javascript:;" title="Add" class="icon-add addUser">ADD</a>
+  </div>
+  <div class="cont-center">
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>USER NAME</th>
+        <th>STATUS</th>
+        <th>LAST LOGIN TIME</th>
+        <th>OPERATION</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>SHUN.YI</td>
+        <td>Active</td>
+        <td>2018-5-25 13:23:23</td>
+        <td>
+          <div class="table-do">
+            <button type="button" class="icon_lock_close" title="Close Lock">Close Lock</button>
+            <button type="button" class="icon-delete" title="Delete">Delete</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>SHUN.YI</td>
+        <td>Active</td>
+        <td>2018-5-25 13:23:23</td>
+        <td>
+          <div class="table-do">
+            <button type="button" class="icon_lock_close" title="Close Lock">Close Lock</button>
+            <button type="button" class="icon-delete" title="Delete">Delete</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>SHUN.YI</td>
+        <td>Active</td>
+        <td>2018-5-25 13:23:23</td>
+        <td>
+          <div class="table-do">
+            <button type="button" class="icon_lock_close" title="Close Lock">Close Lock</button>
+            <button type="button" class="icon-delete" title="Delete">Delete</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>SHUN.YI</td>
+        <td>Inactive</td>
+        <td>2018-5-25 13:23:23</td>
+        <td>
+          <div class="table-do">
+            <button type="button" class="icon_lock_open" title="Open Lock">Open Lock</button>
+            <button type="button" class="icon-delete" title="Delete">Delete</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>SHUN.YI</td>
+        <td>Inactive</td>
+        <td>2018-5-25 13:23:23</td>
+        <td>
+          <div class="table-do">
+            <button type="button" class="icon_lock_open" title="Open Lock">Open Lock</button>
+            <button type="button" class="icon-delete" title="Delete">Delete</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>SHUN.YI</td>
+        <td>Inactive</td>
+        <td>2018-5-25 13:23:23</td>
+        <td>
+          <div class="table-do">
+            <button type="button" class="icon_lock_open" title="Open Lock">Open Lock</button>
+            <button type="button" class="icon-delete" title="Delete">Delete</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="cont-bottom">
+    <div class="page">
+      <a href="javascript:;" title="Prev" class="prev">Prev</a>
+      <a href="javascript:;" title="1" class="active">1</a>
+      <a href="javascript:;" title="2">2</a>
+      <a href="javascript:;" title="3">3</a>
+      <a href="javascript:;" title="4">4</a>
+      <a href="javascript:;" title="5">5</a>
+      <a href="javascript:;" title="Next" class="next">Next</a>
+    </div>
+  </div>
+</div>
+
+<!--弹窗 addUser-->
+<div class="p-box" id="addUser">
+  <div class="p-box-cont">
+    <div class="p-box-h">
+      Add a New Manager
+      <span class="close"></span>
+    </div>
+    <div class="p-box-c">
+      <p class="title">ID:18</p>
+      <form action="">
+        <div class="form-group">
+          <input type="text" placeholder="POLYU NETID">
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="PASSWORD">
+        </div>
+        <div class="form-group fn-clear">
+          <button type="reset" title="Clear" class="fn-l c2-info">CLEAR</button>
+          <button type="button" title="Submit" class="fn-r c2-warning">SUBMIT</button>
+        </div>
+        <div class="form-group fn-hide">
+          <span class="c1-danger">Polyu Netid can't repeat!</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--弹窗 addUser end-->
+<script src="<?=base_url().'res/js/common.js'?>"></script>
+</body>
+</html>

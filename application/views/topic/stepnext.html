@@ -29,6 +29,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 <script>
@@ -60,15 +61,15 @@
         }
     }
 
-    var floorUrlArr = [
-        "<?php echo $leftstep>=1?base_url().'index/fromstep/1':'javascript:;'; ?>",
-        "<?php echo $leftstep>=2?base_url().'index/fromstep/2':'javascript:;'; ?>",
-        "<?php echo $leftstep>=3?base_url().'index/fromstep/3':'javascript:;'; ?>",
-        "<?php echo $leftstep>=4?base_url().'index/fromstep/4':'javascript:;'; ?>",
-        "<?php echo $leftstep>=5?base_url().'index/fromstep/5':'javascript:;'; ?>",
-        "<?php echo $leftstep>=6?base_url().'index/fromstep/6':'javascript:;'; ?>",
-        "<?php echo $leftstep>=7?base_url().'index/fromstep/7':'javascript:;'; ?>",
-        "<?php echo $leftstep>=8?base_url().'index/fromstep/8':'javascript:;'; ?>"
+     var floorUrlArr = [
+        "<?php echo $leftstep>=1?base_url().'index/fromstep/'.$case.'/1':'javascript:;'; ?>",
+        "<?php echo $leftstep>=2?base_url().'index/fromstep/'.$case.'/2':'javascript:;'; ?>",
+        "<?php echo $leftstep>=3?base_url().'index/fromstep/'.$case.'/3':'javascript:;'; ?>",
+        "<?php echo $leftstep>=4?base_url().'index/fromstep/'.$case.'/4':'javascript:;'; ?>",
+        "<?php echo $leftstep>=5?base_url().'index/fromstep/'.$case.'/5':'javascript:;'; ?>",
+        "<?php echo $leftstep>=6?base_url().'index/fromstep/'.$case.'/6':'javascript:;'; ?>",
+        "<?php echo $leftstep>=7?base_url().'index/fromstep/'.$case.'/7':'javascript:;'; ?>",
+        "<?php echo $leftstep>=8?base_url().'index/fromstep/'.$case.'/8':'javascript:;'; ?>"
     ];
 
     // 载入step-floor
@@ -95,7 +96,9 @@
 
     // 载入step-help
     // .step-help切换
-    $('.step-help').load("<?php echo base_url().'index/stephelp';?>");
+     $('.step-help-case1').load("<?php echo base_url().'index/stephelp1';?>");
+    $('.step-help-case2').load("<?php echo base_url().'index/stephelp2';?>");
+    $('.step-help-case3').load("<?php echo base_url().'index/stephelp3';?>");
     stepHelpToggle();
     function stepHelpToggle(){
         var help = $('.step-help');

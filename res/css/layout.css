@@ -1,0 +1,393 @@
+body, button, input, select, textarea {
+    font-size: 16px;
+}
+
+.head, .cont-top, .cont-center, .cont-bottom {
+    min-width: 1100px;
+    padding: 0 50px;
+}
+
+input[type=text] {
+    border: none;
+}
+
+input[type=checkbox] {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+select {
+    min-width: 200px;
+    height: 40px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+button {
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+/*head*/
+.head {
+    height: 80px;
+    background: #333;
+}
+
+.head .line {
+    display: inline-block;
+    height: 20px;
+    margin: 15px 10px 0 0;
+    border-right: 2px solid #ddd;
+    vertical-align: top;
+}
+
+.head-l {
+    float: left;
+    margin-top: 15px;
+}
+
+.head-l a {
+    display: inline-block;
+    margin-right: 10px;
+    line-height: 50px;
+    color: #fff;
+}
+
+.head-l .icon-back:before {
+    display: inline-block;
+    content: '';
+    width: 14px;
+    height: 50px;
+    margin-right: 10px;
+    background: url(../images/icon_back.png) left center no-repeat;
+    background-size: 100%;
+    vertical-align: top;
+}
+
+.head-l .icon-admin:before {
+    display: inline-block;
+    content: '';
+    width: 28px;
+    height: 50px;
+    margin-right: 10px;
+    background: url(../images/icon_admin.png) left center no-repeat;
+    background-size: 100%;
+    vertical-align: top;
+}
+
+.head-r {
+    float: right;
+    margin-top: 15px;
+}
+
+.head-r .head-search {
+    display: inline-block;
+    padding: 0;
+    margin-right: 30px;
+}
+
+.head-search {
+    display: block;
+    margin: 0 auto;
+    width: 320px;
+    padding-top: 15px;
+    vertical-align: top;
+}
+
+.head-search form {
+    background: #fff;
+    border-radius: 2px;
+}
+
+.head-search input, .head-search button {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+}
+
+.head-search input {
+    width: 240px;
+    padding: 0 10px;
+    background: none;
+}
+
+.head-search button {
+    width: 50px;
+    height: 50px;
+    background: url(../images/icon_search.png) center no-repeat;
+    background-size: 50%;
+    text-indent: -999em;
+    overflow: hidden;
+}
+
+.head-r .head-do {
+    display: inline-block;
+}
+
+.head-do button {
+    display: inline-block;
+    padding: 0 15px;
+    line-height: 50px;
+    text-align: center;
+    margin-left: 30px;
+}
+
+/*head end*/
+
+/*container*/
+.container {
+
+}
+
+/*cont-top*/
+.cont-top {
+    padding-top: 15px;
+    height: 55px;
+    background: #e2e6ea;
+}
+
+.cont-top .icon-add {
+    display: inline-block;
+    height: 40px;
+    padding: 0 30px;
+    line-height: 40px;
+    color: #fff;
+    background: #1fbdf1;
+    border-radius: 2px;
+}
+
+.cont-top .icon-add:before {
+    display: inline-block;
+    content: '';
+    width: 20px;
+    height: 100%;
+    margin-right: 10px;
+    background: url(../images/icon_add.png) center no-repeat;
+    background-size: 100%;
+    vertical-align: top;
+}
+
+/*cont-center*/
+.cont-center {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.table {
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.table th, .table td {
+    height: 50px;
+    padding: 5px 10px;
+    line-height: 28px;
+    text-align: center;
+}
+
+.table th {
+    white-space: nowrap;
+    background: #c5d7e9;
+}
+
+.table td {
+    font-size: 14px;
+    border-top: 1px solid #ddd;
+}
+
+.table tr:hover td {
+    background: #e2e6ea;
+}
+
+.check-box {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+
+.check-box.active {
+    background: #fff url(../images/icon_checked.png) center no-repeat;
+}
+
+.table-do button {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    text-indent: -999em;
+    border-radius: 20px;
+}
+
+.table-do button:last-child {
+    margin-left: 10px;
+}
+
+.icon-download {
+    background: #1fbdf1 url(../images/icon_download.png) center no-repeat;
+}
+
+.icon_lock_close {
+    background: #ff3636 url(../images/icon_lock_close.png) center no-repeat;
+}
+
+.icon_lock_open {
+    background: #1f9c37 url(../images/icon_lock_open.png) center no-repeat;
+}
+
+.icon-delete {
+    background: #ff6c2b url(../images/icon_delete.png) center no-repeat;
+}
+
+/*cont-bottom*/
+.cont-bottom {
+}
+
+.table-do-batch {
+    float: left;
+}
+
+.table-do-batch button {
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    text-indent: -999em;
+}
+
+.table-do button:last-child {
+    margin-left: 10px;
+}
+
+.page {
+    text-align: center;
+}
+
+.page a {
+    display: inline-block;
+    min-width: 28px;
+    height: 38px;
+    padding: 0 5px;
+    margin-left: 5px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 16px;
+    color: #999;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+
+.page .prev, .page .next {
+    text-indent: -999em;
+}
+
+.page .prev {
+    background: url(../images/icon_prev.png) center no-repeat;
+}
+
+.page .next {
+    background: url(../images/icon_next.png) center no-repeat;
+}
+
+.page a:hover, .page .active {
+    color: #fff;
+    background: #1fbdf1;
+    border: 1px solid #1fbdf1;
+}
+
+.page .prev:hover {
+    background: #1fbdf1 url(../images/icon_prev_active.png) center no-repeat;
+}
+
+.page .next:hover {
+    background: #1fbdf1 url(../images/icon_next_active.png) center no-repeat;
+}
+
+/*container end*/
+
+/*p-box*/
+.p-box {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .2);
+}
+
+.p-box-cont {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -300px 0 0 -300px;
+    width: 600px;
+    height: 600px;
+    background: #fff;
+    border-radius: 2px;
+}
+
+.p-box-h {
+    height: 60px;
+    line-height: 60px;
+    padding: 0 20px;
+    color: #fff;
+    background: #0f2b48;
+}
+
+.p-box-h .close {
+    float: right;
+    width: 20px;
+    height: 100%;
+    background: url(../images/icon_lcose.png) center no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+}
+
+.p-box-c {
+    height: 520px;
+    padding: 0 20px;
+    overflow-y: auto;
+}
+
+.p-box-c .title {
+    margin: 40px 0;
+}
+
+.p-box-c .form-group {
+    margin: 40px 0;
+}
+
+.p-box-c form {
+    padding: 0 40px;
+}
+
+.p-box-c form input {
+    width: 100%;
+    height: 60px;
+    text-indent: 20px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+.p-box-c form button {
+    margin-top: 30px;
+    width: 48%;
+    height: 60px;
+}
+
+/*p-box end*/
+
+

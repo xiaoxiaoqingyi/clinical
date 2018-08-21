@@ -22,7 +22,7 @@ class Login extends CI_Controller {
             $password=$this->I('password');
             
             $this->load->database();
-            $d=$this->db->select('id,password')->from('u')->where('account',$account)->get()->result()
+            $d=$this->db->select('id,password')->from('user')->where('account',$account)->get()->result()
                 or $this->response(-1,'account or password error');
             
             $d[0]->password==md5($password)||$this->response(-1,'account or password error');
