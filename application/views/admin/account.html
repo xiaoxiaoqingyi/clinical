@@ -33,11 +33,19 @@
         <th>LAST LOGIN TIME</th>
         <th>OPERATION</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>SHUN.YI</td>
-        <td>Active</td>
-        <td>2018-5-25 13:23:23</td>
+     
+        <?php foreach ($data as $value){ ?>
+        
+         <tr>
+        <td><?=$value['id'] ?></td>
+        <td><?=$value['username'] ?></td>
+          <?php if($value['status'] == 1){ ?>
+                 <td>Active</td>
+          <?php }else{ ?>
+              <td>Inactive</td>
+          <?php } ?> 
+      
+        <td><?=$value['last_time'] ?></td>
         <td>
           <div class="table-do">
             <button type="button" class="icon_lock_close" title="Close Lock">Close Lock</button>
@@ -45,79 +53,13 @@
           </div>
         </td>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>SHUN.YI</td>
-        <td>Active</td>
-        <td>2018-5-25 13:23:23</td>
-        <td>
-          <div class="table-do">
-            <button type="button" class="icon_lock_close" title="Close Lock">Close Lock</button>
-            <button type="button" class="icon-delete" title="Delete">Delete</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>SHUN.YI</td>
-        <td>Active</td>
-        <td>2018-5-25 13:23:23</td>
-        <td>
-          <div class="table-do">
-            <button type="button" class="icon_lock_close" title="Close Lock">Close Lock</button>
-            <button type="button" class="icon-delete" title="Delete">Delete</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>SHUN.YI</td>
-        <td>Inactive</td>
-        <td>2018-5-25 13:23:23</td>
-        <td>
-          <div class="table-do">
-            <button type="button" class="icon_lock_open" title="Open Lock">Open Lock</button>
-            <button type="button" class="icon-delete" title="Delete">Delete</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>SHUN.YI</td>
-        <td>Inactive</td>
-        <td>2018-5-25 13:23:23</td>
-        <td>
-          <div class="table-do">
-            <button type="button" class="icon_lock_open" title="Open Lock">Open Lock</button>
-            <button type="button" class="icon-delete" title="Delete">Delete</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>SHUN.YI</td>
-        <td>Inactive</td>
-        <td>2018-5-25 13:23:23</td>
-        <td>
-          <div class="table-do">
-            <button type="button" class="icon_lock_open" title="Open Lock">Open Lock</button>
-            <button type="button" class="icon-delete" title="Delete">Delete</button>
-          </div>
-        </td>
-      </tr>
+        
+        <?php } ?> 
+      
+      
     </table>
   </div>
-  <div class="cont-bottom">
-    <div class="page">
-      <a href="javascript:;" title="Prev" class="prev">Prev</a>
-      <a href="javascript:;" title="1" class="active">1</a>
-      <a href="javascript:;" title="2">2</a>
-      <a href="javascript:;" title="3">3</a>
-      <a href="javascript:;" title="4">4</a>
-      <a href="javascript:;" title="5">5</a>
-      <a href="javascript:;" title="Next" class="next">Next</a>
-    </div>
-  </div>
+ 
 </div>
 
 <!--弹窗 addUser-->
@@ -129,16 +71,16 @@
     </div>
     <div class="p-box-c">
       <p class="title">ID:18</p>
-      <form action="">
+      <form id='addForm' >
         <div class="form-group">
-          <input type="text" placeholder="POLYU NETID">
+          <input name="username" type="text" placeholder="POLYU NETID">
         </div>
         <div class="form-group">
-          <input type="text" placeholder="PASSWORD">
+          <input name="password"  type="text" placeholder="PASSWORD">
         </div>
         <div class="form-group fn-clear">
           <button type="reset" title="Clear" class="fn-l c2-info">CLEAR</button>
-          <button type="button" title="Submit" class="fn-r c2-warning">SUBMIT</button>
+          <button type="Submit" title="Submit" class="fn-r c2-warning">SUBMIT</button>
         </div>
         <div class="form-group fn-hide">
           <span class="c1-danger">Polyu Netid can't repeat!</span>
@@ -148,6 +90,51 @@
   </div>
 </div>
 <!--弹窗 addUser end-->
-<script src="<?=base_url().'res/js/common.js'?>"></script>
+<script >
+    
+      // 添加用户
+  $('.addUser').bind('click', function () {
+    $('#addUser').show();
+  });
+
+  // 关闭弹窗
+  $('.p-box .close').bind('click', function () {
+    var $currentPopbox = $(this).parents('.p-box');
+    $currentPopbox.find('form')[0].reset();
+    $currentPopbox.hide();
+  });
+  
+  
+  
+   $("#addForm").submit(function () {
+              
+            $.ajax({
+                url: "<?=base_url().'admin/addAccount' ?>",
+                data: $(this).serialize(),
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    //		
+                    if (data && data.status == 200) {
+                        
+                        var $currentPopbox = $('.p-box .close').parents('.p-box');
+                        $currentPopbox.find('form')[0].reset();
+                        $currentPopbox.hide();
+                        
+                        window.location.href = data.url;
+                    } else {
+                                       
+                      
+                    }
+                }, error: function (e) {
+//                    alert("error!");
+                }
+            });
+
+            return !1;
+        });
+  
+  
+</script>
 </body>
 </html>

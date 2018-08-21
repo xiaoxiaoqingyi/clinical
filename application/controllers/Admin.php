@@ -306,9 +306,33 @@ class Admin extends CI_Controller {
 	}
         
          public function account(){
-       
-            $this->load->view('admin/account.html');
+             
+            $data=$this->db->select('*')->from('admin')->get()->result_array();
+            
+            $res = array();
+            $res['data'] = $data;
+            
+            $this->load->view('admin/account.html', $res);
 	}
+        
+        public function addAccount(){
+             $username = $this->input->post('username');
+             $password = $this->input->post('password');
+             
+             if(!empty($username)){
+                  $insert = array(
+                       'username' => $username,
+                       'status' => 1,
+                       'last_time' => date('Y-m-d H:i:s')
+                       );
+                $this->db->insert('admin', $insert);
+             }
+             
+            $res = array();
+            $res['status'] = 200;
+            $res['url'] = base_url().'admin/account';
+            echo json_encode($res);
+        }
         
        
 }

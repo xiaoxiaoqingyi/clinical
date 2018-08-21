@@ -10,26 +10,57 @@ class Index extends CI_Controller {
             parent::__construct();
             
 //            session_start();
-            //判断是否登录，否则跳转到登录
-            if(!isset($_SESSION['uid'])){
-                $this->load->helper("url");
-                redirect(base_url().'login');
+//            //判断是否登录，否则跳转到登录
+//            if(!isset($_SESSION['uid'])){
+//                $this->load->helper("url");
+//                redirect(base_url().'login');
+//            }
+            
+            if(!isset($_SERVER['cn'])){
+                 redirect(base_url().'error');
             }
+            
             date_default_timezone_set('Asia/Shanghai');
             $this->load->database();
-            $this->updateLoginTime();
+            $this->updateLoginTime($_SERVER['cn']);
            
 	}
         
         
-       public function updateLoginTime(){
-            $update = array(
-                'last_login_time' => date("Y-m-d H:i:s")
-                );
-            $where = array();
-            $where['id'] = $_SESSION['uid'];
-            $this->db->update('user', $update, $where);
-}
+       
+       public  function error(){
+           $this->load->view('errors/index.html');
+       }
+
+
+       public function updateLoginTime($username){
+           
+            $data=$this->db->select('*')->from('user')->where('account', $username)->get()->result_array();
+            
+             
+            if(empty($data)){
+                 $insert = array(
+                       'account' => $username,
+                       'last_login_time' => date('Y-m-d H:i:s')
+                       );
+                $this->db->insert('user', $insert);
+                
+               $uid = $this->db->insert_id();
+            } else {
+                $update = array(
+                    'last_login_time' => date("Y-m-d H:i:s")
+                    );
+                $where = array();
+                $where['account'] = $username;
+                $this->db->update('user', $update, $where);
+                $uid = $data[0]['id'];
+            }
+           
+         
+            session_start();
+            $_SESSION['username'] = $username;
+            $_SESSION['uid'] = $uid;
+        }
 
 	public function index(){
             $this->load->view('learn.html');

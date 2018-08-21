@@ -11,58 +11,24 @@
 </head>
 <body>
     <div class="login-bg">
-        <div class="login">
-            <form id=form1>
+        <div class="login fn-hide">
+            <form action="">
                 <h1>Sign In</h1>
-                <input class="text" type="text" id="account" name="account" placeholder="Account">
-                <input class="text" type="password" id="password" name="password" placeholder="Password">
-                <span id="backerror" class="error active"></span>
-                <button class="submit" type="submit" title="login">Login</button>
-                <button class="reset" type="reset" title="login">Clear</button>
+                <input class="text" type="text" placeholder="Account">
+                <input class="text" type="password" placeholder="Password">
+                <span class="error active">Account or Password error</span>
+                <button class="submit" type="submit" title="Login">Login</button>
+                <button class="reset" type="reset" title="Login Out">Clear</button>
+            </form>
+        </div>
+        <div class="login polyu-login">
+            <form action="https://pusidp4-dev.polyu.edu.hk/nidp/saml2/sso?id=6&sid=0&option=credential&sid=0" method="get">
+                <h1>Sign In</h1>
+                <button class="btn-polyu-login" type="submit" title="Polyu Login">Polyu Login</button>
             </form>
         </div>
     </div>
     
     
-     <script language="javascript" type="text/javascript">
-         
-        $(function(){
-            $("#form1").submit(function(){
-                       
-			if( '' == $.trim($("#account").val())){
-				alert('账号不能为空');
-				return false;
-			}
-
-			if( '' == $("#password").val()){
-				alert('密码不能为空');
-				return false;
-			}
-
-			$.ajax({
-				url:'<?php echo base_url();?>login/check',
-				data:$(this).serialize(),
-				dataType:'json',
-				type:'post',
-				success:function(data){
-					console.log(data);
-					if(data&&data.status == 200)
-					{			 
-					  location.href = data.res.url;
-					}
-					else
-					{			
-					      $("#backerror").text(data.statusMsg);
-					}
-				},error:function(e){
-					alert("error!");
-				}
-			});
-
-			return !1;
-		});
-        });
-        
-        </script>
 </body>
 </html>
