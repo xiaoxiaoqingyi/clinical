@@ -43,11 +43,9 @@ class Admin extends CI_Controller {
                 $res['totalPage'] = 0;
        
                 $this->load->view('admin/home.html', $res);
-                exit();
-            }
-            
-            
-            $newArr = array();
+               
+            } else{
+                 $newArr = array();
             foreach ($data as $key => $value){
                 unset($value['password']);
                 
@@ -63,7 +61,7 @@ class Admin extends CI_Controller {
                     
                         break;
                      case 2:
-                        if($value['sid'] == 173){
+                        if($value['sid'] == 172){
                             $value['com_rate'] = '100%';
                             $acRate = true;
                         }else{
@@ -101,25 +99,26 @@ class Admin extends CI_Controller {
                 
                 $newArr[$key] = $value;
                 
-            }
-            
+                }
           
-            if($count%10 > 0){
-                $totalPage = $count/10 + 1;
-            } else{
-                $totalPage = $count/10;
+                if($count%10 > 0){
+                    $totalPage = $count/10 + 1;
+                } else{
+                    $totalPage = $count/10;
+                }
+
+                $res = array();
+                $res['case'] = $case;
+                $res['page'] = $page;
+                $res['search'] = empty($search)?'':$search;
+                $res['data'] = $newArr;
+                $res['totalPage'] = $totalPage;
+
+                $this->load->view('admin/home.html', $res);
             }
             
             
-            
-            $res = array();
-            $res['case'] = $case;
-            $res['page'] = $page;
-            $res['search'] = empty($search)?'':$search;
-            $res['data'] = $newArr;
-            $res['totalPage'] = $totalPage;
-       
-            $this->load->view('admin/home.html', $res);
+           
 	}
         
         //delete log

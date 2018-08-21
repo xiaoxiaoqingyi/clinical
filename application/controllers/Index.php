@@ -233,7 +233,7 @@ class Index extends CI_Controller {
                     
                     switch ($step){
                         case 1:
-                            $this->answer($case,1);
+                            $this->answer($case,101);
                             break;
                         case 2:
                             $this->answer($case,114);
@@ -300,7 +300,7 @@ class Index extends CI_Controller {
                             }
                             break;
                         case 2:
-                            if($data[0]['sid'] == 173){
+                            if($data[0]['sid'] == 172){
                                 $this->answer($case, 168);
                                 return;
                             }
@@ -496,7 +496,7 @@ class Index extends CI_Controller {
                        'createtime' => date("Y-m-d H:i:s")
                        );
                   $this->db->insert('answer_state', $insert);
-               } else if($data[0]['next_topic_id'] >  $state[0]['sid'] && $state[0]['sid'] != 0){
+               } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
                     $update = array(
                        'sid' => $data[0]['next_topic_id'],
                        'step' => $data[0]['step'],
@@ -558,7 +558,7 @@ class Index extends CI_Controller {
                             'createtime' => date("Y-m-d H:i:s")
                             );
                        $this->db->insert('answer_state', $insert);
-                    } else{
+                    } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
                          $update = array(
                             'sid' => $data[0]['next_topic_id'],
                             'step' => $data[0]['step']
@@ -625,7 +625,7 @@ class Index extends CI_Controller {
                             'createtime' => date("Y-m-d H:i:s")
                             );
                        $this->db->insert('answer_state', $insert);
-                    } else{
+                    } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
                          $update = array(
                             'sid' => $data[0]['next_topic_id'],
                             'step' => $data[0]['step'],
@@ -692,7 +692,7 @@ class Index extends CI_Controller {
                             'createtime' => date("Y-m-d H:i:s")
                             );
                        $this->db->insert('answer_state', $insert);
-                    } else{
+                    } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
                          $update = array(
                             'sid' => $data[0]['next_topic_id'],
                             'step' => $data[0]['step'],
@@ -760,7 +760,7 @@ class Index extends CI_Controller {
                             'createtime' => date("Y-m-d H:i:s")
                             );
                        $this->db->insert('answer_state', $insert);
-                    } else{
+                    }else if($data[0]['next_topic_id'] >  $state[0]['sid']){
                          $update = array(
                             'sid' => $data[0]['next_topic_id'],
                             'step' => $data[0]['step'],
@@ -829,7 +829,7 @@ class Index extends CI_Controller {
                             'createtime' => date("Y-m-d H:i:s")
                             );
                        $this->db->insert('answer_state', $insert);
-                    } else{
+                    } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
                          $update = array(
                             'sid' => $data[0]['next_topic_id'],
                             'step' => $data[0]['step'],
@@ -897,7 +897,7 @@ class Index extends CI_Controller {
                             'createtime' => date("Y-m-d H:i:s")
                             );
                        $this->db->insert('answer_state', $insert);
-                    } else{
+                    } else if($data[0]['next_topic_id'] >  $state[0]['sid']){
                          $update = array(
                             'sid' => $data[0]['next_topic_id'],
                             'step' => $data[0]['step'],
