@@ -9,7 +9,7 @@ class Index extends CI_Controller {
             
             parent::__construct();
             
-            session_start();
+//            session_start();
             //判断是否登录，否则跳转到登录
             if(!isset($_SESSION['uid'])){
                 $this->load->helper("url");
@@ -111,7 +111,7 @@ class Index extends CI_Controller {
              }else if($case == 2){
                   $res['last_id'] = 172;
              }else if($case == 3){
-                  $res['last_id'] = 280;
+                  $res['last_id'] = 283;
              }
              $this->load->view('stepconclusion.html',$res);
         }
@@ -283,7 +283,7 @@ class Index extends CI_Controller {
                              $this->answer($case,273);
                             break;
                         case 8:
-                             $this->answer($case,280);
+                             $this->answer($case,283);
                             break;
                     }
                     
@@ -306,7 +306,7 @@ class Index extends CI_Controller {
                             }
                             break;
                         case 3:
-                             if($data[0]['sid'] == 280){
+                             if($data[0]['sid'] == 283){
                                 $this->answer($case, 279);
                                 return;
                             }

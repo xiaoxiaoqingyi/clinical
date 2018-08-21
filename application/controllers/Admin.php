@@ -73,7 +73,7 @@ class Admin extends CI_Controller {
                         break;
                     case 3:
                         
-                        if($value['sid'] == 280){
+                        if($value['sid'] == 283){
                             $value['com_rate'] = '100%';
                             $acRate = true;
                         }else{
