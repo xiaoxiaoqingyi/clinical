@@ -299,20 +299,55 @@ class Admin extends CI_Controller {
                     
         }
         
-        
         public function login(){
        
             $this->load->view('admin/login.html');
 	}
         
-         public function account(){
+        public function account($page=1, $key=''){
+            
+            if($key != ''){
+               $search = $key; 
+            } else {
+               $search = $this->input->post('key');
+            }
+            
+            
+            $limit_start = ($page -1)*10;
+            if(!empty($search)){
+                 $data=$this->db->select('id, username, status, last_time')->from('admin')->like('username', $search)->limit(10, 0)->get()->result_array();
+                 $page = 1;
+                 $count=$this->db->select('id, username, status, last_time')->from('admin')->like('username', $search)->count_all_results();
+            } else{
+                   $data=$this->db->select('*')->from('admin')->limit(10, $limit_start)->get()->result_array();
+                   $count=$this->db->select('*')->from('admin')->count_all_results();
+            }
+           
+            
+            if(empty($data)){
+                $res = array();
+                $res['page'] = $page;
+                $res['search'] = empty($search)?'':$search;
+                $res['data'] = array();
+                $res['totalPage'] = 0;
+                $this->load->view('admin/account.html', $res);
+               
+            } else{
+                
+                if($count%10 > 0){
+                    $totalPage = $count/10 + 1;
+                } else{
+                    $totalPage = $count/10;
+                }
+                $res = array();
+                $res['page'] = $page;
+                $res['data'] = $data;
+                $res['search'] = empty($search)?'':$search;
+                $res['totalPage'] = $totalPage;
+                $this->load->view('admin/account.html', $res);
+            }
+            
              
-            $data=$this->db->select('*')->from('admin')->get()->result_array();
-            
-            $res = array();
-            $res['data'] = $data;
-            
-            $this->load->view('admin/account.html', $res);
 	}
         
         public function addAccount(){
@@ -332,6 +367,30 @@ class Admin extends CI_Controller {
             $res['status'] = 200;
             $res['url'] = base_url().'admin/account';
             echo json_encode($res);
+        }
+        
+        public function deleteAccount($id){
+              $this->db->delete('admin', array('id' => $id));
+              
+              $this->account();
+        }
+        public function updateAccount($id, $status){
+            
+            if($status == 1){
+                  $update = array(
+                    'status' => 0
+                    );
+            } else{
+                 $update = array(
+                    'status' => 1
+                    );
+            }
+            
+            $where = array();
+            $where['id'] = $id;
+            $this->db->update('admin', $update, $where);
+            
+            $this->account();
         }
         
        

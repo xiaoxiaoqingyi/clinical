@@ -14,10 +14,10 @@
     <a href="javascript:;" class="icon-back " title="Back"></a>
   </div>
   <div class="head-search">
-    <form action="" class="fn-clear">
-      <input type="text" placeholder="ID/USER NAME">
-      <button type="submit" title="Search"></button>
-    </form>
+    <form action="<?php echo base_url().'admin/account/'.$page;?>" method="post" class="fn-clear">
+          <input id='search' name='key' type="text" value='<?=$search ?>' placeholder="ID/USER NAME">
+        <button type="submit" title="Search"></button>
+      </form>
   </div>
 </div>
 <div class="container">
@@ -48,8 +48,14 @@
         <td><?=$value['last_time'] ?></td>
         <td>
           <div class="table-do">
-            <button type="button" class="icon_lock_close" title="Close Lock">Close Lock</button>
-            <button type="button" class="icon-delete" title="Delete">Delete</button>
+              <?php if($value['status'] == 1){ ?>
+               <a href="<?= base_url().'admin/updateAccount/'.$value['id'].'/'.$value['status'];?>" class="icon_lock_close" title="Close Lock">Close Lock</a>
+            
+          <?php }else{ ?>
+              <a href="<?= base_url().'admin/updateAccount/'.$value['id'].'/'.$value['status'];?>" class="icon_lock_open" title="Close Lock">Close Lock</a>
+            
+          <?php } ?> 
+            <a href="<?= base_url().'admin/deleteAccount/'.$value['id'];?>" class="icon-delete" title="Delete">Delete</a>
           </div>
         </td>
       </tr>
@@ -62,6 +68,23 @@
  
 </div>
 
+    <div class="cont-bottom">
+    <div class="page">
+      <a href="<?php $url = base_url().'admin/account/'.($page-1); echo $page <=1?'javascript:;':$url; ?>" 
+          title="Prev" class="prev">Prev</a>
+        
+       <?php for($i=1; $i<=$totalPage; $i++){ ?>
+       
+       <a href="<?= base_url().'admin/account/'.$i;?>" title="<?php echo $i; ?>" 
+        class="<?php echo $page==$i?'active':''; ?>"    > <?php echo $i; ?></a>
+
+       <?php } ?>
+       
+       <a href=" <?php $url2 = base_url().'admin/account/'.($page+1); echo $page>=$totalPage?'javascript:;':$url2; ?>" 
+          
+          title="Next" class="next">Next</a>
+    </div>
+  </div>
 <!--弹窗 addUser-->
 <div class="p-box" id="addUser">
   <div class="p-box-cont">
@@ -88,6 +111,9 @@
       </form>
     </div>
   </div>
+    
+  
+    
 </div>
 <!--弹窗 addUser end-->
 <script >
