@@ -140,9 +140,9 @@ class Index extends CI_Controller {
              if($case == 1){
                 $res['last_id'] = 78;
              }else if($case == 2){
-                  $res['last_id'] = 172;
+                  $res['last_id'] = 173;
              }else if($case == 3){
-                  $res['last_id'] = 283;
+                  $res['last_id'] = 285;
              }
              $this->load->view('stepconclusion.html',$res);
         }
@@ -176,7 +176,8 @@ class Index extends CI_Controller {
             $data=$this->db->select('*')->from('survey')->where('case',$case)
                     ->where('uid',$_SESSION['uid'])->get()->result_array();
             if(!empty($data)){
-                $this->stepconclusion($case);
+//                $this->stepconclusion($case);
+            $this->clinical();
                 return;
             }
             $res = array();
@@ -352,7 +353,7 @@ class Index extends CI_Controller {
                              $this->answer($case,273);
                             break;
                         case 8:
-                             $this->answer($case,283);
+                             $this->answer($case,280);
                             break;
                     }
                     
@@ -369,14 +370,14 @@ class Index extends CI_Controller {
                             }
                             break;
                         case 2:
-                            if($data[0]['sid'] == 172){
+                            if($data[0]['sid'] == 173){
                                 $this->answer($case, 168);
                                 return;
                             }
                             break;
                         case 3:
-                             if($data[0]['sid'] == 283){
-                                $this->answer($case, 279);
+                             if($data[0]['sid'] == 285){
+                                $this->answer($case, 280);
                                 return;
                             }
                             break;
@@ -438,7 +439,8 @@ class Index extends CI_Controller {
         public function answer($case, $tid=0){
             if($tid == 0){
                 //8个步骤完成
-                $this->stepsurvey($case);             
+//                $this->stepsurvey($case);  
+                  $this->stepconclusion($case);
                 return;;
             }
             

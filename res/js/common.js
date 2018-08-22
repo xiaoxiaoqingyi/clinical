@@ -8,7 +8,10 @@ $(function () {
   // 关闭弹窗
   $('.p-box .close').bind('click', function () {
     var $currentPopbox = $(this).parents('.p-box');
-    $currentPopbox.find('form')[0].reset();
+    var $currentPopboxForm = $currentPopbox.find('form')
+    if($currentPopboxForm.length){
+        $currentPopboxForm[0].reset();
+    }
     $currentPopbox.hide();
   });
 

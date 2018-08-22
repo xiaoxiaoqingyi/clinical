@@ -61,7 +61,7 @@ class Admin extends CI_Controller {
                     
                         break;
                      case 2:
-                        if($value['sid'] == 172){
+                        if($value['sid'] == 173){
                             $value['com_rate'] = '100%';
                             $acRate = true;
                         }else{
@@ -71,11 +71,11 @@ class Admin extends CI_Controller {
                         break;
                     case 3:
                         
-                        if($value['sid'] == 283){
+                        if($value['sid'] == 285){
                             $value['com_rate'] = '100%';
                             $acRate = true;
                         }else{
-                             $value['com_rate'] = ceil(($value['sid']%100)/80*100).'%';
+                             $value['com_rate'] = ceil(($value['sid']%100)/85*100).'%';
                         }
                        
                         break;

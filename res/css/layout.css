@@ -130,12 +130,13 @@ button {
     display: inline-block;
 }
 
-.head-do button {
+.head-do a {
     display: inline-block;
     padding: 0 15px;
     line-height: 50px;
     text-align: center;
     margin-left: 30px;
+    border-radius: 2px;
 }
 
 /*head end*/
@@ -218,7 +219,7 @@ button {
     background: #fff url(../images/icon_checked.png) center no-repeat;
 }
 
-.table-do button {
+.table-do a {
     display: inline-block;
     width: 40px;
     height: 40px;
@@ -228,7 +229,7 @@ button {
     border-radius: 20px;
 }
 
-.table-do button:last-child {
+.table-do a:last-child {
     margin-left: 10px;
 }
 
@@ -256,16 +257,17 @@ button {
     float: left;
 }
 
-.table-do-batch button {
+.table-do-batch a {
     display: inline-block;
     width: 80px;
     height: 40px;
     line-height: 40px;
     text-align: center;
     text-indent: -999em;
+    border-radius: 2px;
 }
 
-.table-do button:last-child {
+.table-do-batch a:last-child {
     margin-left: 10px;
 }
 
@@ -338,6 +340,12 @@ button {
     border-radius: 2px;
 }
 
+#popSure .p-box-cont {
+    margin: -150px 0 0 -300px;
+    width: 600px;
+    height: 300px;
+}
+
 .p-box-h {
     height: 60px;
     line-height: 60px;
@@ -386,6 +394,15 @@ button {
     margin-top: 30px;
     width: 48%;
     height: 60px;
+}
+
+.p-box-c a {
+    margin-top: 30px;
+    width: 48%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 2px;
 }
 
 /*p-box end*/
