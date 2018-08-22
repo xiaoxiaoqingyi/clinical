@@ -10,19 +10,19 @@ class Index extends CI_Controller {
             parent::__construct();
             
 //            session_start();
-//            //判断是否登录，否则跳转到登录
-//            if(!isset($_SESSION['uid'])){
-//                $this->load->helper("url");
-//                redirect(base_url().'login');
-//            }
-            
-            if(!isset($_SERVER['cn'])){
-                 redirect(base_url().'error');
+            //判断是否登录，否则跳转到登录
+            if(!isset($_SESSION['uid'])){
+                $this->load->helper("url");
+                redirect(base_url().'login');
             }
+            
+//            if(!isset($_SERVER['cn'])){
+//                 redirect(base_url().'error');
+//            }
             
             date_default_timezone_set('Asia/Shanghai');
             $this->load->database();
-            $this->updateLoginTime($_SERVER['cn']);
+//            $this->updateLoginTime($_SERVER['cn']);
            
 	}
         
@@ -185,16 +185,54 @@ class Index extends CI_Controller {
         }
         
         public function submitsurvey($case){
-            $select = implode(",",$_POST);
-            if(!empty($select)){
-                 $insert = array(
-                       'uid' => $_SESSION['uid'],
-                       'answer' => $select,
-                       'case' => $case,
-                       'createtime' => date('Y-m-d H:i:s')
-                       );
-                $this->db->insert('survey', $insert);
-            }
+            
+            $req = array();
+            $req[0] = $_POST['radio-0'];
+            $req[1] = $_POST['radio-1'];
+            $req[2] = $_POST['radio-2'];
+            $req[3] = $_POST['radio-3'];
+            $req[4] = $_POST['radio-4'];
+            $req[5] = $_POST['radio-5'];
+            $req[6] = $_POST['radio-6'];
+            $req[7] = $_POST['radio-7'];
+            $req[8] = $_POST['radio-8'];
+            $req[9] = $_POST['radio-9'];
+            $req[10] = $_POST['radio-10'];
+            $req[11] = $_POST['radio-11'];
+            $req[12] = $_POST['radio-12'];
+            $req[13] = $_POST['radio-13'];
+            $req[14] = $_POST['radio-14'];
+            $req[15] = $_POST['radio-15'];
+            
+           $select = implode(",", $req);
+            $suggest1 = $_POST['suggest1'];
+            $suggest2 = $_POST['suggest2'];
+
+            $insert = array(
+                  'uid' => $_SESSION['uid'],
+                  'answer' => $select,
+                 'short1' => $suggest1,
+                 'short2' => $suggest2,
+                  'case' => $case,
+                  'createtime' => date('Y-m-d H:i:s')
+                  );
+           $this->db->insert('survey', $insert);
+           
+            $log_insert= array(
+                    "user_id"=>$_SESSION['uid'],
+                    "username"=>$_SESSION['username'],
+                    "case"=>$case,
+                    "topic_id"=>0,
+                    "topic_type"=>10, 
+                    "topic_title"=>'survey',
+                    "topic_answer"=>'',
+                    "user_answer"=>$select,
+                    "short_answer2"=>$suggest1,
+                    "short_answer3"=>$suggest2,
+                    "createtime"=>date("Y-m-d H:i:s")
+                        );
+
+            $this->db->insert("answer_log", $log_insert);
             
             $this->stepconclusion($case);
         }
