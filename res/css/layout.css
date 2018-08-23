@@ -271,7 +271,7 @@ button {
     margin-left: 10px;
 }
 
-.table-do-batch a.readonly {
+.table-do-batch.readonly a {
     background-color: #eee;
     cursor: not-allowed;
 }
