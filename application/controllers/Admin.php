@@ -132,19 +132,16 @@ class Admin extends CI_Controller {
         
         //delete log
         public function deleteMul($case, $page, $uids){
+            
             $uids = urldecode($uids);
-               
-//            $this->db->delete('answer_state', array('case' => $case));
-//            $this->db->delete('answer_log', array('case' => $case));
-//            $this->db->delete('survey', array('case' => $case));
             
             $sql = "delete from answer_log where answer_log.case=".$case." and user_id in(".$uids.")";
             $this->db->query($sql);
             
-              $sql2 = "delete from answer_state where answer_state.case=".$case." and uid in(".$uids.")";
+            $sql2 = "delete from answer_state where answer_state.case=".$case." and uid in(".$uids.")";
             $this->db->query($sql2);
             
-              $sql3 = "delete from survey where survey.case=".$case." and uid in(".$uids.")";
+            $sql3 = "delete from survey where survey.case=".$case." and uid in(".$uids.")";
             $this->db->query($sql3);
             
             
@@ -185,6 +182,61 @@ class Admin extends CI_Controller {
             //填充表格信息
            foreach($data as $k=>$v){ 
 
+               switch ($v['topic_type']){
+                   case 1:
+                       $v['topic_type'] = 'single choice';
+                       
+                        $v['topic_answer'] = $this->convert( $v['topic_answer']);
+                        $v['user_answer'] = $this->convert( $v['user_answer']);
+                       
+                       break;
+                   case 2:
+                       $v['topic_type'] = 'multiple choice';
+                       $topicAn = explode(",",  $v['topic_answer']);
+                       $newTopic = array();
+                       foreach ($topicAn as $key => $value){
+                           $newTopic[$key] = $this->convert($value);
+                       }
+                        $v['topic_answer'] = implode(",",$newTopic);
+                        
+                       $UserAn = explode(",",  $v['user_answer']);
+                       $newUser = array();
+                       foreach ($newUser as $key => $value){
+                           $newUser[$key] = $this->convert($value);
+                       }
+                        $v['user_answer'] = implode(",",$newUser);
+                       
+                       break;
+                   case 3:
+                       $v['topic_type'] = 'True or false';
+                       break;
+                   case 4:
+                       $v['topic_type'] = 'Match';
+                       $topicAn = explode(",",  $v['topic_answer']);
+                       $newTopic = array();
+                       foreach ($topicAn as $key => $value){
+                           $newTopic[$key] = $this->convert($value);
+                       }
+                        $v['topic_answer'] = implode(",",$newTopic);
+                        
+                       $UserAn = explode(",",  $v['user_answer']);
+                       $newUser = array();
+                       foreach ($newUser as $key => $value){
+                           $newUser[$key] = $this->convert($value);
+                       }
+                        $v['user_answer'] = implode(",",$newUser);
+                       break;
+                   case 5:
+                       $v['topic_type'] = 'short answer';
+                       break;
+                   case 6:
+                        $v['topic_type'] = 'multiple True or false';
+                       break;
+                   case 10:
+                       $v['topic_type'] = 'survey';
+                       break;
+               } 
+               
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
                    <td>".$v['username']."</td>
                    <td>".$v['topic_id']."</td>
@@ -234,7 +286,62 @@ class Admin extends CI_Controller {
 
             //填充表格信息
            foreach($data as $k=>$v){ 
-
+              
+             switch ($v['topic_type']){
+                   case 1:
+                       $v['topic_type'] = 'single choice';
+                       
+                        $v['topic_answer'] = $this->convert( $v['topic_answer']);
+                        $v['user_answer'] = $this->convert( $v['user_answer']);
+                       
+                       break;
+                   case 2:
+                       $v['topic_type'] = 'multiple choice';
+                       $topicAn = explode(",",  $v['topic_answer']);
+                       $newTopic = array();
+                       foreach ($topicAn as $key => $value){
+                           $newTopic[$key] = $this->convert($value);
+                       }
+                        $v['topic_answer'] = implode(",",$newTopic);
+                        
+                       $UserAn = explode(",",  $v['user_answer']);
+                       $newUser = array();
+                       foreach ($newUser as $key => $value){
+                           $newUser[$key] = $this->convert($value);
+                       }
+                        $v['user_answer'] = implode(",",$newUser);
+                       
+                       break;
+                   case 3:
+                       $v['topic_type'] = 'True or false';
+                       break;
+                   case 4:
+                       $v['topic_type'] = 'Match';
+                       $topicAn = explode(",",  $v['topic_answer']);
+                       $newTopic = array();
+                       foreach ($topicAn as $key => $value){
+                           $newTopic[$key] = $this->convert($value);
+                       }
+                        $v['topic_answer'] = implode(",",$newTopic);
+                        
+                       $UserAn = explode(",",  $v['user_answer']);
+                       $newUser = array();
+                       foreach ($newUser as $key => $value){
+                           $newUser[$key] = $this->convert($value);
+                       }
+                        $v['user_answer'] = implode(",",$newUser);
+                       break;
+                   case 5:
+                       $v['topic_type'] = 'short answer';
+                       break;
+                   case 6:
+                        $v['topic_type'] = 'multiple True or false';
+                       break;
+                   case 10:
+                       $v['topic_type'] = 'survey';
+                       break;
+               }
+               
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
                    <td>".$v['username']."</td>
                    <td>".$v['topic_id']."</td>
@@ -274,11 +381,65 @@ class Admin extends CI_Controller {
                 </tr> ";
              
              
-            $data=$this->db->select('*')->from('answer_log')->where('case',$case)
+            $data=$this->db->select('*')->from('answer_log')
                 ->order_by('user_id', 'DESC')->order_by('topic_id', 'ASC')->get()->result_array();
 
             //填充表格信息
-           foreach($data as $k=>$v){ 
+           foreach($data as $k=>$v){
+               switch ($v['topic_type']){
+                   case 1:
+                       $v['topic_type'] = 'single choice';
+                       
+                        $v['topic_answer'] = $this->convert( $v['topic_answer']);
+                        $v['user_answer'] = $this->convert( $v['user_answer']);
+                       
+                       break;
+                   case 2:
+                       $v['topic_type'] = 'multiple choice';
+                       $topicAn = explode(",",  $v['topic_answer']);
+                       $newTopic = array();
+                       foreach ($topicAn as $key => $value){
+                           $newTopic[$key] = $this->convert($value);
+                       }
+                        $v['topic_answer'] = implode(",",$newTopic);
+                        
+                       $UserAn = explode(",",  $v['user_answer']);
+                       $newUser = array();
+                       foreach ($newUser as $key => $value){
+                           $newUser[$key] = $this->convert($value);
+                       }
+                        $v['user_answer'] = implode(",",$newUser);
+                       
+                       break;
+                   case 3:
+                       $v['topic_type'] = 'True or false';
+                       break;
+                   case 4:
+                       $v['topic_type'] = 'Match';
+                       $topicAn = explode(",",  $v['topic_answer']);
+                       $newTopic = array();
+                       foreach ($topicAn as $key => $value){
+                           $newTopic[$key] = $this->convert($value);
+                       }
+                        $v['topic_answer'] = implode(",",$newTopic);
+                        
+                       $UserAn = explode(",",  $v['user_answer']);
+                       $newUser = array();
+                       foreach ($newUser as $key => $value){
+                           $newUser[$key] = $this->convert($value);
+                       }
+                        $v['user_answer'] = implode(",",$newUser);
+                       break;
+                   case 5:
+                       $v['topic_type'] = 'short answer';
+                       break;
+                   case 6:
+                        $v['topic_type'] = 'multiple True or false';
+                       break;
+                   case 10:
+                       $v['topic_type'] = 'survey';
+                       break;
+               }
 
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
                    <td>".$v['username']."</td>
@@ -299,6 +460,55 @@ class Admin extends CI_Controller {
                     
         }
         
+        
+        public function convert($num){
+            $res='';
+            if( $num == 0){
+                $res = 'A';
+            }else if( $num == 1){
+                  $res = 'B';
+            }else if( $num == 2){
+                  $res = 'C';
+            }else if( $num == 3){
+                  $res = 'D';
+            }else if( $num == 4){
+                  $res = 'E';
+            }else if( $num == 5){
+                  $res = 'F';
+            }else if( $num == 6){
+                  $res = 'G';
+            }else if( $num == 7){
+                  $res = 'H';
+            }else if( $num == 8){
+                  $res = 'I';
+            }else if( $num == 9){
+                  $res = 'J';
+            }else if( $num == 10){
+                  $res = 'K';
+            }else if( $num == 11){
+                  $res = 'L';
+            }else if( $num == 12){
+                  $res = 'M';
+            }else if( $num == 13){
+                  $res = 'N';
+            }else if( $num == 14){
+                  $res = 'O';
+            }else if( $num == 15){
+                  $res = 'P';
+            }else if( $num == 16){
+                  $res = 'Q';
+            }else if( $num == 17){
+                  $res = 'R';
+            }else if( $num == 18){
+                  $res = 'S';
+            }else if( $num == 19){
+                  $res = 'T';
+            }
+            
+            return $res;
+        }
+
+
         public function login(){
        
             $this->load->view('admin/login.html');

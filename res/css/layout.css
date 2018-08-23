@@ -271,6 +271,11 @@ button {
     margin-left: 10px;
 }
 
+.table-do-batch a.readonly {
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
 .page {
     text-align: center;
 }

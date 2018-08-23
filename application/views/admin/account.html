@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="<?=base_url().'res/css/common.css'?>">
   <link rel="stylesheet" href="<?=base_url().'res/css/layout.css'?>">
   <script src="<?=base_url().'res/js/jquery-1.8.3.min.js'?>"></script>
+   <script>
+    function popSure(title, text, href){
+        $('#popSure').show();
+        $('#popSureTitle').html(title);
+        $('#popSureText').html(text);
+        $('#popSureHref').prop('href', href);
+    }
+  </script>
 </head>
 <body>
 <div class="head">
@@ -49,13 +57,18 @@
         <td>
           <div class="table-do">
               <?php if($value['status'] == 1){ ?>
-               <a href="<?= base_url().'admin/updateAccount/'.$value['id'].'/'.$value['status'];?>" class="icon_lock_close" title="Close Lock">Close Lock</a>
+               <a href="javascript:;" class="icon_lock_close" 
+                 onclick="popSure('lock list', &quot;Are you sure lock <?=$value['username'] ?>？&quot;,
+                             &quot;<?= base_url().'admin/updateAccount/'.$value['id'].'/'.$value['status'];?>  &quot;)" title="Close Lock">Close Lock</a>
             
           <?php }else{ ?>
-              <a href="<?= base_url().'admin/updateAccount/'.$value['id'].'/'.$value['status'];?>" class="icon_lock_open" title="Close Lock">Close Lock</a>
+              <a href="javascript:;" class="icon_lock_open"
+                 onclick="popSure('lock list', &quot;Are you sure unlock <?=$value['username'] ?>？&quot;,
+                             &quot;<?= base_url().'admin/updateAccount/'.$value['id'].'/'.$value['status'];?>  &quot;)" title="Close Lock">Close Lock</a>
             
           <?php } ?> 
-            <a href="<?= base_url().'admin/deleteAccount/'.$value['id'];?>" class="icon-delete" title="Delete">Delete</a>
+            <a href="javascript:;" class="icon-delete" title="Delete" onclick="popSure('delete list', &quot;Are you sure delete <?=$value['username'] ?>？&quot;,
+               &quot;<?= base_url().'admin/deleteAccount/'.$value['id'];?> &quot;)">Delete</a>
           </div>
         </td>
       </tr>
@@ -116,6 +129,27 @@
     
 </div>
 <!--弹窗 addUser end-->
+
+<!--弹窗 是否确认-->
+<div class="p-box" id="popSure">
+  <div class="p-box-cont">
+    <div class="p-box-h">
+      <span id="popSureTitle">11</span>
+      <span class="close"></span>
+    </div>
+    <div class="p-box-c">
+      <div class="form-group">
+        <div id="popSureText">22</div>
+      </div>
+      <div class="form-group fn-clear">
+        <a href="javascript:;" title="Yes" class="fn-l c2-info" id="popSureHref">Yes</a>
+        <a href="javascript:;" title="No" class="fn-r c2-default close">No</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--弹窗 是否确认 end-->
+
 <script >
     
       // 添加用户

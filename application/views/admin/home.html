@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="<?=base_url().'res/css/common.css'?>">
   <link rel="stylesheet" href="<?=base_url().'res/css/layout.css'?>">
   <script src="<?=base_url().'res/js/jquery-1.8.3.min.js'?>"></script>
+   <script>
+      function popSure(title, text, href){
+          $('#popSure').show();
+          $('#popSureTitle').html(title);
+          $('#popSureText').html(text);
+          $('#popSureHref').prop('href', href);
+      }
+  </script>
 </head>
 <body>
 <div class="head fn-clear">
@@ -23,8 +31,11 @@
       </form>
     </div>
     <div class="head-do">
-      <a href="<?=base_url().'admin/downloadAll/'.$case?>" title="Download All" class="c2-info">Download All</a>
-      <a href="<?=base_url().'admin/deleteAll/'.$case ?>" title="Clean All" class="c2-warning">Clean All</a>
+<!--      <a href="<?=base_url().'admin/downloadAll/'.$case?>" title="Download All" class="c2-info">Download All</a>
+      <a href="<?=base_url().'admin/deleteAll/'.$case ?>" title="Clean All" class="c2-warning">Clean All</a>-->
+
+ <a href="<?=base_url().'admin/downloadAll/'.$case?>" title="Download All" class="c2-info">Download All</a>
+      <a href="javascript:;" title="Clean All" class="c2-warning" onclick="popSure('clean all', 'Are you sure clean all？', &quot;<?=base_url().'admin/deleteAll/'.$case ?>&quot;)" >Clean All</a>
     </div>
   </div>
 </div>
@@ -63,9 +74,13 @@
                     <td><?=$value['last_login_time'] ?></td>
                     <td>
                       <div class="table-do">
-                        <a href="<?=base_url().'admin/downloadOne/'.$case.'/'.$value['uid'] ?>"  class="icon-download" title="Download">Download</a>
+<!--                        <a href="<?=base_url().'admin/downloadOne/'.$case.'/'.$value['uid'] ?>"  class="icon-download" title="Download">Download</a>
                         <a href="<?=base_url().'admin/deleteOne/'.$case.'/'.$page.'/'.$value['uid'].'/'.$search ?>" 
-                           class="icon-delete" title="Delete">Delete</a>
+                           class="icon-delete" title="Delete">Delete</a>-->
+
+            <a href="<?=base_url().'admin/downloadOne/'.$case.'/'.$value['uid'] ?>" class="icon-download" title="Download">Download</a>
+            <a href="javascript:;" class="icon-delete" title="Delete" 
+                    onclick="popSure('delete list', &quot;Are you sure delete <?=$value['account'] ?>？&quot;, &quot;<?=base_url().'admin/deleteOne/'.$case.'/'.$page.'/'.$value['uid'].'/'.$search ?> &quot;)">Delete</a>
                       </div>
                     </td>
                  </tr>
@@ -88,8 +103,11 @@
   </div>
   <div class="cont-bottom fn-clear">
     <div class="table-do-batch">
-      <button id="downloadbtn" type="button" class="icon-download" title="Batch Download">Batch Download</button>
-      <button id="deletebtn" type="button" class="icon-delete" title="Batch Delete">Batch Delete</button>
+<!--      <button id="downloadbtn" type="button" class="icon-download" title="Batch Download">Batch Download</button>
+      <button id="deletebtn" type="button" class="icon-delete" title="Batch Delete">Batch Delete</button>-->
+
+<a href="javascript:;" onclick="downloadSelect()" class="icon-download" title="Batch Download">Batch Download</a>
+      <a href="javascript:;" class="icon-delete" title="Batch Delete" onclick="deleteSelect()">Batch Delete</a>
     </div>
     <div class="page fn-r">
       
@@ -111,9 +129,51 @@
     </div>
   </div>
 </div>
+    
+    <!--弹窗 是否确认-->
+<div class="p-box" id="popSure">
+  <div class="p-box-cont">
+    <div class="p-box-h">
+      <span id="popSureTitle">11</span>
+      <span class="close"></span>
+    </div>
+    <div class="p-box-c">
+      <div class="form-group">
+        <div id="popSureText">22</div>
+      </div>
+      <div class="form-group fn-clear">
+        <a href="javascript:;" title="Yes" class="fn-l c2-info" id="popSureHref">Yes</a>
+        <a href="javascript:;" title="No" class="fn-r c2-default close">No</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--弹窗 是否确认 end-->
 <script src="<?=base_url().'res/js/common.js'?>"></script>
 
 <script>
+    
+     function downloadSelect(){
+       var temp='';
+            $.each($('input:checkbox:checked'),function(){
+                temp = temp + $(this).val() +',';
+            });
+            var uids=temp.substring(0,temp.length-1);
+            
+             var url = "<?= base_url().'admin/downloadMul/'.$case.'/' ?>" + encodeURIComponent(uids);
+             window.location.href = url;
+     }
+     
+     function deleteSelect(){
+             var temp='';
+            $.each($('input:checkbox:checked'),function(){
+                temp = temp + $(this).val() +',';
+            });
+            var uids=temp.substring(0,temp.length-1);
+            
+             var url = "<?= base_url().'admin/deleteMul/'.$case.'/'.$page.'/' ?>" + encodeURIComponent(uids);
+             popSure('batch delete list', 'Are you sure batch delete list？', url)
+     }
     
     $(function () {
         
