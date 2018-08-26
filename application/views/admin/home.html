@@ -172,7 +172,7 @@
             var uids=temp.substring(0,temp.length-1);
             
              var url = "<?= base_url().'admin/deleteMul/'.$case.'/'.$page.'/' ?>" + encodeURIComponent(uids);
-             popSure('batch delete list', 'Are you sure batch delete list？', url)
+             popSure('batch delete list', 'Are you sure to delete selected list？', url)
      }
     
     $(function () {

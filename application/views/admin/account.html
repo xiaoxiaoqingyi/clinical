@@ -58,12 +58,12 @@
           <div class="table-do">
               <?php if($value['status'] == 1){ ?>
                <a href="javascript:;" class="icon_lock_close" 
-                 onclick="popSure('lock list', &quot;Are you sure lock <?=$value['username'] ?>？&quot;,
+                 onclick="popSure('lock list', &quot;Are you sure to inactive <?=$value['username'] ?>？&quot;,
                              &quot;<?= base_url().'admin/updateAccount/'.$value['id'].'/'.$value['status'];?>  &quot;)" title="Close Lock">Close Lock</a>
             
           <?php }else{ ?>
               <a href="javascript:;" class="icon_lock_open"
-                 onclick="popSure('lock list', &quot;Are you sure unlock <?=$value['username'] ?>？&quot;,
+                 onclick="popSure('lock list', &quot;Are you sure to active <?=$value['username'] ?>？&quot;,
                              &quot;<?= base_url().'admin/updateAccount/'.$value['id'].'/'.$value['status'];?>  &quot;)" title="Close Lock">Close Lock</a>
             
           <?php } ?> 
@@ -150,6 +150,7 @@
 </div>
 <!--弹窗 是否确认 end-->
 
+<script src="../js/common.js"></script>
 <script >
     
       // 添加用户
