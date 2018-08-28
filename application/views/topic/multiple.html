@@ -212,9 +212,9 @@
 
     // 载入step-help
     // .step-help切换
-   $('.step-help-case1').load("<?php echo base_url().'index/stephelp1';?>");
-    $('.step-help-case2').load("<?php echo base_url().'index/stephelp2';?>");
-    $('.step-help-case3').load("<?php echo base_url().'index/stephelp3';?>");
+   $('.step-help-case1').load("<?php echo base_url().'index/stephelp1/'.$case;?>");
+    $('.step-help-case2').load("<?php echo base_url().'index/stephelp2/'.$case;?>");
+    $('.step-help-case3').load("<?php echo base_url().'index/stephelp3/'.$case;?>");
     stepHelpToggle();
     function stepHelpToggle(){
         var help = $('.step-help');
@@ -252,7 +252,7 @@
            noteSaveBtn.bind('click', function(){
                  //ajax提交笔记
                 $.ajax({
-                    url: "<?= base_url().'index/saveNotes';?>",
+                    url: "<?= base_url().'index/saveNotes/'.$case;?>",
                     data: $("#saveNote").serialize(),
                     dataType: 'json',
                     type: 'post',

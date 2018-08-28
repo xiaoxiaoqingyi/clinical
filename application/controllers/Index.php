@@ -87,20 +87,19 @@ class Index extends CI_Controller {
             $this->load->view('html/head.html',$res);
         }
         
-        public function stephelp1(){
+        public function stephelp1($case){
              //获取个人日志
-            $notes=$this->db->select('*')->from('notes')->where('user_id',$_SESSION['uid'])->get()->result_array();
+            $notes=$this->db->select('*')->from('notes')->where('case',$case)->where('user_id',$_SESSION['uid'])->get()->result_array();
             if(!empty($notes)){
                  $res['notes'] = $notes[0];
             }else{
                  $res['notes'] = '';
             }
-          
             $this->load->view('html/step-help-case1.html',$res);
         }
-        public function stephelp2(){
+        public function stephelp2($case){
              //获取个人日志
-            $notes=$this->db->select('*')->from('notes')->where('user_id',$_SESSION['uid'])->get()->result_array();
+            $notes=$this->db->select('*')->from('notes')->where('case',$case)->where('user_id',$_SESSION['uid'])->get()->result_array();
             if(!empty($notes)){
                  $res['notes'] = $notes[0];
             }else{
@@ -109,9 +108,9 @@ class Index extends CI_Controller {
           
             $this->load->view('html/step-help-case2.html',$res);
         }
-        public function stephelp3(){
+        public function stephelp3($case){
              //获取个人日志
-            $notes=$this->db->select('*')->from('notes')->where('user_id',$_SESSION['uid'])->get()->result_array();
+            $notes=$this->db->select('*')->from('notes')->where('case',$case)->where('user_id',$_SESSION['uid'])->get()->result_array();
             if(!empty($notes)){
                  $res['notes'] = $notes[0];
             }else{
@@ -185,6 +184,25 @@ class Index extends CI_Controller {
             $this->load->view('stepsurvey.html', $res);
         }
         
+        public function getSurveyTopic(){
+            $res = array();
+            $res[0]= "he interactive platform maintained by interest in learning clinical reasoning skills";
+            $res[1]= "The interactive platform helped me to develop plans for nursing therapeutic interventions";
+            $res[2]= "The interactive platform helped me to recognize the gaps of my knowledge";
+            $res[3]= "The interactive platform helped me to develop ability to solve problems";
+            $res[4]= "The interactive platform helped me to develop clinical reasoning ability";
+            $res[5]= "The interactive platform helped me to develop decision making ability";
+            $res[6]= "I will be able to related the VP scenario to apply to my future practice.";
+            $res[7]= "The instructions of the clinical scenarios were clear";
+            $res[8]= "My background knowledge was sufficient for understanding the clinical scenarios";
+            $res[9]= "The interactive platform is relevant to prepare my clinical practicum";
+            $res[10]= "As a result of practicing clinical reasoning skills via the platform, I can see clearly how clinical reasoning relates to becoming a registered nurse";
+            $res[11]= "I was able to access technical help when needed";
+            $res[12]= "The process of using the platform, has motivated me to learn";
+            $res[13]= "This was a valuable learning experience";
+            return $res;
+        }
+
         public function submitsurvey($case){
             
             $req = array();
@@ -202,8 +220,6 @@ class Index extends CI_Controller {
             $req[11] = $_POST['radio-11'];
             $req[12] = $_POST['radio-12'];
             $req[13] = $_POST['radio-13'];
-            $req[14] = $_POST['radio-14'];
-            $req[15] = $_POST['radio-15'];
             
            $select = implode(",", $req);
             $suggest1 = $_POST['suggest1'];
@@ -219,23 +235,72 @@ class Index extends CI_Controller {
                   );
            $this->db->insert('survey', $insert);
            
-            $log_insert= array(
+           $topicList = $this->getSurveyTopic();
+           foreach ($topicList as $key=>$value){
+                if($req[$key] == 0){
+                    $ans = 'Very agree';
+                }else if($req[$key] == 1){
+                     $ans = 'Agree';
+                }else if($req[$key] == 2){
+                      $ans = 'Disagree';
+                }else if($req[$key] == 3){
+                     $ans = 'Very disagree';
+                }
+                    
+               
+                 $log_insert= array(
                     "user_id"=>$_SESSION['uid'],
                     "username"=>$_SESSION['username'],
                     "case"=>$case,
-                    "topic_id"=>0,
+                    "topic_id"=>($key+1),
                     "topic_type"=>10, 
-                    "topic_title"=>'survey',
+                    "topic_title"=>$value,
                     "topic_answer"=>'',
-                    "user_answer"=>$select,
-                    "short_answer2"=>$suggest1,
-                    "short_answer3"=>$suggest2,
+                    "user_answer"=>$ans,
                     "createtime"=>date("Y-m-d H:i:s")
                         );
 
-            $this->db->insert("answer_log", $log_insert);
+                $this->db->insert("answer_log", $log_insert);
+           }
+           
+           $short2="Is there anything about the learning experience regarding using the "
+                   . "platform of virtual patient based, interactive computerized platform for"
+                   . " students practicing clinical reasoning and decision-making skills that"
+                   . " you are particularly satisfied or dissatisfied with but not mentioned above?"
+                   . " Please explain if there is anything as such.";
+           $short3 = "Any other comments / suggestions:";
+           
+           $log_insert2= array(
+                    "user_id"=>$_SESSION['uid'],
+                    "username"=>$_SESSION['username'],
+                    "case"=>$case,
+                    "topic_id"=>15,
+                    "topic_type"=>10, 
+                    "topic_title"=>$short2,
+                    "topic_answer"=>'',
+                    "user_answer"=>$suggest1,
+                    "createtime"=>date("Y-m-d H:i:s")
+                        );
+
+            $this->db->insert("answer_log", $log_insert2);
             
-            $this->stepconclusion($case);
+             $log_insert3= array(
+                    "user_id"=>$_SESSION['uid'],
+                    "username"=>$_SESSION['username'],
+                    "case"=>$case,
+                    "topic_id"=>16,
+                    "topic_type"=>10, 
+                    "topic_title"=>$short3,
+                    "topic_answer"=>'',
+                    "user_answer"=>$suggest2,
+                    "createtime"=>date("Y-m-d H:i:s")
+                        );
+
+            $this->db->insert("answer_log", $log_insert3);
+           
+          
+            
+            $this->clinical();
         }
         
         public function step($case){
@@ -390,7 +455,7 @@ class Index extends CI_Controller {
             
         } 
         
-         public function saveNotes(){
+         public function saveNotes($case){
             $step1 = $this->I('textarea-1');
             $step2 = $this->I('textarea-2');
             $step3 = $this->I('textarea-3');
@@ -400,10 +465,11 @@ class Index extends CI_Controller {
             $step7 = $this->I('textarea-7');
             $step8 = $this->I('textarea-8');
             
-            $notes=$this->db->select('*')->from('notes')->where('user_id',$_SESSION['uid'])->get()->result_array();
+            $notes=$this->db->select('*')->from('notes')->where('case',$case)->where('user_id',$_SESSION['uid'])->get()->result_array();
             if(empty($notes)){
                 $insert = array(
                     'user_id' => $_SESSION['uid'],
+                    'case' => $case,
                     'step1' => $step1,
                     'step2' => $step2,
                     'step3' => $step3,
@@ -427,7 +493,7 @@ class Index extends CI_Controller {
                     'step8' => $step8,
                     'update_time' => date("Y-m-d H:i:s")
                     );
-                $where = "user_id=".$_SESSION['uid'];
+                $where = array("user_id"=>$_SESSION['uid'], "case"=>$case);
                 $this->db->update('notes', $update, $where);
             }
             
@@ -467,6 +533,7 @@ class Index extends CI_Controller {
                 $data[0]['leftstep'] = $state[0]['step'];
            } else {
                unset($data[0]['answer']);
+                $data[0]['leftstep'] = 1;
            }
 
             if($data[0]['type'] == -1){

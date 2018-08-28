@@ -107,11 +107,12 @@
 .step-help .intro-save{
     display: block;
     position: absolute;
-    top: 26px;
-    left: 956px;
-    width: 48px;
+    top: 24px;
+    right: 36px;
+    padding: 0 10px;
     height: 48px;
-    background: url(../images/step/icon-save.png);
+    color: #fff;
+    background: #09f;
     cursor: pointer;
 }
 .step-help .intro-title{
@@ -489,7 +490,7 @@
     position: relative;
     top: 50%;
     margin: -300px auto 0;
-    width: 800px;
+    width: 1000px;
     height: 600px;
     line-height: 600px;
     background: #fff;
