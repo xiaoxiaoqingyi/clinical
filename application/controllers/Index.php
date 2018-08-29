@@ -299,8 +299,9 @@ class Index extends CI_Controller {
             $this->db->insert("answer_log", $log_insert3);
            
           
-            
-            $this->clinical();
+            $res = array("url"=>base_url('/index/clinical'));
+            $this->response(200,'ok',$res);
+//            $this->clinical();
         }
         
         public function step($case){

@@ -9,8 +9,11 @@
     <link rel="stylesheet" href="<?=base_url().'src/css/module.css'?>">
     <!--add css-->
     <link rel="stylesheet" href="<?=base_url().'src/css/style-step.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/jquery-confirm.min.css'?>">
+    <link rel="stylesheet" href="<?=base_url().'src/css/bundled.css'?>">
     <!--add css end-->
     <script src="<?=base_url().'src/js/jquery-1.8.3.min.js'?>"></script>
+    <script src="<?=base_url().'src/js/jquery-confirm.min.js'?>"></script>
 </head>
 <body>
 <div class="head" data-val="clinical">
@@ -21,7 +24,7 @@
         <div class="content">
             <div class="text tx-c">
                 <div class="title-h2 tx-l" style="font-size: 28px; margin: 30px 0 24px 0;">Evaluation survey</div>
-                <form action="<?= base_url().'index/submitsurvey/'.$case;?>" method='post' class="form" style="margin-bottom: 50px;">
+                <form id="surveyForm" method='post' class="form" style="margin-bottom: 50px;">
                     <div class="table-have-border">
                         <table>
                             <tr>
@@ -160,7 +163,9 @@
                             </table>
                         </div>
                         <div style="margin: 0 20px;">
-                            <div class="tx-l l-30 mt-30 f-18">Is there anything about the learning experience regarding using the platform of <span class="tx-line">v</span>irtual <span class="f-b tx-line">p</span>atient based, <span class="f-b tx-line">i</span>nteractive <span class="f-b tx-line"></span>computerized <span class="f-b tx-line">p</span>latform for students practicing <span class="f-b tx-line">c</span>linical <span class="f-b tx-line">r</span>easoning and decision-making skills that you are particularly <span class="f-b tx-line">satisfied</span> or <span class="f-b tx-line">dissatisfied</span> with but not mentioned above?  Please explain if there is anything as such. </>
+                            <div class="tx-l l-30 mt-30 f-18">Is there anything about the learning experience regarding using the platform of
+                                virtual patient based, interactive computerized platform for students practicing clinical reasoning and decision-making 
+                                skills that you are particularly <span class="f-b tx-line">satisfied</span> or <span class="f-b tx-line">dissatisfied</span> with but not mentioned above?  Please explain if there is anything as such. </>
                             <textarea class="textarea" style="width: 1098px; height: 96px; margin-top: 10px;" name="suggest1" placeholder="Please fill in the answers here..."></textarea>
                             <div class="tx-l l-30 mt-30 f-18 f-b">Any other comments / suggestions:</div>
                             <textarea class="textarea" style="width: 1098px; height: 96px; margin-top: 10px;" name="suggest2" placeholder="Please fill in the answers here..."></textarea>
@@ -168,7 +173,7 @@
                     </div>
                     <div class="tx-c py-30">
                         <a class="btn-l c2-primary" href="<?=base_url().'index/step'?>" title="&lt;&nbsp;prev">&lt;&nbsp;PREV</a>
-                        <button type="submit" class="btn-l c2-primary" onclick="return radioVerify(this)">SUBMIT</button>
+                        <button type="button" class="btn-l c2-primary" onclick="return radioVerify(this)">SUBMIT</button>
                     </div>
                 </form>
             </div>
@@ -183,11 +188,60 @@
         var checkedLen = $('input[type="radio"]:checked').length;
         var textarea = $('textarea');
         if(checkedLen < inputLen || !textarea.eq(0).val() || !textarea.eq(1).val()){
-            alert('Please complete all the items of the evaluation form prior to submission. Thank you very much');
+//            alert('Please complete all the items of the evaluation form prior to submission. Thank you very much');
+            $.confirm({
+                title: '',
+                content: 'Please complete all the items of the evaluation form prior to submission. Thank you very much',
+                type: 'green',
+                buttons: {
+                        ok: {
+                            text: 'ok',
+                            btnClass: 'btn-primary'
+                        }
+
+                    }
+             });
             return false;
         }
-        self.form;
+     
+         $.confirm({
+            title: '',
+            content: 'Your evaluation information is well received, thank you very much!',
+            type: 'green',
+            buttons: {
+                    ok: {
+                        text: 'ok',
+                        btnClass: 'btn-primary',
+                        action: function() {
+                            formSubmit();
+                        }
+                    }
+
+                }
+             });
+      
     }
+    
+    function formSubmit(){
+         $.ajax({
+                url: "<?= base_url().'index/submitsurvey/'.$case;?>",
+                data: $('#surveyForm').serialize(),
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    //					console.log(data);
+                    if (data && data.status == 200) {
+                         location.href = data.res.url;
+                    }
+                    else {
+                        alert("error!");
+                    }
+                }, error: function (e) {
+                    alert("error!");
+                }
+            });
+    }
+    
 
         /**
      * Created by lzm on 2018/3/30.

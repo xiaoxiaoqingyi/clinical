@@ -165,6 +165,7 @@ class Admin extends CI_Controller {
             echo "<table width='500' border='1' cellspacing='2' cellpadding='2'>
                 <tr align='center'  style='background-color:#E5E8ED'>
                     <td >netID</td>
+                    <td >case</td>
                     <td >题目ID</td>
                     <td >题目类型</td>
                     <td >题目</td>
@@ -232,6 +233,9 @@ class Admin extends CI_Controller {
                    case 6:
                         $v['topic_type'] = 'multiple True or false';
                        break;
+                    case 9:
+                        $v['topic_type'] = 'three short answer';
+                       break;
                    case 10:
                        $v['topic_type'] = 'survey';
                        break;
@@ -239,6 +243,7 @@ class Admin extends CI_Controller {
                
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
                    <td>".$v['username']."</td>
+                   <td>".$v['case']."</td>
                    <td>".$v['topic_id']."</td>
                    <td>".$v['topic_type']."</td>
                    <td>".$v['topic_title']."</td>
@@ -268,6 +273,7 @@ class Admin extends CI_Controller {
             echo "<table width='500' border='1' cellspacing='2' cellpadding='2'>
                 <tr align='center'  style='background-color:#E5E8ED'>
                     <td >netID</td>
+                    <td >case</td>
                     <td >题目ID</td>
                     <td >题目类型</td>
                     <td >题目</td>
@@ -337,6 +343,9 @@ class Admin extends CI_Controller {
                    case 6:
                         $v['topic_type'] = 'multiple True or false';
                        break;
+                    case 9:
+                        $v['topic_type'] = 'three short answer';
+                         break;
                    case 10:
                        $v['topic_type'] = 'survey';
                        break;
@@ -344,6 +353,7 @@ class Admin extends CI_Controller {
                
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
                    <td>".$v['username']."</td>
+                   <td>".$v['case']."</td>
                    <td>".$v['topic_id']."</td>
                    <td>".$v['topic_type']."</td>
                    <td>".$v['topic_title']."</td>
@@ -370,6 +380,7 @@ class Admin extends CI_Controller {
             echo "<table width='500' border='1' cellspacing='2' cellpadding='2'>
                 <tr align='center'  style='background-color:#E5E8ED'>
                     <td >netID</td>
+                    <td >case</td>
                     <td >题目ID</td>
                     <td >题目类型</td>
                     <td >题目</td>
@@ -436,6 +447,9 @@ class Admin extends CI_Controller {
                    case 6:
                         $v['topic_type'] = 'multiple True or false';
                        break;
+                   case 9:
+                        $v['topic_type'] = 'three short answer';
+                         break;
                    case 10:
                        $v['topic_type'] = 'survey';
                        break;
@@ -443,6 +457,7 @@ class Admin extends CI_Controller {
 
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
                    <td>".$v['username']."</td>
+                   <td>".$v['case']."</td>
                    <td>".$v['topic_id']."</td>
                    <td>".$v['topic_type']."</td>
                    <td>".$v['topic_title']."</td>
@@ -525,11 +540,12 @@ class Admin extends CI_Controller {
             
             $limit_start = ($page -1)*10;
             if(!empty($search)){
-                 $data=$this->db->select('id, username, status, last_time')->from('admin')->like('username', $search)->limit(10, 0)->get()->result_array();
+                 $data=$this->db->select('id, username, status, last_time')->from('admin')->like('username', $search)
+                         ->order_by('id', 'DESC')->limit(10, 0)->get()->result_array();
                  $page = 1;
                  $count=$this->db->select('id, username, status, last_time')->from('admin')->like('username', $search)->count_all_results();
             } else{
-                   $data=$this->db->select('*')->from('admin')->limit(10, $limit_start)->get()->result_array();
+                   $data=$this->db->select('*')->from('admin')->order_by('id', 'DESC')->limit(10, $limit_start)->get()->result_array();
                    $count=$this->db->select('*')->from('admin')->count_all_results();
             }
            
@@ -562,7 +578,6 @@ class Admin extends CI_Controller {
         
         public function addAccount(){
              $username = $this->input->post('username');
-             $password = $this->input->post('password');
              
              if(!empty($username)){
                   $insert = array(
