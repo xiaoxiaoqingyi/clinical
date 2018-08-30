@@ -149,9 +149,9 @@ class Admin extends CI_Controller {
         }
          //delete log
         public function deleteAll($case){
-            $this->db->delete('answer_state', array('case' => $case));
-            $this->db->delete('answer_log', array('case' => $case));
-            $this->db->delete('survey', array('case' => $case));
+            $this->db->delete('answer_state');
+            $this->db->delete('answer_log');
+            $this->db->delete('survey');
             
             $this->index($case, 1, '');
         }
@@ -374,7 +374,7 @@ class Admin extends CI_Controller {
         
         public function downloadAll($case){
             header('Content-Type: application/vnd.ms-excel;');          
-            header('Content-Disposition: attachment;filename="case'.$case.'_log.xls"');
+            header('Content-Disposition: attachment;filename="all_log.xls"');
             header('Cache-Control: max-age=0'); 
             
             echo "<table width='500' border='1' cellspacing='2' cellpadding='2'>
