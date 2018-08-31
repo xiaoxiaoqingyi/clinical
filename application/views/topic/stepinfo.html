@@ -28,7 +28,7 @@
                     <?= $des; ?>
                 </div>
                 <div class="step-btn" style="margin-top: 184px;">
-                    <a class="btn-prev" href="<?php if(isset($last_topic_id)){echo base_url().'index/answer/'.$last_topic_id;}else{echo 'javascript:history.back(-1);';} ?>" title="&lt;&nbsp;prev">prev</a>
+                    <a class="btn-prev" href="<?php if(isset($last_topic_id)){echo base_url().'index/answer/'.$case.'/'.$last_topic_id;}else{echo 'javascript:history.back(-1);';} ?>" title="&lt;&nbsp;prev">prev</a>
                     <a class="btn-next" href="<?php echo base_url().'index/answer/'.$case.'/'.$next_topic_id;?>" title="next&nbsp;&gt;">next</a>
                 </div>
             </div>
