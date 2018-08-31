@@ -16,6 +16,8 @@ class Index extends CI_Controller {
                 redirect(base_url().'login');
             }
             
+         
+            
 //            if(!isset($_SERVER['cn'])){
 //                 redirect(base_url().'error');
 //            }
@@ -23,6 +25,7 @@ class Index extends CI_Controller {
             date_default_timezone_set('Asia/Shanghai');
             $this->load->database();
 //            $this->updateLoginTime($_SERVER['cn']);
+               $this->updateLoginTime($_SESSION['username']);
            
 	}
         
@@ -57,7 +60,7 @@ class Index extends CI_Controller {
             }
            
          
-            session_start();
+//            session_start();
             $_SESSION['username'] = $username;
             $_SESSION['uid'] = $uid;
         }
