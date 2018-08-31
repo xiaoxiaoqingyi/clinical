@@ -149,9 +149,9 @@ class Admin extends CI_Controller {
         }
          //delete log
         public function deleteAll($case){
-            $this->db->delete('answer_state');
-            $this->db->delete('answer_log');
-            $this->db->delete('survey');
+            $this->db->empty_table('answer_state');
+            $this->db->empty_table('answer_log');
+            $this->db->empty_table('survey');
             
             $this->index($case, 1, '');
         }
