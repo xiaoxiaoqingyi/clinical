@@ -173,6 +173,7 @@ class Admin extends CI_Controller {
                     <td >用户提交答案</td>
                     <td> 简答题答案2</td>
                     <td>简答题答案3 </td>
+                    <td>提交日期 </td>
                     <td>提交时间 </td>
                 </tr> ";
              
@@ -239,7 +240,9 @@ class Admin extends CI_Controller {
                    case 10:
                        $v['topic_type'] = 'survey';
                        break;
-               } 
+               }
+               
+               $v['datetime'] = explode(" ",  $v['createtime']);
                
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
                    <td>".$v['username']."</td>
@@ -251,7 +254,8 @@ class Admin extends CI_Controller {
                    <td>".$v['user_answer']."</td>
                    <td> ".$v['short_answer2']."</td>
                    <td>".$v['short_answer3']." </td>
-                   <td>".$v['createtime']." </td>
+                   <td>".$v['datetime'][0]." </td>
+                   <td>".$v['datetime'][1]." </td>
                 </tr>";
 
            }
@@ -281,6 +285,7 @@ class Admin extends CI_Controller {
                     <td >用户提交答案</td>
                     <td> 简答题答案2</td>
                     <td>简答题答案3 </td>
+                    <td>提交日期 </td>
                     <td>提交时间 </td>
                 </tr> ";
              
@@ -351,6 +356,9 @@ class Admin extends CI_Controller {
                        break;
                }
                
+             
+               $v['datetime'] = explode(" ",  $v['createtime']);
+               
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
                    <td>".$v['username']."</td>
                    <td>".$v['case']."</td>
@@ -361,7 +369,8 @@ class Admin extends CI_Controller {
                    <td>".$v['user_answer']."</td>
                    <td> ".$v['short_answer2']."</td>
                    <td>".$v['short_answer3']." </td>
-                   <td>".$v['createtime']." </td>
+                   <td>".$v['datetime'][0]." </td>
+                   <td>".$v['datetime'][1]." </td>
                 </tr>";
 
            }
@@ -388,6 +397,7 @@ class Admin extends CI_Controller {
                     <td >用户提交答案</td>
                     <td> 简答题答案2</td>
                     <td>简答题答案3 </td>
+                    <td>提交日期 </td>
                     <td>提交时间 </td>
                 </tr> ";
              
@@ -455,6 +465,8 @@ class Admin extends CI_Controller {
                        break;
                }
 
+               
+               $v['datetime'] = explode(" ",  $v['createtime']);
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
                    <td>".$v['username']."</td>
                    <td>".$v['case']."</td>
@@ -465,7 +477,8 @@ class Admin extends CI_Controller {
                    <td>".$v['user_answer']."</td>
                    <td> ".$v['short_answer2']."</td>
                    <td>".$v['short_answer3']." </td>
-                   <td>".$v['createtime']." </td>
+                   <td>".$v['datetime'][0]." </td>
+                   <td>".$v['datetime'][1]." </td>
                 </tr>";
 
            }
