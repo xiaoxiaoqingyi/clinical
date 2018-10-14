@@ -13,6 +13,17 @@ class Admin extends CI_Controller {
 
 	public function index($case=1, $page=1, $key=''){
             
+            if(!isset($_SERVER['cn'])){
+                 redirect(base_url().'error');
+                 return;
+            }
+            
+            $accounts=$this->db->select('*')->from('admin')->where('username',base64_encode($_SERVER['cn']))->where('status',1)->get()->result_array();
+            if(empty($accounts)){
+                redirect(base_url().'error');
+                return;
+            }
+            
             if($key != ''){
                $search = $key; 
             } else {
@@ -45,59 +56,60 @@ class Admin extends CI_Controller {
                 $this->load->view('admin/home.html', $res);
                
             } else{
-                 $newArr = array();
-            foreach ($data as $key => $value){
-                unset($value['password']);
+                $newArr = array();
+                foreach ($data as $key => $value){
+                    unset($value['password']);
+                   $value['account'] = base64_decode($value['account']);
                 
-                $acRate = false;
-                switch ($case){
-                    case 1:
-                        if($value['sid'] == 78){
-                             $value['com_rate'] = '100%';
-                             $acRate = true;
-                        }else{
-                             $value['com_rate'] = ceil(($value['sid']%100)/78*100).'%';
-                        }
-                    
-                        break;
-                     case 2:
-                        if($value['sid'] == 173){
-                            $value['com_rate'] = '100%';
-                            $acRate = true;
-                        }else{
-                             $value['com_rate'] = ceil(($value['sid']%100)/73*100).'%';
-                        }
-                      
-                        break;
-                    case 3:
-                        
-                        if($value['sid'] == 285){
-                            $value['com_rate'] = '100%';
-                            $acRate = true;
-                        }else{
-                             $value['com_rate'] = ceil(($value['sid']%100)/85*100).'%';
-                        }
-                       
-                        break;
-                }
-                
-                $sflag = false;
-                $survey=$this->db->select('*')->from('survey')->where('case',$case)
-                    ->where('uid',$value['uid'])->get()->result_array();
-                if(!empty($survey)){
-                   $value['survey'] = 'COMPLETED';
-                     $sflag = true;
-                } else{
-                    $value['survey'] = 'NOT COMPLETED';
-                }
-                
-                if($acRate && $sflag){
-                    $value['finsih'] = 1;
-                } else {
-                    $value['finsih'] = 0;
-                }
-                
-                $newArr[$key] = $value;
+                    $acRate = false;
+                    switch ($case){
+                        case 1:
+                            if($value['sid'] == 78){
+                                 $value['com_rate'] = '100%';
+                                 $acRate = true;
+                            }else{
+                                 $value['com_rate'] = ceil(($value['sid']%100)/78*100).'%';
+                            }
+
+                            break;
+                         case 2:
+                            if($value['sid'] == 173){
+                                $value['com_rate'] = '100%';
+                                $acRate = true;
+                            }else{
+                                 $value['com_rate'] = ceil(($value['sid']%100)/73*100).'%';
+                            }
+
+                            break;
+                        case 3:
+
+                            if($value['sid'] == 285){
+                                $value['com_rate'] = '100%';
+                                $acRate = true;
+                            }else{
+                                 $value['com_rate'] = ceil(($value['sid']%100)/85*100).'%';
+                            }
+
+                            break;
+                    }
+
+                    $sflag = false;
+                    $survey=$this->db->select('*')->from('survey')->where('case',$case)
+                        ->where('uid',$value['uid'])->get()->result_array();
+                    if(!empty($survey)){
+                       $value['survey'] = 'COMPLETED';
+                         $sflag = true;
+                    } else{
+                        $value['survey'] = 'NOT COMPLETED';
+                    }
+
+                    if($acRate && $sflag){
+                        $value['finsih'] = 1;
+                    } else {
+                        $value['finsih'] = 0;
+                    }
+
+                    $newArr[$key] = $value;
                 
                 }
           
@@ -245,7 +257,7 @@ class Admin extends CI_Controller {
                $v['datetime'] = explode(" ",  $v['createtime']);
                
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
-                   <td>".$v['username']."</td>
+                   <td>".base64_decode($v['username'])."</td>
                    <td>".$v['case']."</td>
                    <td>".$v['topic_id']."</td>
                    <td>".$v['topic_type']."</td>
@@ -360,7 +372,7 @@ class Admin extends CI_Controller {
                $v['datetime'] = explode(" ",  $v['createtime']);
                
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
-                   <td>".$v['username']."</td>
+                   <td>".base64_decode($v['username'])."</td>
                    <td>".$v['case']."</td>
                    <td>".$v['topic_id']."</td>
                    <td>".$v['topic_type']."</td>
@@ -468,7 +480,7 @@ class Admin extends CI_Controller {
                
                $v['datetime'] = explode(" ",  $v['createtime']);
              echo  "<tr align='center'  style='background-color:#E5E8ED'>
-                   <td>".$v['username']."</td>
+                   <td>".base64_decode($v['username'])."</td>
                    <td>".$v['case']."</td>
                    <td>".$v['topic_id']."</td>
                    <td>".$v['topic_type']."</td>
@@ -536,13 +548,13 @@ class Admin extends CI_Controller {
             return $res;
         }
 
-
-        public function login(){
-       
-            $this->load->view('admin/login.html');
-	}
         
         public function account($page=1, $key=''){
+            
+             if(!isset($_SERVER['cn']) || $_SERVER['cn']!='snvendor3'){
+                 redirect(base_url().'error');
+                 return;
+            }
             
             if($key != ''){
                $search = $key; 
@@ -573,6 +585,10 @@ class Admin extends CI_Controller {
                
             } else{
                 
+                foreach ($data as $key => $value) {
+                    $data[$key]['username'] = base64_decode($value['username']);
+                }
+                
                 if($count%10 > 0){
                     $totalPage = $count/10 + 1;
                 } else{
@@ -594,7 +610,7 @@ class Admin extends CI_Controller {
              
              if(!empty($username)){
                   $insert = array(
-                       'username' => $username,
+                       'username' => base64_encode($username),
                        'status' => 1,
                        'last_time' => date('Y-m-d H:i:s')
                        );

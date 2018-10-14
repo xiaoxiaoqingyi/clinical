@@ -9,23 +9,13 @@ class Index extends CI_Controller {
             
             parent::__construct();
             
-//            session_start();
-            //判断是否登录，否则跳转到登录
-            if(!isset($_SESSION['uid'])){
-                $this->load->helper("url");
-                redirect(base_url().'login');
+            if(!isset($_SERVER['cn'])){
+                 redirect(base_url().'error');
             }
-            
-         
-            
-//            if(!isset($_SERVER['cn'])){
-//                 redirect(base_url().'error');
-//            }
             
             date_default_timezone_set('Asia/Shanghai');
             $this->load->database();
-//            $this->updateLoginTime($_SERVER['cn']);
-               $this->updateLoginTime($_SESSION['username']);
+            $this->updateLoginTime($_SERVER['cn']);
            
 	}
         
@@ -38,12 +28,12 @@ class Index extends CI_Controller {
 
        public function updateLoginTime($username){
            
-            $data=$this->db->select('*')->from('user')->where('account', $username)->get()->result_array();
+            $data=$this->db->select('*')->from('user')->where('account', base64_encode($username))->get()->result_array();
             
              
             if(empty($data)){
                  $insert = array(
-                       'account' => $username,
+                       'account' => base64_encode($username),
                        'last_login_time' => date('Y-m-d H:i:s')
                        );
                 $this->db->insert('user', $insert);
@@ -54,13 +44,13 @@ class Index extends CI_Controller {
                     'last_login_time' => date("Y-m-d H:i:s")
                     );
                 $where = array();
-                $where['account'] = $username;
+                $where['account'] = base64_encode($username);
                 $this->db->update('user', $update, $where);
                 $uid = $data[0]['id'];
             }
            
          
-//            session_start();
+            session_start();
             $_SESSION['username'] = $username;
             $_SESSION['uid'] = $uid;
         }
@@ -253,7 +243,7 @@ class Index extends CI_Controller {
                
                  $log_insert= array(
                     "user_id"=>$_SESSION['uid'],
-                    "username"=>$_SESSION['username'],
+                    "username"=>base64_encode($_SESSION['username']),
                     "case"=>$case,
                     "topic_id"=>($key+1),
                     "topic_type"=>10, 
@@ -275,7 +265,7 @@ class Index extends CI_Controller {
            
            $log_insert2= array(
                     "user_id"=>$_SESSION['uid'],
-                    "username"=>$_SESSION['username'],
+                    "username"=>base64_encode($_SESSION['username']),
                     "case"=>$case,
                     "topic_id"=>15,
                     "topic_type"=>10, 
@@ -289,7 +279,7 @@ class Index extends CI_Controller {
             
              $log_insert3= array(
                     "user_id"=>$_SESSION['uid'],
-                    "username"=>$_SESSION['username'],
+                    "username"=>base64_encode($_SESSION['username']),
                     "case"=>$case,
                     "topic_id"=>16,
                     "topic_type"=>10, 
@@ -674,7 +664,7 @@ class Index extends CI_Controller {
                 if(!empty($data)){
                       $insert= array(
                         "user_id"=>$_SESSION['uid'],
-                        "username"=>$_SESSION['username'],
+                        "username"=>base64_encode($_SESSION['username']),
                         "case"=>$data[0]['case'],
                         "topic_id"=>$data[0]['id'],
                         "topic_type"=>$data[0]['type'], 
@@ -741,7 +731,7 @@ class Index extends CI_Controller {
                 if(!empty($data)){
                       $insert= array(
                         "user_id"=>$_SESSION['uid'],
-                        "username"=>$_SESSION['username'],
+                        "username"=>base64_encode($_SESSION['username']),
                         "case"=>$data[0]['case'],
                         "topic_id"=>$data[0]['id'],
                         "topic_type"=>$data[0]['type'], 
@@ -809,7 +799,7 @@ class Index extends CI_Controller {
                 if(!empty($data)){
                       $insert= array(
                         "user_id"=>$_SESSION['uid'],
-                        "username"=>$_SESSION['username'],
+                        "username"=>base64_encode($_SESSION['username']),
                         "case"=>$data[0]['case'],
                         "topic_id"=>$data[0]['id'],
                         "topic_type"=>$data[0]['type'], 
@@ -876,7 +866,7 @@ class Index extends CI_Controller {
                 if(!empty($data)){
                       $insert= array(
                         "user_id"=>$_SESSION['uid'],
-                        "username"=>$_SESSION['username'],
+                        "username"=>base64_encode($_SESSION['username']),
                         "case"=>$data[0]['case'],
                         "topic_id"=>$data[0]['id'],
                         "topic_type"=>$data[0]['type'], 
@@ -945,7 +935,7 @@ class Index extends CI_Controller {
                 if(!empty($data[0])){
                     $insert= array(
                         "user_id"=>$_SESSION['uid'],
-                        "username"=>$_SESSION['username'],
+                        "username"=>base64_encode($_SESSION['username']),
                         "case"=>$data[0]['case'],
                         "topic_id"=>$data[0]['id'],
                         "topic_type"=>$data[0]['type'], 
@@ -1013,7 +1003,7 @@ class Index extends CI_Controller {
                 if(!empty($data)){
                       $insert= array(
                         "user_id"=>$_SESSION['uid'],
-                        "username"=>$_SESSION['username'],
+                        "username"=>base64_encode($_SESSION['username']),
                         "case"=>$data[0]['case'],
                         "topic_id"=>$data[0]['id'],
                         "topic_type"=>$data[0]['type'], 
